@@ -116,6 +116,8 @@ class ProductCreate(BaseModel):
     stock_level: int = 0
     images: List[str] = []
     status: str = "published"
+    installment_months: Optional[int] = None
+    installment_available: bool = False
 
 class ProductUpdate(BaseModel):
     title: Optional[str] = None
