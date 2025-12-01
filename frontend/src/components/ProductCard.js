@@ -122,14 +122,23 @@ const ProductCard = ({ product }) => {
         )}
 
         {/* Price */}
-        <div className="flex items-center gap-2">
-          <span data-testid="product-price" className="text-2xl font-bold text-[#121212]">
-            ${product.price.toFixed(2)}
-          </span>
-          {product.compare_price && (
-            <span className="text-lg text-gray-400 line-through">
-              ${product.compare_price.toFixed(2)}
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span data-testid="product-price" className="text-2xl font-bold text-[#121212]">
+              ${product.price.toFixed(2)}
             </span>
+            {product.compare_price && (
+              <span className="text-lg text-gray-400 line-through">
+                ${product.compare_price.toFixed(2)}
+              </span>
+            )}
+          </div>
+          {product.installment_available && product.installment_months && (
+            <div className="text-sm text-gray-600">
+              или <span className="font-semibold text-[#0071E3]">
+                ${(product.price / product.installment_months).toFixed(2)}/мес
+              </span> на {product.installment_months} мес
+            </div>
           )}
         </div>
 
