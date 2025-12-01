@@ -151,7 +151,7 @@ const Header = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for products..."
+              placeholder={t('search')}
               className="w-full pl-12 pr-4 py-3 bg-[#F7F7F7] rounded-full focus:outline-none focus:ring-2 focus:ring-[#0071E3]/20 focus:bg-white"
             />
           </div>
