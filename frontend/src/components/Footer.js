@@ -30,6 +30,46 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#121212] text-white mt-20">
+      {/* Google Map Section */}
+      <div className="w-full h-[400px] md:h-[500px] relative">
+        <iframe
+          title="Наше расположение"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.562920422844!2d30.520526315741807!3d50.44864997947381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce56b2456d3b%3A0x7abb4e2ca04e4e52!2z0YPQuy4g0JrRgNC10YnQsNGC0LjQuiwgMzYsINCa0LjQtdCyLCAwMjAwMA!5e0!3m2!1sru!2sua!4v1234567890123!5m2!1sru!2sua"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="grayscale hover:grayscale-0 transition-all duration-500"
+        ></iframe>
+        
+        {/* Map Overlay with Address */}
+        <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-2xl max-w-sm">
+          <div className="flex items-start gap-3">
+            <MapPin className="w-6 h-6 text-[#0071E3] flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-bold text-lg text-[#121212] mb-1">Marketplace</h3>
+              <p className="text-gray-700 text-sm mb-2">
+                ул. Крещатик, 36<br />
+                Киев, Украина, 01001
+              </p>
+              <a
+                href="https://www.google.com/maps/dir//Крещатик,+36,+Киев,+02000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071E3] hover:text-[#0051c3] text-sm font-semibold inline-flex items-center gap-1"
+              >
+                {t('getDirections')}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Contact Info */}
       <div className="container-main py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
