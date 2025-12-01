@@ -23,6 +23,8 @@ const Header = () => {
   const { isAuthenticated, user, logout, isSeller, isAdmin } = useAuth();
   const { cartItemsCount } = useCart();
   const { favoritesCount } = useFavorites();
+  const { comparisonCount } = useComparison();
+  const { unreadCount } = useNotifications();
   const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
