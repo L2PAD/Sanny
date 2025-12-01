@@ -82,20 +82,36 @@ const ProductCard = ({ product }) => {
           </div>
         )}
         
-        {/* Favorite Button */}
-        <button
-          onClick={handleToggleFavorite}
-          className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-sm transition-all ${
-            isFavorite(product.id)
-              ? 'bg-red-500 text-white'
-              : 'bg-white/80 text-gray-600 hover:bg-white'
-          }`}
-          title={isFavorite(product.id) ? 'Удалить из избранного' : 'Добавить в избранное'}
-        >
-          <Heart
-            className={`w-5 h-5 ${isFavorite(product.id) ? 'fill-current' : ''}`}
-          />
-        </button>
+        {/* Action Buttons */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
+          {/* Favorite Button */}
+          <button
+            onClick={handleToggleFavorite}
+            className={`p-2 rounded-full backdrop-blur-sm transition-all ${
+              isFavorite(product.id)
+                ? 'bg-red-500 text-white'
+                : 'bg-white/80 text-gray-600 hover:bg-white'
+            }`}
+            title={isFavorite(product.id) ? 'Удалить из избранного' : 'Добавить в избранное'}
+          >
+            <Heart
+              className={`w-5 h-5 ${isFavorite(product.id) ? 'fill-current' : ''}`}
+            />
+          </button>
+          
+          {/* Comparison Button */}
+          <button
+            onClick={handleToggleComparison}
+            className={`p-2 rounded-full backdrop-blur-sm transition-all ${
+              isInComparison(product.id)
+                ? 'bg-blue-500 text-white'
+                : 'bg-white/80 text-gray-600 hover:bg-white'
+            }`}
+            title={isInComparison(product.id) ? 'Удалить из сравнения' : 'Добавить к сравнению'}
+          >
+            <Scale className="w-5 h-5" />
+          </button>
+        </div>
         
         {discount > 0 && (
           <div data-testid="discount-badge" className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
