@@ -5,6 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { ShoppingCart, Star, Package, Shield, TruckIcon } from 'lucide-react';
+import ReviewsSection from '../components/ReviewsSection';
 
 const ProductDetail = () => {
   const { id } = useParams();
