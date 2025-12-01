@@ -37,6 +37,7 @@ function App() {
                 <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
+              <Footer />
             </div>
           </CartProvider>
         </AuthProvider>
