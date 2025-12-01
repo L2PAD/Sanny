@@ -69,9 +69,19 @@ const Header = () => {
           </form>
 
           {/* Right Section */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {/* Language Switcher */}
             <LanguageSwitcher />
+            
+            {/* Comparison */}
+            <Link to="/comparison" className="relative p-2 hover:bg-gray-100 rounded-lg" title="Порівняння">
+              <Scale className="w-6 h-6 text-[#121212]" />
+              {comparisonCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {comparisonCount}
+                </span>
+              )}
+            </Link>
             
             {/* Favorites */}
             <Link to="/favorites" className="relative p-2 hover:bg-gray-100 rounded-lg" title="Обране">
@@ -82,6 +92,9 @@ const Header = () => {
                 </span>
               )}
             </Link>
+            
+            {/* Notifications */}
+            <NotificationsDropdown />
             
             {/* Cart */}
             {isAuthenticated && (
