@@ -1,0 +1,250 @@
+export const translations = {
+  ru: {
+    // Header
+    search: 'Поиск товаров...',
+    login: 'Войти',
+    signup: 'Регистрация',
+    cart: 'Корзина',
+    myProfile: 'Мой профиль',
+    myOrders: 'Мои заказы',
+    sellerDashboard: 'Панель продавца',
+    adminPanel: 'Панель администратора',
+    logout: 'Выйти',
+    
+    // Home
+    heroTitle: 'Откройте для себя',
+    heroTitleHighlight: 'Удивительные товары',
+    heroDescription: 'Покупайте у тысяч проверенных продавцов. Найдите то, что вы любите, по ценам, которые вам понравятся еще больше.',
+    browseProducts: 'Просмотреть товары',
+    becomeSeller: 'Стать продавцом',
+    
+    // Features
+    qualityProducts: 'Качественные товары',
+    qualityProductsDesc: 'Проверенные продавцы предлагают аутентичные товары с гарантией качества',
+    bestPrices: 'Лучшие цены',
+    bestPricesDesc: 'Конкурентные цены на тысячи товаров от нескольких продавцов',
+    securePayment: 'Безопасная оплата',
+    securePaymentDesc: 'Безопасные транзакции с несколькими вариантами оплаты',
+    fastDelivery: 'Быстрая доставка',
+    fastDeliveryDesc: 'Оперативная доставка по всей стране с отслеживанием',
+    
+    // Categories
+    shopByCategory: 'Покупки по категориям',
+    viewAll: 'Посмотреть все',
+    
+    // Products
+    featuredProducts: 'Избранные товары',
+    addToCart: 'В корзину',
+    outOfStock: 'Нет в наличии',
+    inStock: 'В наличии',
+    reviews: 'отзывов',
+    
+    // Product Detail
+    buyNow: 'Купить сейчас',
+    quantity: 'Количество',
+    productDescription: 'Описание товара',
+    specifications: 'Характеристики',
+    customerReviews: 'Отзывы покупателей',
+    writeReview: 'Написать отзыв',
+    noReviews: 'Пока нет отзывов',
+    
+    // Cart
+    shoppingCart: 'Корзина покупок',
+    clearCart: 'Очистить корзину',
+    cartEmpty: 'Ваша корзина пуста',
+    continueShopping: 'Продолжить покупки',
+    orderSummary: 'Итого',
+    subtotal: 'Подытог',
+    shipping: 'Доставка',
+    free: 'Бесплатно',
+    total: 'Всего',
+    proceedToCheckout: 'Оформить заказ',
+    
+    // Checkout
+    checkout: 'Оформление заказа',
+    shippingAddress: 'Адрес доставки',
+    street: 'Улица',
+    city: 'Город',
+    state: 'Область/Регион',
+    postalCode: 'Почтовый индекс',
+    country: 'Страна',
+    paymentMethod: 'Способ оплаты',
+    cardNumber: 'Номер карты',
+    expiryDate: 'Срок действия',
+    cvv: 'CVV',
+    placeOrder: 'Оформить заказ',
+    paymentSuccessful: 'Оплата успешна!',
+    orderConfirmed: 'Ваш заказ подтвержден',
+    
+    // Auth
+    welcomeBack: 'С возвращением',
+    signInToAccount: 'Войдите в свой аккаунт',
+    emailAddress: 'Email адрес',
+    password: 'Пароль',
+    signIn: 'Войти',
+    noAccount: 'Нет аккаунта?',
+    createAccount: 'Создать аккаунт',
+    joinMarketplace: 'Присоединяйтесь к нашему маркетплейсу',
+    fullName: 'Полное имя',
+    accountType: 'Тип аккаунта',
+    customer: 'Покупатель',
+    seller: 'Продавец',
+    iWantToBuy: 'Я хочу покупать товары',
+    iWantToSell: 'Я хочу продавать товары',
+    companyName: 'Название компании',
+    optional: '(необязательно)',
+    haveAccount: 'Уже есть аккаунт?',
+    
+    // Contact
+    contactUs: 'Свяжитесь с нами',
+    contactInfo: 'Контактная информация',
+    phone: 'Телефон',
+    address: 'Адрес',
+    workingHours: 'Часы работы',
+    mondayFriday: 'Пн-Пт',
+    saturday: 'Суббота',
+    sunday: 'Воскресенье',
+    closed: 'Выходной',
+    getDirections: 'Как добраться',
+    requestCallback: 'Заказать звонок',
+    yourName: 'Ваше имя',
+    yourPhone: 'Ваш телефон',
+    yourMessage: 'Ваше сообщение',
+    send: 'Отправить',
+    
+    // Support
+    support: 'Поддержка',
+    liveChat: 'Онлайн-чат',
+    chatWithUs: 'Напишите нам',
+    helpCenter: 'Центр помощи',
+    
+    // CTA
+    readyToStartSelling: 'Готовы начать продавать?',
+    ctaDescription: 'Присоединяйтесь к тысячам успешных продавцов на нашей платформе. Создайте свой магазин и начните зарабатывать уже сегодня.',
+    getStartedNow: 'Начать сейчас',
+  },
+  ua: {
+    // Header
+    search: 'Пошук товарів...',
+    login: 'Увійти',
+    signup: 'Реєстрація',
+    cart: 'Кошик',
+    myProfile: 'Мій профіль',
+    myOrders: 'Мої замовлення',
+    sellerDashboard: 'Панель продавця',
+    adminPanel: 'Панель адміністратора',
+    logout: 'Вийти',
+    
+    // Home
+    heroTitle: 'Відкрийте для себе',
+    heroTitleHighlight: 'Дивовижні товари',
+    heroDescription: 'Купуйте у тисяч перевірених продавців. Знайдіть те, що ви любите, за цінами, які вам сподобаються ще більше.',
+    browseProducts: 'Переглянути товари',
+    becomeSeller: 'Стати продавцем',
+    
+    // Features
+    qualityProducts: 'Якісні товари',
+    qualityProductsDesc: 'Перевірені продавці пропонують автентичні товари з гарантією якості',
+    bestPrices: 'Найкращі ціни',
+    bestPricesDesc: 'Конкурентні ціни на тисячі товарів від кількох продавців',
+    securePayment: 'Безпечна оплата',
+    securePaymentDesc: 'Безпечні транзакції з декількома варіантами оплати',
+    fastDelivery: 'Швидка доставка',
+    fastDeliveryDesc: 'Оперативна доставка по всій країні з відстеженням',
+    
+    // Categories
+    shopByCategory: 'Покупки за категоріями',
+    viewAll: 'Дивитись все',
+    
+    // Products
+    featuredProducts: 'Обрані товари',
+    addToCart: 'У кошик',
+    outOfStock: 'Немає в наявності',
+    inStock: 'В наявності',
+    reviews: 'відгуків',
+    
+    // Product Detail
+    buyNow: 'Купити зараз',
+    quantity: 'Кількість',
+    productDescription: 'Опис товару',
+    specifications: 'Характеристики',
+    customerReviews: 'Відгуки покупців',
+    writeReview: 'Написати відгук',
+    noReviews: 'Поки немає відгуків',
+    
+    // Cart
+    shoppingCart: 'Кошик покупок',
+    clearCart: 'Очистити кошик',
+    cartEmpty: 'Ваш кошик порожній',
+    continueShopping: 'Продовжити покупки',
+    orderSummary: 'Підсумок',
+    subtotal: 'Проміжний підсумок',
+    shipping: 'Доставка',
+    free: 'Безкоштовно',
+    total: 'Всього',
+    proceedToCheckout: 'Оформити замовлення',
+    
+    // Checkout
+    checkout: 'Оформлення замовлення',
+    shippingAddress: 'Адреса доставки',
+    street: 'Вулиця',
+    city: 'Місто',
+    state: 'Область/Регіон',
+    postalCode: 'Поштовий індекс',
+    country: 'Країна',
+    paymentMethod: 'Спосіб оплати',
+    cardNumber: 'Номер картки',
+    expiryDate: 'Термін дії',
+    cvv: 'CVV',
+    placeOrder: 'Оформити замовлення',
+    paymentSuccessful: 'Оплата успішна!',
+    orderConfirmed: 'Ваше замовлення підтверджено',
+    
+    // Auth
+    welcomeBack: 'З поверненням',
+    signInToAccount: 'Увійдіть до свого облікового запису',
+    emailAddress: 'Email адреса',
+    password: 'Пароль',
+    signIn: 'Увійти',
+    noAccount: 'Немає облікового запису?',
+    createAccount: 'Створити обліковий запис',
+    joinMarketplace: 'Приєднуйтесь до нашого маркетплейсу',
+    fullName: 'Повне ім\'я',
+    accountType: 'Тип облікового запису',
+    customer: 'Покупець',
+    seller: 'Продавець',
+    iWantToBuy: 'Я хочу купувати товари',
+    iWantToSell: 'Я хочу продавати товари',
+    companyName: 'Назва компанії',
+    optional: '(необов\'язково)',
+    haveAccount: 'Вже є обліковий запис?',
+    
+    // Contact
+    contactUs: 'Зв\'яжіться з нами',
+    contactInfo: 'Контактна інформація',
+    phone: 'Телефон',
+    address: 'Адреса',
+    workingHours: 'Години роботи',
+    mondayFriday: 'Пн-Пт',
+    saturday: 'Субота',
+    sunday: 'Неділя',
+    closed: 'Вихідний',
+    getDirections: 'Як дістатись',
+    requestCallback: 'Замовити дзвінок',
+    yourName: 'Ваше ім\'я',
+    yourPhone: 'Ваш телефон',
+    yourMessage: 'Ваше повідомлення',
+    send: 'Відправити',
+    
+    // Support
+    support: 'Підтримка',
+    liveChat: 'Онлайн-чат',
+    chatWithUs: 'Напишіть нам',
+    helpCenter: 'Центр допомоги',
+    
+    // CTA
+    readyToStartSelling: 'Готові почати продавати?',
+    ctaDescription: 'Приєднуйтесь до тисяч успішних продавців на нашій платформі. Створіть свій магазин і почніть заробляти вже сьогодні.',
+    getStartedNow: 'Почати зараз',
+  },
+};

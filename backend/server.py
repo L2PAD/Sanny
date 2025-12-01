@@ -46,7 +46,7 @@ class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     email: EmailStr
     full_name: str
-    role: str = "customer"  # customer, seller, admin
+    role: str = "customer"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     company_name: Optional[str] = None
     verified: bool = False
@@ -96,7 +96,7 @@ class Product(BaseModel):
     currency: str = "USD"
     stock_level: int = 0
     images: List[str] = []
-    status: str = "published"  # published, draft, archived
+    status: str = "published"
     rating: float = 0.0
     reviews_count: int = 0
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -124,6 +124,21 @@ class ProductUpdate(BaseModel):
     stock_level: Optional[int] = None
     images: Optional[List[str]] = None
     status: Optional[str] = None
+
+class Review(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    product_id: str
+    user_id: str
+    user_name: str
+    rating: int
+    comment: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ReviewCreate(BaseModel):
+    product_id: str
+    rating: int = Field(ge=1, le=5)
+    comment: str
 
 class CartItem(BaseModel):
     product_id: str
@@ -165,8 +180,8 @@ class Order(BaseModel):
     total_amount: float
     currency: str = "USD"
     shipping_address: ShippingAddress
-    status: str = "pending"  # pending, paid, processing, shipped, delivered, cancelled
-    payment_status: str = "pending"  # pending, paid, failed, refunded
+    status: str = "pending"
+    payment_status: str = "pending"
     payment_method: Optional[str] = None
     payment_session_id: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -196,6 +211,11 @@ class AIDescriptionRequest(BaseModel):
 class AIDescriptionResponse(BaseModel):
     description: str
     short_description: str
+
+class ContactRequest(BaseModel):
+    name: str
+    phone: str
+    message: str
 
 # ============= AUTH UTILITIES =============
 
@@ -241,12 +261,10 @@ async def get_current_admin(current_user: User = Depends(get_current_user)) -> U
 
 @api_router.post("/auth/register", response_model=Token)
 async def register(user_data: UserCreate):
-    # Check if user exists
     existing = await db.users.find_one({"email": user_data.email})
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    # Create user
     user = User(
         email=user_data.email,
         full_name=user_data.full_name,
@@ -259,8 +277,6 @@ async def register(user_data: UserCreate):
     user_doc["created_at"] = user_doc["created_at"].isoformat()
     
     await db.users.insert_one(user_doc)
-    
-    # Create token
     access_token = create_access_token({"sub": user.id})
     
     return Token(access_token=access_token, token_type="bearer", user=user)
@@ -414,6 +430,51 @@ async def delete_product(
     await db.products.delete_one({"id": product_id})
     return {"message": "Product deleted successfully"}
 
+# ============= REVIEWS ENDPOINTS =============
+
+@api_router.get("/products/{product_id}/reviews", response_model=List[Review])
+async def get_product_reviews(product_id: str):
+    reviews = await db.reviews.find({"product_id": product_id}, {"_id": 0}).to_list(1000)
+    for review in reviews:
+        if isinstance(review.get("created_at"), str):
+            review["created_at"] = datetime.fromisoformat(review["created_at"])
+    return reviews
+
+@api_router.post("/reviews", response_model=Review)
+async def create_review(
+    review_data: ReviewCreate,
+    current_user: User = Depends(get_current_user)
+):
+    # Check if user already reviewed this product
+    existing = await db.reviews.find_one({
+        "product_id": review_data.product_id,
+        "user_id": current_user.id
+    })
+    if existing:
+        raise HTTPException(status_code=400, detail="You already reviewed this product")
+    
+    review = Review(
+        product_id=review_data.product_id,
+        user_id=current_user.id,
+        user_name=current_user.full_name,
+        rating=review_data.rating,
+        comment=review_data.comment
+    )
+    
+    review_doc = review.model_dump()
+    review_doc["created_at"] = review_doc["created_at"].isoformat()
+    await db.reviews.insert_one(review_doc)
+    
+    # Update product rating
+    all_reviews = await db.reviews.find({"product_id": review_data.product_id}).to_list(1000)
+    avg_rating = sum(r["rating"] for r in all_reviews) / len(all_reviews)
+    await db.products.update_one(
+        {"id": review_data.product_id},
+        {"$set": {"rating": round(avg_rating, 1), "reviews_count": len(all_reviews)}}
+    )
+    
+    return review
+
 # ============= CART ENDPOINTS =============
 
 @api_router.get("/cart", response_model=Cart)
@@ -438,7 +499,6 @@ async def add_to_cart(
     item: AddToCartRequest,
     current_user: User = Depends(get_current_user)
 ):
-    # Get product
     product = await db.products.find_one({"id": item.product_id}, {"_id": 0})
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
@@ -446,14 +506,12 @@ async def add_to_cart(
     if product["stock_level"] < item.quantity:
         raise HTTPException(status_code=400, detail="Insufficient stock")
     
-    # Get or create cart
     cart = await db.carts.find_one({"user_id": current_user.id}, {"_id": 0})
     if not cart:
         cart = Cart(user_id=current_user.id).model_dump()
         cart["created_at"] = cart["created_at"].isoformat()
         cart["updated_at"] = cart["updated_at"].isoformat()
     
-    # Add or update item
     cart_item = CartItem(
         product_id=item.product_id,
         quantity=item.quantity,
@@ -515,15 +573,12 @@ async def create_checkout_session(
 ):
     from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionRequest
     
-    # Get cart
     cart = await db.carts.find_one({"user_id": current_user.id}, {"_id": 0})
     if not cart or not cart.get("items"):
         raise HTTPException(status_code=400, detail="Cart is empty")
     
-    # Calculate total
     total = sum(item["price"] * item["quantity"] for item in cart["items"])
     
-    # Create order
     order_items = []
     for item in cart["items"]:
         product = await db.products.find_one({"id": item["product_id"]}, {"_id": 0})
@@ -551,7 +606,6 @@ async def create_checkout_session(
     order_doc["updated_at"] = order_doc["updated_at"].isoformat()
     await db.orders.insert_one(order_doc)
     
-    # Create Stripe checkout session
     stripe_api_key = os.environ.get('STRIPE_API_KEY')
     host_url = str(request.base_url).rstrip('/')
     webhook_url = f"{host_url}/api/webhook/stripe"
@@ -574,7 +628,6 @@ async def create_checkout_session(
     
     session = await stripe_checkout.create_checkout_session(checkout_request)
     
-    # Save payment transaction
     payment = PaymentTransaction(
         order_id=order.id,
         session_id=session.session_id,
@@ -590,7 +643,6 @@ async def create_checkout_session(
     payment_doc["updated_at"] = payment_doc["updated_at"].isoformat()
     await db.payment_transactions.insert_one(payment_doc)
     
-    # Update order with session ID
     await db.orders.update_one(
         {"id": order.id},
         {"$set": {"payment_session_id": session.session_id}}
@@ -611,7 +663,6 @@ async def get_checkout_status(session_id: str):
     
     status = await stripe_checkout.get_checkout_status(session_id)
     
-    # Update payment transaction
     if status.payment_status == "paid":
         payment = await db.payment_transactions.find_one({"session_id": session_id})
         if payment and payment.get("payment_status") != "paid":
@@ -620,7 +671,6 @@ async def get_checkout_status(session_id: str):
                 {"$set": {"payment_status": "paid", "updated_at": datetime.now(timezone.utc).isoformat()}}
             )
             
-            # Update order
             await db.orders.update_one(
                 {"id": payment["order_id"]},
                 {"$set": {
@@ -631,7 +681,6 @@ async def get_checkout_status(session_id: str):
                 }}
             )
             
-            # Clear cart
             order = await db.orders.find_one({"id": payment["order_id"]})
             if order:
                 await db.carts.update_one(
@@ -705,7 +754,6 @@ async def get_seller_products(current_user: User = Depends(get_current_seller)):
 
 @api_router.get("/seller/orders", response_model=List[Order])
 async def get_seller_orders(current_user: User = Depends(get_current_seller)):
-    # Get orders that contain products from this seller
     orders = await db.orders.find({}, {"_id": 0}).to_list(1000)
     seller_orders = []
     
@@ -779,7 +827,6 @@ Format your response as JSON with keys: "description" and "short_description"""
     
     try:
         import json
-        # Try to parse JSON from response
         response_text = response.strip()
         if "```json" in response_text:
             response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -792,12 +839,26 @@ Format your response as JSON with keys: "description" and "short_description"""
             short_description=result.get("short_description", request.product_title)
         )
     except:
-        # Fallback if parsing fails
         lines = response.split("\n\n")
         return AIDescriptionResponse(
             description=response if len(lines) < 2 else "\n\n".join(lines[:-1]),
             short_description=lines[-1] if len(lines) > 1 else request.product_title[:160]
         )
+
+# ============= CONTACT & SUPPORT =============
+
+@api_router.post("/contact/callback")
+async def request_callback(request: ContactRequest):
+    callback_doc = {
+        "id": str(uuid.uuid4()),
+        "name": request.name,
+        "phone": request.phone,
+        "message": request.message,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "status": "pending"
+    }
+    await db.callbacks.insert_one(callback_doc)
+    return {"message": "Callback request received. We will contact you soon."}
 
 # ============= ADMIN ENDPOINTS =============
 
