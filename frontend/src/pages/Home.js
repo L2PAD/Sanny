@@ -39,11 +39,11 @@ const Home = () => {
         <div className="container-main">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 data-testid="hero-title" className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#121212] leading-tight">
-              Discover Amazing
-              <span className="block text-[#0071E3]">Products</span>
+              {t('heroTitle')}
+              <span className="block text-[#0071E3]">{t('heroTitleHighlight')}</span>
             </h1>
             <p data-testid="hero-description" className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              Shop from thousands of verified sellers. Find what you love at prices you'll love even more.
+              {t('heroDescription')}
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Link to="/products">
