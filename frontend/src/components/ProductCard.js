@@ -66,10 +66,10 @@ const ProductCard = ({ product }) => {
     <Link
       data-testid={`product-card-${product.id}`}
       to={`/products/${product.id}`}
-      className="group card hover:shadow-xl"
+      className="group card hover:shadow-xl flex flex-col h-full"
     >
       {/* Image */}
-      <div className="relative image-zoom rounded-xl overflow-hidden bg-[#F7F7F7] aspect-ratio-1-1 mb-4">
+      <div className="relative image-zoom rounded-xl overflow-hidden bg-[#F7F7F7] aspect-ratio-1-1 mb-4 flex-shrink-0">
         {product.images && product.images.length > 0 ? (
           <img
             src={product.images[0]}
