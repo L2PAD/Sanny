@@ -6,7 +6,7 @@ import { Button } from '../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Slider } from '../components/ui/slider';
 import { Label } from '../components/ui/label';
-import { Filter, X, Grid, List, ArrowUpDown } from 'lucide-react';
+import { Filter, X, Grid, List, ArrowUpDown, ChevronDown, ChevronRight, Search } from 'lucide-react';
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,8 +16,10 @@ const Products = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [sortBy, setSortBy] = useState('newest');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
-  const [priceDisplay, setPriceDisplay] = useState('full'); // 'full' or 'monthly'
+  const [viewMode, setViewMode] = useState('grid');
+  const [priceDisplay, setPriceDisplay] = useState('full');
+  const [expandedCategories, setExpandedCategories] = useState([]);
+  const [categorySearch, setCategorySearch] = useState('');
 
   const search = searchParams.get('search') || '';
   const categoryId = searchParams.get('category') || '';
@@ -58,13 +60,21 @@ const Products = () => {
     }
   };
 
-  const handleCategoryChange = (value) => {
-    if (value === 'all') {
+  const handleCategoryChange = (catId) => {
+    if (catId === categoryId) {
       searchParams.delete('category');
     } else {
-      searchParams.set('category', value);
+      searchParams.set('category', catId);
     }
     setSearchParams(searchParams);
+  };
+
+  const toggleCategory = (catId) => {
+    setExpandedCategories(prev => 
+      prev.includes(catId) 
+        ? prev.filter(id => id !== catId)
+        : [...prev, catId]
+    );
   };
 
   const handleSortChange = (value) => {
@@ -77,177 +87,249 @@ const Products = () => {
     setSortBy('newest');
   };
 
+  const filteredCategories = categories.filter(cat => 
+    cat.name.toLowerCase().includes(categorySearch.toLowerCase())
+  );
+
   return (
-    <div data-testid="products-page" className="min-h-screen py-8">
-      <div className="container-main">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <div>
-            <h1 data-testid="page-title" className="text-4xl font-bold mb-2">
-              {search ? `Search Results for "${search}"` : 'All Products'}
+    <div className="min-h-screen bg-[#F7F7F7]">
+      {/* Compact Header */}
+      <div className="bg-white border-b border-gray-200 py-4">
+        <div className="container-main">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold">
+              {search ? `Результати пошуку: "${search}"` : 'Каталог товарів'}
             </h1>
-            <p className="text-gray-600">{products.length} products found</p>
-          </div>
-          
-          <div className="flex items-center gap-3 flex-wrap">
-            {/* Price Display Toggle */}
-            <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg p-1">
-              <button
-                onClick={() => setPriceDisplay('full')}
-                className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
-                  priceDisplay === 'full'
-                    ? 'bg-green-500 text-white'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Повна ціна
-              </button>
-              <button
-                onClick={() => setPriceDisplay('monthly')}
-                className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
-                  priceDisplay === 'monthly'
-                    ? 'bg-green-500 text-white'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Ціна в місяць
-              </button>
-            </div>
-
-            {/* Sort */}
-            <Select value={sortBy} onValueChange={handleSortChange}>
-              <SelectTrigger className="w-[200px] bg-white">
-                <ArrowUpDown className="w-4 h-4 mr-2" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="popularity">За популярністю</SelectItem>
-                <SelectItem value="newest">Нові</SelectItem>
-                <SelectItem value="price_asc">Ціна: від дешевих</SelectItem>
-                <SelectItem value="price_desc">Ціна: від дорогих</SelectItem>
-                <SelectItem value="rating">За рейтингом</SelectItem>
-              </SelectContent>
-            </Select>
-
-            {/* View Mode */}
-            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-2 rounded transition-colors ${
-                  viewMode === 'grid'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-400 hover:text-gray-600'
-                }`}
-                title="Сетка"
-              >
-                <Grid className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`p-2 rounded transition-colors ${
-                  viewMode === 'list'
-                    ? 'bg-gray-100 text-gray-900'
-                    : 'text-gray-400 hover:text-gray-600'
-                }`}
-                title="Список"
-              >
-                <List className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Mobile Filters Toggle */}
             <Button
-              data-testid="toggle-filters-button"
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
               className="lg:hidden"
             >
               <Filter className="w-4 h-4 mr-2" />
-              Filters
+              Фільтри
             </Button>
           </div>
         </div>
+      </div>
 
-        <div className="flex gap-8">
-          {/* Filters Sidebar */}
+      <div className="container-main py-6">
+        <div className="flex gap-6">
+          {/* Left Sidebar - Filters */}
           <div className={`${
             showFilters ? 'block' : 'hidden'
-          } lg:block w-full lg:w-64 space-y-6`}>
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 space-y-6 sticky top-24">
-              <div className="flex justify-between items-center">
-                <h3 data-testid="filters-title" className="font-semibold text-lg">Filters</h3>
-                <Button
-                  data-testid="clear-filters-button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="text-sm"
-                >
-                  Clear All
-                </Button>
-              </div>
-
-              {/* Category Filter */}
-              <div>
-                <Label className="mb-2 block font-medium">Category</Label>
-                <Select value={categoryId || 'all'} onValueChange={handleCategoryChange}>
-                  <SelectTrigger data-testid="category-select">
-                    <SelectValue placeholder="All Categories" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
-                    {categories.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.id}>
-                        {cat.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Price Range */}
-              <div>
-                <Label className="mb-2 block font-medium">Price Range</Label>
+          } lg:block w-full lg:w-80 flex-shrink-0`}>
+            <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-6">
+              {/* Price Filter */}
+              <div className="p-6 border-b border-gray-200">
+                <h3 className="font-bold text-lg mb-4">Ціна</h3>
                 <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      value={priceRange[0]}
+                      onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      placeholder="Від"
+                    />
+                    <span>—</span>
+                    <input
+                      type="number"
+                      value={priceRange[1]}
+                      onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 1000])}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      placeholder="До"
+                    />
+                  </div>
                   <Slider
-                    data-testid="price-slider"
                     min={0}
                     max={1000}
                     step={10}
                     value={priceRange}
                     onValueChange={setPriceRange}
-                    className="mt-2"
                   />
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>${priceRange[0]}</span>
-                    <span>${priceRange[1]}</span>
-                  </div>
                   <Button
-                    data-testid="apply-price-filter-button"
                     onClick={fetchProducts}
-                    className="w-full"
-                    size="sm"
+                    className="w-full bg-green-600 hover:bg-green-700"
                   >
-                    Apply
+                    ЗАСТОСУВАТИ
                   </Button>
+                </div>
+              </div>
+
+              {/* Categories Filter */}
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-lg">Розділ</h3>
+                  {categoryId && (
+                    <button
+                      onClick={() => handleCategoryChange('')}
+                      className="text-sm text-blue-600 hover:text-blue-700"
+                    >
+                      Скинути
+                    </button>
+                  )}
+                </div>
+
+                {/* Category Search */}
+                <div className="relative mb-4">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={categorySearch}
+                    onChange={(e) => setCategorySearch(e.target.value)}
+                    placeholder="Пошук"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"
+                  />
+                </div>
+
+                {/* Categories List */}
+                <div className="space-y-1 max-h-[500px] overflow-y-auto">
+                  {filteredCategories.map((category) => (
+                    <div key={category.id}>
+                      <div
+                        className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
+                          categoryId === category.id
+                            ? 'bg-blue-50 text-blue-700'
+                            : 'hover:bg-gray-50'
+                        }`}
+                      >
+                        <div 
+                          className="flex items-center gap-3 flex-1"
+                          onClick={() => handleCategoryChange(category.id)}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={categoryId === category.id}
+                            onChange={() => handleCategoryChange(category.id)}
+                            className="w-4 h-4"
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                          <span className="flex-1 text-sm font-medium">
+                            {category.name}
+                          </span>
+                          <span className="text-xs text-gray-500">
+                            {products.filter(p => p.category_id === category.id).length}
+                          </span>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleCategory(category.id);
+                          }}
+                          className="p-1 hover:bg-gray-200 rounded"
+                        >
+                          {expandedCategories.includes(category.id) ? (
+                            <ChevronDown className="w-4 h-4" />
+                          ) : (
+                            <ChevronRight className="w-4 h-4" />
+                          )}
+                        </button>
+                      </div>
+                      
+                      {/* Subcategories placeholder */}
+                      {expandedCategories.includes(category.id) && (
+                        <div className="ml-6 mt-1 space-y-1">
+                          <div className="text-xs text-gray-500 p-2">
+                            Підкатегорії будуть тут
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Products Grid/List */}
+          {/* Right Content - Products */}
           <div className="flex-1">
+            {/* Toolbar */}
+            <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-6">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  {/* Price Display Toggle */}
+                  <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                    <button
+                      onClick={() => setPriceDisplay('full')}
+                      className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
+                        priceDisplay === 'full'
+                          ? 'bg-green-500 text-white'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      Повна ціна
+                    </button>
+                    <button
+                      onClick={() => setPriceDisplay('monthly')}
+                      className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
+                        priceDisplay === 'monthly'
+                          ? 'bg-green-500 text-white'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      Ціна в місяць
+                    </button>
+                  </div>
+
+                  {/* Sort */}
+                  <Select value={sortBy} onValueChange={handleSortChange}>
+                    <SelectTrigger className="w-[200px]">
+                      <ArrowUpDown className="w-4 h-4 mr-2" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="popularity">За популярністю</SelectItem>
+                      <SelectItem value="newest">Нові</SelectItem>
+                      <SelectItem value="price_asc">Ціна: від дешевих</SelectItem>
+                      <SelectItem value="price_desc">Ціна: від дорогих</SelectItem>
+                      <SelectItem value="rating">За рейтингом</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* View Mode */}
+                <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2 rounded transition-colors ${
+                      viewMode === 'grid'
+                        ? 'bg-white shadow-sm'
+                        : 'hover:bg-gray-200'
+                    }`}
+                  >
+                    <Grid className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 rounded transition-colors ${
+                      viewMode === 'list'
+                        ? 'bg-white shadow-sm'
+                        : 'hover:bg-gray-200'
+                    }`}
+                  >
+                    <List className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Results count */}
+              <div className="mt-3 text-sm text-gray-600">
+                Знайдено товарів: <span className="font-semibold">{products.length}</span>
+              </div>
+            </div>
+
+            {/* Products Grid */}
             {loading ? (
               <div className="flex items-center justify-center py-20">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0071E3]"></div>
               </div>
             ) : products.length === 0 ? (
-              <div className="text-center py-20">
-                <p className="text-gray-600 text-lg">No products found</p>
+              <div className="text-center py-20 bg-white rounded-2xl">
+                <p className="text-gray-600 text-lg">Товари не знайдено</p>
               </div>
             ) : (
               <div className={viewMode === 'grid' 
-                ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
+                ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'
                 : 'space-y-4'
               }>
                 {products.map((product) => (
