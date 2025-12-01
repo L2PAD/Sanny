@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import Header from './components/Header';
@@ -17,26 +18,28 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <div data-testid="app" className="App">
-            <Toaster position="top-right" />
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:id" element={<ProductDetail />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/checkout/success" element={<CheckoutSuccess />} />
-              <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </div>
-        </CartProvider>
-      </AuthProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <CartProvider>
+            <div data-testid="app" className="App">
+              <Toaster position="top-right" />
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/checkout/success" element={<CheckoutSuccess />} />
+                <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </div>
+          </CartProvider>
+        </AuthProvider>
+      </LanguageProvider>
     </BrowserRouter>
   );
 }
