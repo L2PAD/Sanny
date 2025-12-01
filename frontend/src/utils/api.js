@@ -1,0 +1,105 @@
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = `${BACKEND_URL}/api`;
+
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Add retry logic
+axiosRetry(api, {
+  retries: 3,
+  retryDelay: axiosRetry.exponentialDelay,
+  retryCondition: (error) => {
+    return axiosRetry.isNetworkOrIdempotentRequestError(error) || error.response?.status === 429;
+  },
+});
+
+// Add auth token to requests
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Handle auth errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+
+// Auth API
+export const authAPI = {
+  register: (data) => api.post('/auth/register', data),
+  login: (data) => api.post('/auth/login', data),
+  me: () => api.get('/auth/me'),
+};
+
+// Categories API
+export const categoriesAPI = {
+  getAll: () => api.get('/categories'),
+  create: (data) => api.post('/categories', data),
+};
+
+// Products API
+export const productsAPI = {
+  getAll: (params) => api.get('/products', { params }),
+  getById: (id) => api.get(`/products/${id}`),
+  create: (data) => api.post('/products', data),
+  update: (id, data) => api.patch(`/products/${id}`, data),
+  delete: (id) => api.delete(`/products/${id}`),
+};
+
+// Cart API
+export const cartAPI = {
+  get: () => api.get('/cart'),
+  addItem: (data) => api.post('/cart/items', data),
+  removeItem: (productId) => api.delete(`/cart/items/${productId}`),
+  clear: () => api.delete('/cart'),
+};
+
+// Checkout API
+export const checkoutAPI = {
+  createSession: (data) => api.post('/checkout/create-session', data),
+  getStatus: (sessionId) => api.get(`/checkout/status/${sessionId}`),
+};
+
+// Orders API
+export const ordersAPI = {
+  getAll: () => api.get('/orders'),
+  getById: (id) => api.get(`/orders/${id}`),
+};
+
+// Seller API
+export const sellerAPI = {
+  getProducts: () => api.get('/seller/products'),
+  getOrders: () => api.get('/seller/orders'),
+  getStats: () => api.get('/seller/stats'),
+};
+
+// AI API
+export const aiAPI = {
+  generateDescription: (data) => api.post('/ai/generate-description', data),
+};
+
+// Admin API
+export const adminAPI = {
+  getUsers: () => api.get('/admin/users'),
+  getStats: () => api.get('/admin/stats'),
+};
