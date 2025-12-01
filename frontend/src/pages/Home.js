@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, TrendingUp, Shield } from 'lucide-react';
 import { categoriesAPI, productsAPI } from '../utils/api';
 import ProductCard from '../components/ProductCard';
 import { Button } from '../components/ui/button';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
