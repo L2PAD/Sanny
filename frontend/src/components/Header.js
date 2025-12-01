@@ -68,6 +68,16 @@ const Header = () => {
             {/* Language Switcher */}
             <LanguageSwitcher />
             
+            {/* Favorites */}
+            <Link to="/favorites" className="relative p-2 hover:bg-gray-100 rounded-lg" title="Обране">
+              <Heart className="w-6 h-6 text-[#121212]" />
+              {favoritesCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {favoritesCount}
+                </span>
+              )}
+            </Link>
+            
             {/* Cart */}
             {isAuthenticated && (
               <Link data-testid="cart-link" to="/cart" className="relative p-2 hover:bg-gray-100 rounded-lg">
