@@ -469,6 +469,9 @@ const EnhancedProductDetail = () => {
           </div>
         </div>
 
+        {/* Buy Together Section */}
+        <BuyTogether product={product} />
+
         {/* Similar Products from Same Category */}
         <SimilarProducts product={product} />
 
