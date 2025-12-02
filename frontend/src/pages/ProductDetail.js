@@ -63,6 +63,34 @@ const ProductDetail = () => {
     }
   };
 
+  const handleToggleFavorite = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
+      toast.success('Видалено з обраного');
+    } else {
+      addToFavorites(product);
+      toast.success('Додано в обране');
+    }
+  };
+
+  const handleToggleComparison = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    if (isInComparison(product.id)) {
+      removeFromComparison(product.id);
+      toast.success('Видалено з порівняння');
+    } else {
+      addToComparison(product);
+      toast.success('Додано до порівняння');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen py-12">
