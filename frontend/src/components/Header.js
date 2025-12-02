@@ -27,17 +27,8 @@ const Header = () => {
   const { comparisonCount } = useComparison();
   const { unreadCount } = useNotifications();
   const { t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery('');
-    }
-  };
 
   const handleLogout = () => {
     logout();
