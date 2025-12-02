@@ -129,9 +129,9 @@ const ProductCardCompact = ({ product }) => {
               <span className="text-xl font-bold text-gray-900">
                 ${finalPrice.toFixed(2)}
               </span>
-              {product.sale_price && (
+              {product.compare_price && (
                 <span className="text-sm text-gray-400 line-through">
-                  ${product.price.toFixed(2)}
+                  ${product.compare_price.toFixed(2)}
                 </span>
               )}
             </div>
