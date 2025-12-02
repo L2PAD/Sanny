@@ -579,7 +579,13 @@ const Checkout = () => {
               {/* RozetkaPay Widget */}
               {paymentMethod === 'online' && showPaymentWidget && (
                 <div className="mt-6 pt-6 border-t border-gray-200">
-                  <h3 className="font-semibold mb-4">Введіть дані карти</h3>
+                  <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-sm text-blue-800">
+                      <strong>Увага:</strong> Онлайн оплата через RozetkaPay тимчасово в режимі налаштування. 
+                      Для завершення замовлення виберіть "Оплата під час отримання товару".
+                    </p>
+                  </div>
+                  <h3 className="font-semibold mb-4">Введіть дані карти (Тестовий режим)</h3>
                   <RozetkaPayWidget
                     amount={totalWithDelivery}
                     onTokenReceived={handleTokenReceived}
@@ -587,7 +593,9 @@ const Checkout = () => {
                     customerId={user?.id}
                     onError={(error) => {
                       console.error('Widget error:', error);
-                      toast.error('Помилка завантаження платіжної форми');
+                      setShowPaymentWidget(false);
+                      setPaymentMethod('on-delivery');
+                      toast.error('Платіжний виджет недоступний. Оберіть "Оплата при отриманні"');
                     }}
                   />
                   {cardToken && (
