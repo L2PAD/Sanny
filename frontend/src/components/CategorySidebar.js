@@ -12,7 +12,6 @@ import {
   Baby,
   PackageOpen,
   BookOpen,
-  Zap,
   Dog,
   Sparkles,
   Gift,
