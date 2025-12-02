@@ -8,6 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useCart } from '../../contexts/CartContext';
 import { useFavorites } from '../../contexts/FavoritesContext';
 import { useComparison } from '../../contexts/ComparisonContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { productsAPI, reviewsAPI } from '../../utils/api';
 import { Button } from '../ui/button';
 import { toast } from 'sonner';
