@@ -6,6 +6,7 @@ import { productsAPI } from '../utils/api';
 import { Button } from '../components/ui/button';
 import { MapPin, CreditCard, Building2, User, Phone, Mail, ChevronRight, AlertCircle, Package, Truck, Home } from 'lucide-react';
 import { toast } from 'sonner';
+import NovaPoshtaDelivery from '../components/NovaPoshtaDelivery';
 
 const Checkout = () => {
   const navigate = useNavigate();
