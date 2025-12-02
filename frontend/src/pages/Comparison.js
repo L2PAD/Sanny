@@ -153,23 +153,23 @@ const Comparison = () => {
                           </div>
                         )}
                         {attr.type === 'rating' && (!product[attr.key] || product[attr.key] === 0) && (
-                          <span className="text-gray-400">Нет оценок</span>
+                          <span className="text-gray-400">{t('noRatings')}</span>
                         )}
                         {attr.type === 'number' && (
                           <span>{product[attr.key] || 0}</span>
                         )}
                         {attr.type === 'stock' && (
                           <span className={product[attr.key] > 0 ? 'text-green-600' : 'text-red-600'}>
-                            {product[attr.key] > 0 ? `${product[attr.key]} шт.` : 'Нет в наличии'}
+                            {product[attr.key] > 0 ? `${product[attr.key]} ${t('pieces')}` : t('notAvailable')}
                           </span>
                         )}
                         {attr.type === 'boolean' && (
                           <span className={product[attr.key] ? 'text-green-600' : 'text-gray-400'}>
-                            {product[attr.key] ? '✓ Да' : '—'}
+                            {product[attr.key] ? `✓ ${t('yes')}` : '—'}
                           </span>
                         )}
                         {attr.type === 'months' && product[attr.key] && (
-                          <span>{product[attr.key]} мес.</span>
+                          <span>{product[attr.key]} {t('months')}</span>
                         )}
                         {attr.type === 'months' && !product[attr.key] && <span>—</span>}
                       </td>
