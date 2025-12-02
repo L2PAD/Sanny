@@ -20,10 +20,20 @@ const RozetkaPayWidget = ({
       try {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payment/rozetkapay/widget-key`);
         const data = await response.json();
-        setWidgetKey(data.widget_key);
+        
+        // Check if widget key is valid (not placeholder)
+        if (data.widget_key && data.widget_key !== 'test_widget_key_placeholder' && data.widget_key.length > 10) {
+          setWidgetKey(data.widget_key);
+        } else {
+          console.warn('Widget key is not configured properly');
+          toast.error('Платіжний виджет недоступний. Використовуйте інший метод оплати.');
+          setIsLoading(false);
+          if (onError) onError(new Error('Widget key not configured'));
+        }
       } catch (error) {
         console.error('Error fetching widget key:', error);
         toast.error('Помилка завантаження платіжної форми');
+        setIsLoading(false);
         if (onError) onError(error);
       }
     };
