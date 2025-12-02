@@ -282,6 +282,9 @@ const ProductDetail = () => {
 
         {/* Reviews Section */}
         <ReviewsSection productId={product.id} />
+
+        {/* AI Recommendations */}
+        <AIRecommendations productId={product.id} />
       </div>
     </div>
   );
