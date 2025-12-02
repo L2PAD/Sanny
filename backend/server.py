@@ -730,6 +730,44 @@ async def stripe_webhook(request: Request):
 
 # ============= ORDERS ENDPOINTS =============
 
+@api_router.post("/orders", response_model=Order)
+async def create_order(
+    order_data: dict,
+    current_user: User = Depends(get_current_user)
+):
+    """Create a new order"""
+    try:
+        # Create order object
+        order = Order(
+            order_number=order_data.get("order_number", f"ORD-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{str(uuid.uuid4())[:8].upper()}"),
+            buyer_id=order_data.get("buyer_id", current_user.id),
+            items=order_data.get("items", []),
+            total_amount=order_data.get("total_amount", 0),
+            currency=order_data.get("currency", "USD"),
+            shipping_address=order_data.get("shipping_address", {}),
+            status=order_data.get("status", "pending"),
+            payment_status=order_data.get("payment_status", "pending"),
+            payment_method=order_data.get("payment_method", "cash_on_delivery")
+        )
+        
+        # Save to database
+        order_doc = order.model_dump()
+        order_doc["created_at"] = order_doc["created_at"].isoformat()
+        order_doc["updated_at"] = order_doc["updated_at"].isoformat()
+        await db.orders.insert_one(order_doc)
+        
+        # Clear cart after successful order creation
+        await db.carts.update_one(
+            {"user_id": current_user.id},
+            {"$set": {"items": []}}
+        )
+        
+        return order
+        
+    except Exception as e:
+        logger.error(f"Error creating order: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create order: {str(e)}")
+
 @api_router.get("/orders", response_model=List[Order])
 async def get_orders(current_user: User = Depends(get_current_user)):
     query = {"buyer_id": current_user.id}
