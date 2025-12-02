@@ -53,7 +53,9 @@ const ExchangeReturn = () => {
             {language === 'ru'
               ? 'По вопросам возврата звоните: '
               : 'З питань повернення телефонуйте: '}
-            <a href="tel:+380688886671" className="font-bold text-blue-600 hover:underline">068-888-66-71</a>
+            <a href="tel:+380502474161" className="font-bold text-blue-600 hover:underline">050-247-41-61</a>
+            {' '}або{' '}
+            <a href="tel:+380637247703" className="font-bold text-blue-600 hover:underline">063-724-77-03</a>
           </p>
         </div>
       </div>
