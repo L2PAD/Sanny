@@ -11,7 +11,6 @@ import { toast } from 'sonner';
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
-  const { addToComparison, removeFromComparison, isInComparison, canAddMore } = useComparison();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
