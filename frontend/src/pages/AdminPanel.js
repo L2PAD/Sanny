@@ -13,6 +13,7 @@ import AnalyticsDashboard from '../components/admin/AnalyticsDashboard';
 const AdminPanel = () => {
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('analytics');
   const [stats, setStats] = useState(null);
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
