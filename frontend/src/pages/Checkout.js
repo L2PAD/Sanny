@@ -518,6 +518,10 @@ const Checkout = () => {
                   <div
                     key={option.id}
                     onClick={() => {
+                      if (option.disabled) {
+                        toast.info('Цей метод оплати тимчасово недоступний');
+                        return;
+                      }
                       setPaymentMethod(option.id);
                       if (option.id === 'online') {
                         setShowPaymentWidget(true);
@@ -525,17 +529,23 @@ const Checkout = () => {
                         setShowPaymentWidget(false);
                       }
                     }}
-                    className={`p-4 border rounded-xl cursor-pointer transition-all ${
-                      paymentMethod === option.id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                    className={`p-4 border rounded-xl transition-all ${
+                      option.disabled
+                        ? 'opacity-50 cursor-not-allowed bg-gray-50'
+                        : `cursor-pointer ${
+                            paymentMethod === option.id
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       <input
                         type="radio"
                         checked={paymentMethod === option.id}
+                        disabled={option.disabled}
                         onChange={() => {
+                          if (option.disabled) return;
                           setPaymentMethod(option.id);
                           if (option.id === 'online') {
                             setShowPaymentWidget(true);
@@ -551,6 +561,11 @@ const Checkout = () => {
                           {option.badge && (
                             <span className="px-2 py-1 bg-yellow-400 text-xs font-semibold rounded">
                               {option.badge}
+                            </span>
+                          )}
+                          {option.disabled && (
+                            <span className="px-2 py-1 bg-gray-300 text-xs font-semibold rounded text-gray-600">
+                              Недоступно
                             </span>
                           )}
                         </div>
