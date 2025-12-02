@@ -37,7 +37,7 @@ function App() {
                 <CartProvider>
                   <div data-testid="app" className="App">
                     <Toaster position="top-right" />
-                    <Header />
+                    <NewHeader />
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/login" element={<Login />} />
