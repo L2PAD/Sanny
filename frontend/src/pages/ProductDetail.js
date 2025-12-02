@@ -5,7 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { useComparison } from '../contexts/ComparisonContext';
 import { productsAPI, reviewsAPI } from '../utils/api';
-import { Star, Heart, GitCompare, ShoppingCart, Minus, Plus, ChevronRight } from 'lucide-react';
+import { Star, Heart, GitCompare, ShoppingCart, Minus, Plus, ChevronRight, Package, Shield, Truck } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { toast } from 'sonner';
 import ProductGallery from '../components/ProductGallery';
