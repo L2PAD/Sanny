@@ -122,7 +122,7 @@ const Products = () => {
             <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-6">
               {/* Price Filter */}
               <div className="p-6 border-b border-gray-200">
-                <h3 className="font-bold text-lg mb-4">Ціна</h3>
+                <h3 className="font-bold text-lg mb-4">{t('priceLabel')}</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
                     <input
@@ -130,7 +130,7 @@ const Products = () => {
                       value={priceRange[0]}
                       onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                      placeholder="Від"
+                      placeholder={t('from')}
                     />
                     <span>—</span>
                     <input
@@ -138,7 +138,7 @@ const Products = () => {
                       value={priceRange[1]}
                       onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 1000])}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                      placeholder="До"
+                      placeholder={t('to')}
                     />
                   </div>
                   <Slider
@@ -152,7 +152,7 @@ const Products = () => {
                     onClick={fetchProducts}
                     className="w-full bg-green-600 hover:bg-green-700"
                   >
-                    ЗАСТОСУВАТИ
+                    {t('apply')}
                   </Button>
                 </div>
               </div>
