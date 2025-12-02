@@ -40,7 +40,13 @@ const BuyTogether = ({ product }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [product]);
+
+  useEffect(() => {
+    if (product?.category_id) {
+      fetchComplementaryProducts();
+    }
+  }, [product, fetchComplementaryProducts]);
 
   const toggleProductSelection = (prod) => {
     setSelectedProducts(prev => {
