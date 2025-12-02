@@ -133,8 +133,11 @@ async def seed_categories():
     """Seed categories into MongoDB"""
     # Connect to MongoDB
     mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    db_name = os.environ.get('DB_NAME', 'marketplace_db')
     client = AsyncIOMotorClient(mongo_url)
-    db = client.marketplace
+    db = client[db_name]
+    
+    print(f"📦 Using database: {db_name}")
     
     print("🌱 Starting category seeding...")
     
