@@ -913,7 +913,6 @@ class RozetkaPayCreatePaymentRequest(BaseModel):
     external_id: str
     amount: float
     currency: str = "UAH"
-    card_token: str
     customer: Dict[str, Any]
     description: str = "Оплата заказа"
 
