@@ -514,7 +514,14 @@ const Checkout = () => {
                 {paymentOptions.map((option) => (
                   <div
                     key={option.id}
-                    onClick={() => setPaymentMethod(option.id)}
+                    onClick={() => {
+                      setPaymentMethod(option.id);
+                      if (option.id === 'online') {
+                        setShowPaymentWidget(true);
+                      } else {
+                        setShowPaymentWidget(false);
+                      }
+                    }}
                     className={`p-4 border rounded-xl cursor-pointer transition-all ${
                       paymentMethod === option.id
                         ? 'border-blue-500 bg-blue-50'
@@ -525,7 +532,14 @@ const Checkout = () => {
                       <input
                         type="radio"
                         checked={paymentMethod === option.id}
-                        onChange={() => setPaymentMethod(option.id)}
+                        onChange={() => {
+                          setPaymentMethod(option.id);
+                          if (option.id === 'online') {
+                            setShowPaymentWidget(true);
+                          } else {
+                            setShowPaymentWidget(false);
+                          }
+                        }}
                         className="mt-1 w-5 h-5"
                       />
                       <div className="flex-1">
@@ -543,6 +557,31 @@ const Checkout = () => {
                   </div>
                 ))}
               </div>
+
+              {/* RozetkaPay Widget */}
+              {paymentMethod === 'online' && showPaymentWidget && (
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <h3 className="font-semibold mb-4">Введіть дані карти</h3>
+                  <RozetkaPayWidget
+                    amount={totalWithDelivery}
+                    onTokenReceived={handleTokenReceived}
+                    customerEmail={recipientData.email}
+                    customerId={user?.id}
+                    onError={(error) => {
+                      console.error('Widget error:', error);
+                      toast.error('Помилка завантаження платіжної форми');
+                    }}
+                  />
+                  {cardToken && (
+                    <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-sm text-green-800 flex items-center gap-2">
+                        <CreditCard className="w-4 h-4" />
+                        Карта {cardToken.card_mask} успішно додана
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Certificate */}
               <div className="mt-6 pt-6 border-t border-gray-200">
