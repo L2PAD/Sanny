@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { sellerAPI, productsAPI, categoriesAPI, aiAPI } from '../utils/api';
+import { generateProductDescription, generateSEO } from '../services/openaiService';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -10,7 +11,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Card } from '../components/ui/card';
 import { toast } from 'sonner';
-import { Plus, Package, DollarSign, ShoppingBag, Sparkles, Edit, Trash2 } from 'lucide-react';
+import { Plus, Package, DollarSign, ShoppingBag, Sparkles, Edit, Trash2, Wand2 } from 'lucide-react';
 
 const SellerDashboard = () => {
   const { user, isSeller } = useAuth();
