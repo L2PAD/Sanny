@@ -195,34 +195,24 @@ const AdminPanel = () => {
 
             {/* Categories List */}
             <div className="bg-white rounded-2xl p-8 border border-gray-200">
-              <h2 className="text-2xl font-bold mb-6">Категории</h2>
+              <h2 className="text-2xl font-bold mb-6">Категории ({categories.length})</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {categories.map((cat) => (
-              <div key={cat.id} className="p-4 border border-gray-200 rounded-xl">
-                <h3 className="font-semibold">{cat.name}</h3>
-                <p className="text-sm text-gray-600">{cat.slug}</p>
+                {categories.filter(cat => !cat.parent_id).map((cat) => (
+                  <div key={cat.id} className="p-4 border border-gray-200 rounded-xl hover:shadow-md transition-shadow">
+                    <h3 className="font-semibold text-lg">{cat.name}</h3>
+                    <p className="text-sm text-gray-600">{cat.slug}</p>
+                    {/* Show subcategories count */}
+                    {categories.filter(sub => sub.parent_id === cat.id).length > 0 && (
+                      <p className="text-xs text-blue-600 mt-2">
+                        {categories.filter(sub => sub.parent_id === cat.id).length} подкатегорий
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-
-        {/* Users */}
-        <div className="bg-white rounded-2xl p-8 border border-gray-200">
-          <h2 className="text-2xl font-bold mb-6">Пользователи</h2>
-          <div className="space-y-4">
-            {users.map((user) => (
-              <div key={user.id} className="p-4 border border-gray-200 rounded-xl flex justify-between items-center">
-                <div>
-                  <h3 className="font-semibold">{user.full_name}</h3>
-                  <p className="text-sm text-gray-600">{user.email}</p>
-                </div>
-                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                  {user.role}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
