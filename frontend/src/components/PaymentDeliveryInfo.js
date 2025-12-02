@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreditCard, Truck, Package, ShieldCheck, Banknote, Smartphone } from 'lucide-react';
+import { CreditCard, Truck, Package, ShieldCheck, Banknote, Smartphone, MapPin } from 'lucide-react';
 
 const PaymentDeliveryInfo = () => {
   return (
