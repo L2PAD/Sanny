@@ -41,13 +41,15 @@ const ProductDetail = () => {
     addToCart(product.id, quantity);
   };
 
-  const handleBuyNow = () => {
+  const handleBuyNow = async () => {
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
-    addToCart(product.id, quantity);
-    navigate('/cart');
+    const result = await addToCart(product.id, quantity);
+    if (result.success) {
+      navigate('/cart');
+    }
   };
 
   if (loading) {
