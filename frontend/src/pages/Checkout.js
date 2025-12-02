@@ -80,8 +80,8 @@ const Checkout = () => {
     },
     {
       id: 'card-rozetka',
-      name: 'Оплатити Карткою Marketplace зараз',
-      description: 'При оплаті онлайн Карткою Marketplace застосується знижка',
+      name: 'Оплатити Карткою Bazaar зараз',
+      description: 'При оплаті онлайн Карткою Bazaar застосується знижка',
       badge: 'Discount'
     },
     {
