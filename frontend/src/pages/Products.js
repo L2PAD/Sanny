@@ -255,11 +255,11 @@ const Products = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="popularity">За популярністю</SelectItem>
-                      <SelectItem value="newest">Нові</SelectItem>
-                      <SelectItem value="price_asc">Ціна: від дешевих</SelectItem>
-                      <SelectItem value="price_desc">Ціна: від дорогих</SelectItem>
-                      <SelectItem value="rating">За рейтингом</SelectItem>
+                      <SelectItem value="popularity">{t('sortByPopularity')}</SelectItem>
+                      <SelectItem value="newest">{t('newest')}</SelectItem>
+                      <SelectItem value="price_asc">{t('priceLowToHigh')}</SelectItem>
+                      <SelectItem value="price_desc">{t('priceHighToLow')}</SelectItem>
+                      <SelectItem value="rating">{t('byRating')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
