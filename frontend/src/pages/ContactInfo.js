@@ -25,11 +25,11 @@ const ContactInfo = () => {
                 </h2>
               </div>
               
-              <a href="tel:+380688886671" className="block text-xl font-semibold hover:text-blue-600 transition-colors">
-                068-888-66-71
+              <a href="tel:+380502474161" className="block text-xl font-semibold hover:text-blue-600 transition-colors">
+                050-247-41-61
               </a>
-              <a href="tel:+380668886671" className="block text-xl font-semibold hover:text-blue-600 transition-colors">
-                066-888-66-71
+              <a href="tel:+380637247703" className="block text-xl font-semibold hover:text-blue-600 transition-colors">
+                063-724-77-03
               </a>
             </div>
 
