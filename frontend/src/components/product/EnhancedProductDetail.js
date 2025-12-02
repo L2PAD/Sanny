@@ -350,34 +350,13 @@ const EnhancedProductDetail = () => {
                 </button>
               </div>
 
-              {/* Delivery & Payment Info */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-8 border-t border-gray-200">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Truck className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">Швидка доставка</p>
-                    <p className="text-xs text-gray-600">Завтра або післязавтра</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">Гарантія 36 міс</p>
-                    <p className="text-xs text-gray-600">Обмін/повернення 14 днів</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <CreditCard className="w-5 h-5 text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">Оплата частинами</p>
-                    <p className="text-xs text-gray-600">Без переплат</p>
-                  </div>
+              {/* Delivery Time Info */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <div className="flex items-center gap-3 text-gray-700">
+                  <Truck className="w-5 h-5 text-blue-600" />
+                  <span className="font-medium">
+                    {t('language') === 'ru' ? 'Срок отправки: 1-3 рабочих дня' : 'Термін відправки: 1-3 робочі дні'}
+                  </span>
                 </div>
               </div>
             </div>
