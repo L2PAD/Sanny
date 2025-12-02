@@ -4,6 +4,7 @@ import { categoriesAPI, productsAPI } from '../utils/api';
 import ProductCardCompact from '../components/ProductCardCompact';
 import CategorySidebar from '../components/CategorySidebar';
 import HeroBanner from '../components/HeroBanner';
+import PaymentDeliveryInfo from '../components/PaymentDeliveryInfo';
 import TestimonialsSection from '../components/TestimonialsSection';
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
