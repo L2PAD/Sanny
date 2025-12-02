@@ -13,6 +13,7 @@ import { productsAPI, reviewsAPI } from '../../utils/api';
 import { Button } from '../ui/button';
 import { toast } from 'sonner';
 import AIRecommendations from '../AIRecommendations';
+import ProductCardCompact from '../ProductCardCompact';
 
 const EnhancedProductDetail = () => {
   const { id } = useParams();
