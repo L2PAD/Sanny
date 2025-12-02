@@ -326,7 +326,7 @@ const ProductDetail = () => {
         <ReviewsSection productId={product.id} />
 
         {/* AI Recommendations */}
-        <AIRecommendations productId={product.id} />
+        <AIRecommendations product={product} />
       </div>
     </div>
   );
