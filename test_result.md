@@ -315,17 +315,17 @@ backend:
 
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "2.0"
+  test_sequence: 2
   run_ui: true
 
 test_plan:
   current_focus:
-    - "RozetkaPay Payment Integration"
+    - "Comprehensive E2E Marketplace Testing Completed"
   stuck_tasks:
     - "RozetkaPay Payment Integration"
-  test_all: false
-  test_priority: "stuck_first"
+  test_all: true
+  test_priority: "comprehensive_e2e_completed"
 
 agent_communication:
   - agent: "testing"
