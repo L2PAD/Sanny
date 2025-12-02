@@ -558,36 +558,20 @@ const Checkout = () => {
                 ))}
               </div>
 
-              {/* RozetkaPay Widget */}
-              {paymentMethod === 'online' && showPaymentWidget && (
+              {/* Payment Info */}
+              {paymentMethod === 'online' && (
                 <div className="mt-6 pt-6 border-t border-gray-200">
-                  <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm text-blue-800">
-                      <strong>Увага:</strong> Онлайн оплата через RozetkaPay тимчасово в режимі налаштування. 
-                      Для завершення замовлення виберіть "Оплата під час отримання товару".
-                    </p>
-                  </div>
-                  <h3 className="font-semibold mb-4">Введіть дані карти (Тестовий режим)</h3>
-                  <RozetkaPayWidget
-                    amount={totalWithDelivery}
-                    onTokenReceived={handleTokenReceived}
-                    customerEmail={recipientData.email}
-                    customerId={user?.id}
-                    onError={(error) => {
-                      console.error('Widget error:', error);
-                      setShowPaymentWidget(false);
-                      setPaymentMethod('on-delivery');
-                      toast.error('Платіжний виджет недоступний. Оберіть "Оплата при отриманні"');
-                    }}
-                  />
-                  {cardToken && (
-                    <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <p className="text-sm text-green-800 flex items-center gap-2">
-                        <CreditCard className="w-4 h-4" />
-                        Карта {cardToken.card_mask} успішно додана
-                      </p>
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <CreditCard className="w-5 h-5 text-green-600 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-green-800 mb-1">Безпечна онлайн оплата</p>
+                        <p className="text-sm text-green-700">
+                          Після натискання "Підтвердити замовлення" ви будете перенаправлені на захищену сторінку RozetkaPay для введення даних карти.
+                        </p>
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               )}
 
