@@ -11,6 +11,8 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
