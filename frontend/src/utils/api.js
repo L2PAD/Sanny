@@ -96,6 +96,14 @@ export const sellerAPI = {
 };
 
 // AI API
+
+
+// Reviews API
+export const reviewsAPI = {
+  getByProduct: (productId) => api.get(`/reviews/product/${productId}`),
+  create: (data) => api.post('/reviews', data),
+};
+
 export const aiAPI = {
   generateDescription: (data) => api.post('/ai/generate-description', data),
 };
