@@ -68,6 +68,9 @@ export const translations = {
     noAvailable: 'Нет',
     pieces: 'шт',
     beFirst: 'Будьте первым!',
+    buyTogether: 'Купите вместе',
+    addAllToCart: 'Добавить всё в корзину',
+    totalPrice: 'Общая цена',
     
     // Cart
     shoppingCart: 'Корзина покупок',
