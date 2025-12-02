@@ -43,6 +43,15 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
     : 0;
 
   const finalPrice = product.price;
+  
+  // Get all images or fallback
+  const images = product.images && product.images.length > 0 
+    ? product.images 
+    : ['https://via.placeholder.com/300'];
+  
+  // Generate SKU from product ID
+  const sku = product.id ? product.id.substring(0, 8).toUpperCase() : 'N/A';
+  
   const installmentPrice = product.installment_months
     ? (finalPrice / product.installment_months).toFixed(2)
     : null;
