@@ -19,9 +19,12 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [activeTab, setActiveTab] = useState('description');
+  
   const { addToCart } = useCart();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  const { addToComparison, removeFromComparison, isInComparison } = useComparison();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
