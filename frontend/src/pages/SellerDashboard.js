@@ -78,18 +78,25 @@ const SellerDashboard = () => {
     try {
       const category = categories.find(c => c.id === formData.category_id);
       const response = await aiAPI.generateDescription({
-        product_title: formData.title,
+        product_name: formData.title,
         category: category?.name || 'General',
-        key_features: []
+        price: formData.price ? parseFloat(formData.price) : null,
+        features: []
       });
-      setFormData({
-        ...formData,
-        description: response.data.description,
-        short_description: response.data.short_description
-      });
-      toast.success('Описание сгенерировано!');
+      
+      if (response.data.success) {
+        setFormData({
+          ...formData,
+          description: response.data.data.description,
+          short_description: response.data.data.short_description
+        });
+        toast.success('✨ Опис згенеровано AI!');
+      } else {
+        toast.error('Помилка генерації опису');
+      }
     } catch (error) {
-      toast.error('Ошибка генерации описания');
+      console.error('AI generation error:', error);
+      toast.error('Помилка генерації опису');
     } finally {
       setAiLoading(false);
     }
