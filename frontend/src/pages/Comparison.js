@@ -235,12 +235,12 @@ const Comparison = () => {
               {/* Details */}
               <div className="space-y-3 mb-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Цена:</span>
+                  <span className="text-gray-600">{t('price')}:</span>
                   <span className="font-bold text-lg">${product.price.toFixed(2)}</span>
                 </div>
                 {product.rating > 0 && (
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Рейтинг:</span>
+                    <span className="text-gray-600">{t('rating')}:</span>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       <span>{product.rating.toFixed(1)} ({product.reviews_count})</span>
@@ -248,15 +248,15 @@ const Comparison = () => {
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span className="text-gray-600">В наличии:</span>
+                  <span className="text-gray-600">{t('inStock')}:</span>
                   <span className={product.stock_level > 0 ? 'text-green-600' : 'text-red-600'}>
-                    {product.stock_level > 0 ? `${product.stock_level} шт.` : 'Нет'}
+                    {product.stock_level > 0 ? `${product.stock_level} ${t('pieces')}` : t('notAvailable')}
                   </span>
                 </div>
                 {product.installment_available && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Рассрочка:</span>
-                    <span className="text-green-600">✓ {product.installment_months} мес.</span>
+                    <span className="text-gray-600">{t('installment')}:</span>
+                    <span className="text-green-600">✓ {product.installment_months} {t('months')}</span>
                   </div>
                 )}
               </div>
