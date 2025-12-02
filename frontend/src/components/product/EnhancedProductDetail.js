@@ -476,7 +476,16 @@ const EnhancedProductDetail = () => {
             <div className="flex-1">
               <h3 className="font-bold text-lg text-gray-900 mb-4">Важлива інформація</h3>
               <ul className="space-y-3 text-gray-700">
-                {/* НОВЫЙ ТЕКСТ ЗДЕСЬ - укажите, что нужно разместить */}
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span><strong>Обмін та повернення протягом 14 днів</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>
+                    <strong>Перевірка товару:</strong> При отриманні товару у поштовому відділенні перевірте його на цілісність, наявність браку та деформацій, магазин не несе відповідальність за пошкоджений товар перевізником
+                  </span>
+                </li>
               </ul>
             </div>
           </div>
