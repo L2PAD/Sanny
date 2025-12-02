@@ -217,31 +217,6 @@ const CategorySidebar = ({ categories, selectedCategory, onCategoryClick }) => {
 
   return (
     <aside className="w-80 flex-shrink-0 space-y-4">
-      {/* Promo Blocks */}
-      <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-5 border border-green-200 cursor-pointer hover:shadow-lg transition-shadow">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-            <Zap className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h3 className="font-bold text-lg">Карта Bazaar</h3>
-          </div>
-        </div>
-        <p className="text-sm text-gray-700">Персональні знижки та бонуси</p>
-      </div>
-
-      <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-5 border border-yellow-200 cursor-pointer hover:shadow-lg transition-shadow">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-            S
-          </div>
-          <div>
-            <h3 className="font-bold text-lg">Підписка Smart</h3>
-          </div>
-        </div>
-        <p className="text-sm text-gray-700">Безплатна доставка за 50 ₴/міс</p>
-      </div>
-
       {/* Categories */}
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         {loading ? (
