@@ -135,24 +135,9 @@ const Checkout = () => {
     }
   };
 
-  const handleTokenReceived = (tokenData) => {
-    console.log('Card token received:', tokenData);
-    setCardToken(tokenData);
-    toast.success('Дані карти успішно збережено');
-  };
-
   const handlePlaceOrder = async () => {
     if (!validateForm()) {
       toast.error('Будь ласка, заповніть всі обов\'язкові поля');
-      return;
-    }
-
-    // If online payment selected but no token, show widget
-    if (paymentMethod === 'online' && !cardToken) {
-      if (!showPaymentWidget) {
-        setShowPaymentWidget(true);
-      }
-      toast.info('Будь ласка, введіть дані карти для оплати або оберіть інший метод');
       return;
     }
 
