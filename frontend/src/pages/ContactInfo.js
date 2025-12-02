@@ -47,6 +47,24 @@ const ContactInfo = () => {
               </a>
             </div>
           </div>
+
+          {/* Address */}
+          <div className="mt-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-purple-600" />
+              </div>
+              <h2 className="text-2xl font-bold">
+                {language === 'ru' ? 'Адрес' : 'Адреса'}
+              </h2>
+            </div>
+            
+            <p className="text-lg text-gray-700">
+              проспект Миколи Бажана, 24/1<br />
+              Київ, 02149<br />
+              Україна
+            </p>
+          </div>
         </div>
 
         {/* Working Hours */}
