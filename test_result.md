@@ -167,15 +167,18 @@ frontend:
 
   - task: "Buy Together Feature on Product Detail Page"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/product/BuyTogether.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Initial testing task created for Buy Together feature. Need to test main product display with blue border, complementary products with green borders, checkboxes, total price calculation, and add all to cart functionality."
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE TESTING COMPLETED: Buy Together feature is fully functional. ✅ Fixed API response handling issue in BuyTogether.js (line 29-31). ✅ 'Купите вместе' section displays correctly below product tabs. ✅ Main product (HomePod) shows with blue border (border-blue-500). ✅ Complementary products (PlayStation 5, iPad Pro) display with green borders (border-green-500). ✅ Checkboxes present for product selection with 'Додати цей товар' labels. ✅ Total price calculation working: $799.98 with $50.00 savings displayed. ✅ 'Добавить всё в корзину' button functional - successfully adds main + selected complementary products to cart. ✅ All product information (titles, prices, images) displayed correctly. Feature meets all requirements from test scenario."
 
 backend:
   - task: "Orders API Endpoint"
