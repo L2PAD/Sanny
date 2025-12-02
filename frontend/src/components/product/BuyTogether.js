@@ -17,14 +17,7 @@ const BuyTogether = ({ product }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (product?.category_id) {
-      fetchComplementaryProducts();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product]);
-
-  const fetchComplementaryProducts = async () => {
+  const fetchComplementaryProducts = React.useCallback(async () => {
     try {
       setLoading(true);
       const response = await productsAPI.getAll({
