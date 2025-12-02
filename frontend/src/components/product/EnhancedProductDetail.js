@@ -469,6 +469,32 @@ const EnhancedProductDetail = () => {
           </div>
         </div>
 
+        {/* Important Information Block */}
+        <div className="bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-6 mb-8">
+          <div className="flex items-start gap-3">
+            <Info className="w-6 h-6 text-yellow-600 mt-1 flex-shrink-0" />
+            <div className="flex-1">
+              <h3 className="font-bold text-lg text-gray-900 mb-4">Важлива інформація</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span><strong>Офіційна гарантія від виробника</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span><strong>Обмін та повернення протягом 14 днів</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>
+                    <strong>Перевірка товару:</strong> При отриманні товару у поштовому відділенні перевірте його на цілісність, наявність браку та деформацій, магазин не несе відповідальність за пошкоджений товар перевізником
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* Buy Together Section */}
         <BuyTogether product={product} />
 
