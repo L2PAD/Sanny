@@ -8,9 +8,11 @@ import PaymentDeliveryInfo from '../components/PaymentDeliveryInfo';
 import TestimonialsSection from '../components/TestimonialsSection';
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
@@ -62,12 +64,12 @@ const Home = () => {
             {/* Featured Products */}
             <section className="mt-8">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold text-[#121212]">Найкращі пропозиції для вас</h2>
+                <h2 className="text-3xl font-bold text-[#121212]">{t('featuredProducts')}</h2>
                 <Link 
                   to="/products?sort_by=popularity"
                   className="text-blue-600 hover:text-blue-700 flex items-center gap-1 font-medium"
                 >
-                  Показати все
+                  {t('viewAll')}
                   <ChevronRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -88,12 +90,12 @@ const Home = () => {
             {/* New Products */}
             <section className="mt-12">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold text-[#121212]">Новинки</h2>
+                <h2 className="text-3xl font-bold text-[#121212]">{t('language') === 'ru' ? 'Новинки' : 'Новинки'}</h2>
                 <Link 
                   to="/products?sort_by=newest"
                   className="text-blue-600 hover:text-blue-700 flex items-center gap-1 font-medium"
                 >
-                  Показати все
+                  {t('viewAll')}
                   <ChevronRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -111,9 +113,8 @@ const Home = () => {
               )}
             </section>
 
-            {/* Testimonials */}
+            {/* Testimonials - ОДИН РАЗ */}
             <section className="mt-12">
-              <h2 className="text-3xl font-bold text-center mb-8">Відгуки покупців</h2>
               <TestimonialsSection />
             </section>
           </div>
