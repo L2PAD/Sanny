@@ -244,11 +244,17 @@ const CategorySidebar = ({ categories, selectedCategory, onCategoryClick }) => {
 
       {/* Categories */}
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="divide-y divide-gray-100">
-          {categoryStructure.map((category) => {
-            const IconComponent = category.icon;
-            const isExpanded = expandedCategories.includes(category.id);
-            const isSelected = selectedCategory === category.id;
+        {loading ? (
+          <div className="p-8 text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+            <p className="text-sm text-gray-500 mt-2">Завантаження...</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-gray-100">
+            {categoryStructure.map((category) => {
+              const IconComponent = iconMap[category.slug] || category.icon || PackageOpen;
+              const isExpanded = expandedCategories.includes(category.id);
+              const isSelected = selectedCategory === category.id;
             
             return (
               <div key={category.id}>
