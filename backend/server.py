@@ -1085,6 +1085,69 @@ async def generate_product_description(
     request: AIGenerateDescriptionRequest,
     current_user: User = Depends(get_current_user)
 ):
+
+# ============= PAYOUTS =============
+
+from payouts_service import init_payouts
+
+# Initialize payouts service
+payouts_svc = init_payouts(db)
+
+class PayoutRequest(BaseModel):
+    amount: float
+    payment_method: str  # bank_transfer, paypal, stripe
+    payment_details: Dict[str, str]  # account_number, email, etc.
+
+@api_router.get("/seller/balance")
+async def get_seller_balance(current_user: User = Depends(get_current_user)):
+    if current_user.role != 'seller':
+        raise HTTPException(status_code=403, detail="Only sellers can access balance")
+    return await payouts_svc.calculate_seller_balance(current_user.id)
+
+@api_router.post("/seller/payouts")
+async def request_payout(
+    request: PayoutRequest,
+    current_user: User = Depends(get_current_user)
+):
+    if current_user.role != 'seller':
+        raise HTTPException(status_code=403, detail="Only sellers can request payouts")
+    
+    try:
+        payout = await payouts_svc.create_payout_request(
+            current_user.id,
+            request.amount,
+            request.payment_method,
+            request.payment_details
+        )
+        return {"success": True, "payout": payout}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.get("/seller/payouts")
+async def get_my_payouts(current_user: User = Depends(get_current_user)):
+    if current_user.role != 'seller':
+        raise HTTPException(status_code=403, detail="Only sellers can access payouts")
+    return await payouts_svc.get_seller_payouts(current_user.id)
+
+@api_router.get("/admin/payouts/pending")
+async def get_pending_payouts_admin(current_user: User = Depends(get_current_admin)):
+    return await payouts_svc.get_pending_payouts()
+
+@api_router.post("/admin/payouts/{payout_id}/process")
+async def process_payout_admin(
+    payout_id: str,
+    status: str,
+    current_user: User = Depends(get_current_admin)
+):
+    if status not in ['completed', 'rejected']:
+        raise HTTPException(status_code=400, detail="Invalid status")
+    
+    try:
+        payout = await payouts_svc.process_payout(payout_id, current_user.id, status)
+        return {"success": True, "payout": payout}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
     """
     Generate AI product description
     Requires seller or admin role
