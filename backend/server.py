@@ -1037,21 +1037,38 @@ async def get_all_users(current_user: User = Depends(get_current_admin)):
             user["created_at"] = datetime.fromisoformat(user["created_at"])
     return users
 
+from analytics_service import init_analytics
+
+# Initialize analytics service
+analytics_svc = init_analytics(db)
+
 @api_router.get("/admin/stats")
 async def get_admin_stats(current_user: User = Depends(get_current_admin)):
-    total_users = await db.users.count_documents({})
-    total_products = await db.products.count_documents({})
-    total_orders = await db.orders.count_documents({})
-    
-    orders = await db.orders.find({"payment_status": "paid"}).to_list(1000)
-    total_revenue = sum(order.get("total_amount", 0) for order in orders)
-    
-    return {
-        "total_users": total_users,
-        "total_products": total_products,
-        "total_orders": total_orders,
-        "total_revenue": total_revenue
-    }
+    return await analytics_svc.get_overview_stats()
+
+@api_router.get("/admin/analytics/revenue")
+async def get_revenue_analytics(days: int = 30, current_user: User = Depends(get_current_admin)):
+    return await analytics_svc.get_revenue_by_period(days)
+
+@api_router.get("/admin/analytics/top-products")
+async def get_top_products(limit: int = 10, current_user: User = Depends(get_current_admin)):
+    return await analytics_svc.get_top_products(limit)
+
+@api_router.get("/admin/analytics/categories")
+async def get_category_distribution(current_user: User = Depends(get_current_admin)):
+    return await analytics_svc.get_category_distribution()
+
+@api_router.get("/admin/analytics/user-growth")
+async def get_user_growth(days: int = 30, current_user: User = Depends(get_current_admin)):
+    return await analytics_svc.get_user_growth(days)
+
+@api_router.get("/admin/analytics/sellers")
+async def get_seller_performance(limit: int = 10, current_user: User = Depends(get_current_admin)):
+    return await analytics_svc.get_seller_performance(limit)
+
+@api_router.get("/admin/analytics/order-status")
+async def get_order_status_distribution(current_user: User = Depends(get_current_admin)):
+    return await analytics_svc.get_order_status_distribution()
 
 # ============= AI FEATURES =============
 
