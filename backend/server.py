@@ -993,9 +993,11 @@ async def get_product_recommendations(
     Based on user history and current product
     """
     try:
-        # Get user history
+        # Get user history (for now, use empty list - can be enhanced later)
         user_history = []
-        if current_user:
+        
+        # TODO: Get from user session/cookies if available
+        if False:  # Placeholder for future auth integration
             # Get user's order history
             orders = await db.orders.find(
                 {"buyer_id": current_user.id},
