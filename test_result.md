@@ -185,13 +185,16 @@ backend:
     implemented: true
     working: false
     file: "/app/backend/server.py, /app/backend/rozetkapay_service.py"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "testing"
         comment: "RozetkaPay integration failing with 500 Internal Server Error. Order creation works but payment processing fails with 'NoneType' object has no attribute 'get' error. RozetkaPay service logs show 'Payment created successfully' but returns None instead of expected dictionary response."
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL ISSUE CONFIRMED: RozetkaPay integration completely broken. Multiple test attempts show: 1) Backend service returns 'NoneType' object instead of expected dictionary from rozetkapay_service.create_payment() 2) Frontend checkout flow cannot reach RozetkaPay selection due to cart/authentication issues 3) No API calls to RozetkaPay endpoints detected during testing 4) Error: 'NoneType' object has no attribute 'get' in server.py line 995. The RozetkaPay service appears to have a critical bug where it returns None instead of the expected response dictionary."
 
 metadata:
   created_by: "testing_agent"
