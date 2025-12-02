@@ -1081,14 +1081,6 @@ async def get_payment_info(
         logger.error(f"Error getting payment info: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@api_router.get("/payment/rozetkapay/widget-key")
-async def get_widget_key():
-    """
-    Get RozetkaPay widget key for frontend
-    """
-    widget_key = os.environ.get('ROZETKAPAY_WIDGET_KEY', '')
-    return {"widget_key": widget_key}
-
 # ============= INITIALIZE APP =============
 
 app.include_router(api_router)
