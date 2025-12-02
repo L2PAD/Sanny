@@ -905,6 +905,192 @@ async def get_admin_stats(current_user: User = Depends(get_current_admin)):
         "total_revenue": total_revenue
     }
 
+# ============= ROZETKAPAY PAYMENT INTEGRATION =============
+
+from rozetkapay_service import rozetkapay_service
+
+class RozetkaPayCreatePaymentRequest(BaseModel):
+    external_id: str
+    amount: float
+    currency: str = "UAH"
+    card_token: str
+    customer: Dict[str, Any]
+    description: str = "Оплата заказа"
+
+class RozetkaPayPaymentResponse(BaseModel):
+    success: bool
+    payment_id: Optional[str] = None
+    external_id: Optional[str] = None
+    is_success: Optional[bool] = None
+    action_required: bool = False
+    action: Optional[Dict[str, Any]] = None
+    status: Optional[str] = None
+    error: Optional[str] = None
+    message: Optional[str] = None
+
+@api_router.post("/payment/rozetkapay/create", response_model=RozetkaPayPaymentResponse)
+async def create_rozetkapay_payment(
+    request: RozetkaPayCreatePaymentRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Create payment using RozetkaPay with card token from widget
+    """
+    try:
+        # Get callback and result URLs
+        backend_url = os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:8001')
+        frontend_url = backend_url.replace(':8001', ':3000').replace('/api', '')
+        
+        callback_url = f"{backend_url}/api/payment/rozetkapay/webhook"
+        result_url = f"{frontend_url}/checkout/success"
+        
+        # Create payment
+        result = rozetkapay_service.create_payment(
+            external_id=request.external_id,
+            amount=request.amount,
+            currency=request.currency,
+            customer=request.customer,
+            card_token=request.card_token,
+            callback_url=callback_url,
+            result_url=result_url,
+            description=request.description
+        )
+        
+        if result.get("success"):
+            # Save payment transaction to database
+            payment_doc = {
+                "id": str(uuid.uuid4()),
+                "order_id": request.external_id,
+                "payment_id": result.get("payment_id"),
+                "user_id": current_user.id,
+                "amount": request.amount,
+                "currency": request.currency,
+                "status": result.get("status", "pending"),
+                "payment_method": "rozetkapay",
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+                "raw_response": result.get("raw_response")
+            }
+            await db.payment_transactions.insert_one(payment_doc)
+            
+            return RozetkaPayPaymentResponse(
+                success=True,
+                payment_id=result.get("payment_id"),
+                external_id=result.get("external_id"),
+                is_success=result.get("is_success"),
+                action_required=result.get("action_required", False),
+                action=result.get("action"),
+                status=result.get("status"),
+                message="Payment created successfully"
+            )
+        else:
+            logger.error(f"Payment creation failed: {result.get('error')}")
+            return RozetkaPayPaymentResponse(
+                success=False,
+                error=result.get("error"),
+                message="Failed to create payment"
+            )
+    
+    except Exception as e:
+        logger.error(f"Error in create_rozetkapay_payment: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to create payment: {str(e)}"
+        )
+
+@api_router.post("/payment/rozetkapay/webhook")
+async def rozetkapay_webhook(request: Request):
+    """
+    Handle payment webhooks from RozetkaPay
+    """
+    try:
+        # Get raw body and signature
+        body = await request.body()
+        body_str = body.decode('utf-8')
+        signature = request.headers.get('X-ROZETKAPAY-SIGNATURE', '')
+        
+        logger.info(f"Received webhook from RozetkaPay")
+        
+        # Verify signature
+        if not rozetkapay_service.verify_webhook_signature(body_str, signature):
+            logger.warning("Invalid webhook signature")
+            raise HTTPException(status_code=403, detail="Invalid signature")
+        
+        # Parse payload
+        import json
+        payload = json.loads(body_str)
+        
+        # Extract payment details
+        external_id = payload.get("external_id")
+        payment_id = payload.get("id")
+        is_success = payload.get("is_success")
+        details = payload.get("details", {})
+        status = details.get("status")
+        
+        logger.info(f"Webhook for order {external_id}: status={status}, success={is_success}")
+        
+        # Update order status
+        if external_id:
+            order = await db.orders.find_one({"order_number": external_id})
+            if order:
+                new_status = "paid" if is_success else "payment_failed"
+                await db.orders.update_one(
+                    {"order_number": external_id},
+                    {
+                        "$set": {
+                            "payment_status": new_status,
+                            "payment_session_id": payment_id,
+                            "updated_at": datetime.now(timezone.utc).isoformat()
+                        }
+                    }
+                )
+                logger.info(f"Order {external_id} updated to status: {new_status}")
+        
+        # Update payment transaction
+        await db.payment_transactions.update_one(
+            {"order_id": external_id},
+            {
+                "$set": {
+                    "status": status,
+                    "is_success": is_success,
+                    "webhook_received": True,
+                    "webhook_data": payload,
+                    "updated_at": datetime.now(timezone.utc).isoformat()
+                }
+            }
+        )
+        
+        return {"status": "processed", "order_id": external_id}
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing webhook: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to process webhook")
+
+@api_router.get("/payment/rozetkapay/info/{payment_id}")
+async def get_payment_info(
+    payment_id: str,
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Get payment information from RozetkaPay
+    """
+    try:
+        result = rozetkapay_service.get_payment_info(payment_id)
+        return result
+    except Exception as e:
+        logger.error(f"Error getting payment info: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/payment/rozetkapay/widget-key")
+async def get_widget_key():
+    """
+    Get RozetkaPay widget key for frontend
+    """
+    widget_key = os.environ.get('ROZETKAPAY_WIDGET_KEY', '')
+    return {"widget_key": widget_key}
+
 # ============= INITIALIZE APP =============
 
 app.include_router(api_router)
