@@ -15,13 +15,12 @@ logger = logging.getLogger(__name__)
 
 
 class RozetkaPayService:
-    """Service for interacting with RozetkaPay API"""
+    """Service for interacting with RozetkaPay API - Hosted Checkout Mode"""
     
     def __init__(self):
         self.api_url = os.environ.get('ROZETKAPAY_API_URL', 'https://api.rozetkapay.com')
         self.login = os.environ.get('ROZETKAPAY_LOGIN')
         self.password = os.environ.get('ROZETKAPAY_PASSWORD')
-        self.widget_key = os.environ.get('ROZETKAPAY_WIDGET_KEY', '')
         
         if not self.login or not self.password:
             logger.warning("RozetkaPay credentials not configured")
