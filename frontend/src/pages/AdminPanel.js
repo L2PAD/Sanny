@@ -7,7 +7,8 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Card } from '../components/ui/card';
 import { toast } from 'sonner';
-import { Users, Package, ShoppingBag, DollarSign, Plus } from 'lucide-react';
+import { Users, Package, ShoppingBag, DollarSign, Plus, BarChart3 } from 'lucide-react';
+import AnalyticsDashboard from '../components/admin/AnalyticsDashboard';
 
 const AdminPanel = () => {
   const { isAdmin } = useAuth();
