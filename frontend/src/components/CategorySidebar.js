@@ -176,7 +176,7 @@ const CategorySidebar = ({ categories, selectedCategory, onCategoryClick }) => {
             <Zap className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="font-bold text-lg">Карта Marketplace</h3>
+            <h3 className="font-bold text-lg">Карта Bazaar</h3>
           </div>
         </div>
         <p className="text-sm text-gray-700">Персональні знижки та бонуси</p>
