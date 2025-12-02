@@ -943,6 +943,115 @@ async def get_admin_stats(current_user: User = Depends(get_current_admin)):
         "total_revenue": total_revenue
     }
 
+# ============= AI FEATURES =============
+
+from ai_service import ai_service
+
+class AIGenerateDescriptionRequest(BaseModel):
+    product_name: str
+    category: str
+    price: Optional[float] = None
+    features: Optional[List[str]] = None
+
+@api_router.post("/ai/generate-description")
+async def generate_product_description(
+    request: AIGenerateDescriptionRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Generate AI product description
+    Requires seller or admin role
+    """
+    if current_user.role not in ['seller', 'admin']:
+        raise HTTPException(status_code=403, detail="Only sellers and admins can generate descriptions")
+    
+    try:
+        existing_info = {}
+        if request.price:
+            existing_info['price'] = request.price
+        if request.features:
+            existing_info['features'] = request.features
+        
+        result = await ai_service.generate_product_description(
+            product_name=request.product_name,
+            category=request.category,
+            existing_info=existing_info if existing_info else None
+        )
+        
+        return result
+    except Exception as e:
+        logger.error(f"Error in generate_product_description: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/ai/recommendations")
+async def get_product_recommendations(
+    product_id: Optional[str] = None,
+    limit: int = 5,
+    current_user: User = Depends(get_current_user_optional)
+):
+    """
+    Get AI-powered product recommendations
+    Based on user history and current product
+    """
+    try:
+        # Get user history
+        user_history = []
+        if current_user:
+            # Get user's order history
+            orders = await db.orders.find(
+                {"buyer_id": current_user.id},
+                {"_id": 0}
+            ).limit(20).to_list(20)
+            
+            # Extract products from orders
+            for order in orders:
+                for item in order.get('items', []):
+                    user_history.append({
+                        'title': item.get('title'),
+                        'category': 'Electronics',  # Default category
+                        'id': item.get('product_id')
+                    })
+        
+        # Get current product if provided
+        current_product = None
+        if product_id:
+            product = await db.products.find_one({"id": product_id}, {"_id": 0})
+            if product:
+                current_product = {
+                    'id': product['id'],
+                    'title': product['name'],
+                    'category': product.get('category', 'General')
+                }
+        
+        # Get available products
+        available_products = await db.products.find(
+            {"status": "published"},
+            {"_id": 0, "id": 1, "name": 1, "category": 1, "price": 1}
+        ).limit(50).to_list(50)
+        
+        # Format for AI
+        available_for_ai = [
+            {
+                'id': p['id'],
+                'title': p['name'],
+                'category': p.get('category', 'General'),
+                'price': p.get('price', 0)
+            }
+            for p in available_products
+        ]
+        
+        result = await ai_service.generate_recommendations(
+            user_history=user_history,
+            current_product=current_product,
+            available_products=available_for_ai,
+            limit=limit
+        )
+        
+        return result
+    except Exception as e:
+        logger.error(f"Error in get_product_recommendations: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # ============= NOVA POSHTA INTEGRATION =============
 
 from novaposhta_service import novaposhta_service
