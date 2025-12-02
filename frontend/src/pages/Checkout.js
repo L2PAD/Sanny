@@ -192,7 +192,15 @@ const Checkout = () => {
         }),
         total_amount: totalWithDelivery,
         currency: 'UAH',
-        shipping_address: {
+        shipping_address: deliveryMethod === 'nova-poshta' && novaPoshtaData ? {
+          street: novaPoshtaData.warehouse ? novaPoshtaData.warehouse.address : 'N/A',
+          city: novaPoshtaData.city || 'N/A',
+          state: '',
+          postal_code: '',
+          country: 'UA',
+          warehouse_ref: novaPoshtaData.warehouse?.ref,
+          warehouse_number: novaPoshtaData.warehouse?.number
+        } : {
           street: recipientData.address || 'N/A',
           city: recipientData.city || 'N/A',
           state: '',
