@@ -986,8 +986,7 @@ async def generate_product_description(
 @api_router.get("/ai/recommendations")
 async def get_product_recommendations(
     product_id: Optional[str] = None,
-    limit: int = 5,
-    current_user: User = Depends(get_current_user_optional)
+    limit: int = 5
 ):
     """
     Get AI-powered product recommendations
