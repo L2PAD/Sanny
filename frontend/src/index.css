@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile-first base styles */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Prevent horizontal scroll on mobile */
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Container for consistent padding */
+.container-main {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-main {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Mobile input fixes */
+input,
+textarea,
+select {
+  font-size: 16px !important; /* Prevent iOS zoom on focus */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Mobile button fixes */
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Prevent double-tap zoom */
+a,
+button,
+input[type="submit"],
+input[type="button"] {
+  touch-action: manipulation;
+}
+
+/* Fix for iOS Safari bottom bar */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Loading state */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Mobile-specific utilities */
+@media (max-width: 640px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .show-on-mobile {
+    display: block !important;
+  }
+  
+  /* Prevent text overflow */
+  h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Full width buttons on mobile */
+  .btn-mobile-full {
+    width: 100% !important;
+  }
+}
+
+/* Safe area insets for iPhone X+ */
+@supports (padding: max(0px)) {
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}
+
+/* Fix for sticky elements on mobile Safari */
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+/* Improve touch targets for accessibility */
+@media (pointer: coarse) {
+  button,
+  a,
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
