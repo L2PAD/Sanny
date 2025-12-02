@@ -198,6 +198,20 @@ export const translations = {
     actions: 'Действия',
     details: 'Подробнее',
     
+    // Header Navigation
+    catalog: 'Каталог',
+    contactInfo: 'Контактная информация',
+    deliveryPayment: 'Доставка и оплата',
+    exchangeReturn: 'Обмен и возврат',
+    aboutUs: 'О нас',
+    userAgreement: 'Соглашение пользователя',
+    blog: 'Блог',
+    myCart: 'Моя корзина',
+    login: 'Вход',
+    searchProducts: 'поиск товаров',
+    workingHours: 'Пн–Пт: 09:00 – 18:00',
+    weekends: 'Сб–Нд: Выходные',
+    
     // Cart
     shoppingCart: 'Корзина покупок',
     clearCart: 'Очистить корзину',
