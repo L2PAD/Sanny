@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
+import { Twitter, Instagram, Youtube } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
