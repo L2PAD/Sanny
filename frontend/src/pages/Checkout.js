@@ -79,19 +79,22 @@ const Checkout = () => {
     },
     {
       id: 'online',
-      name: 'Оплатити зараз',
-      description: 'Оплата карткою онлайн'
+      name: 'Оплатити зараз (RozetkaPay)',
+      description: 'Оплата карткою онлайн через RozetkaPay',
+      disabled: false  // Will be enabled when widget key is configured
     },
     {
       id: 'card-rozetka',
       name: 'Оплатити Карткою Bazaar зараз',
       description: 'При оплаті онлайн Карткою Bazaar застосується знижка',
-      badge: 'Discount'
+      badge: 'Discount',
+      disabled: true  // Temporarily disabled
     },
     {
       id: 'installment',
       name: 'Кредит та оплата частинами',
-      description: 'Оформлення кредитів у банках партнерів'
+      description: 'Оформлення кредитів у банках партнерів',
+      disabled: true  // Temporarily disabled
     }
   ];
 
