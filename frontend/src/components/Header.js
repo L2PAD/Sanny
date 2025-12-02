@@ -10,6 +10,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from './ui/button';
 import NotificationsDropdown from './NotificationsDropdown';
 import LanguageSwitcher from './LanguageSwitcher';
+import SearchBar from './SearchBar';
 import {
   DropdownMenu,
   DropdownMenuContent,
