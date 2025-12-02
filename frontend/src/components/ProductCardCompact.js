@@ -6,7 +6,7 @@ import { useFavorites } from '../contexts/FavoritesContext';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'sonner';
 
-const ProductCardCompact = ({ product }) => {
+const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
   const { addToCart } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
