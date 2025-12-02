@@ -469,6 +469,19 @@ const EnhancedProductDetail = () => {
           </div>
         </div>
 
+        {/* Important Information Block */}
+        <div className="bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-6 mb-8">
+          <div className="flex items-start gap-3">
+            <Info className="w-6 h-6 text-yellow-600 mt-1 flex-shrink-0" />
+            <div className="flex-1">
+              <h3 className="font-bold text-lg text-gray-900 mb-4">Важлива інформація</h3>
+              <ul className="space-y-3 text-gray-700">
+                {/* НОВЫЙ ТЕКСТ ЗДЕСЬ - укажите, что нужно разместить */}
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* Buy Together Section */}
         <BuyTogether product={product} />
 
