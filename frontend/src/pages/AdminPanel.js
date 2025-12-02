@@ -69,6 +69,89 @@ const AdminPanel = () => {
           </Button>
         </div>
 
+        {/* Tabs */}
+        <div className="flex gap-4 mb-8 border-b">
+          <button
+            onClick={() => setActiveTab('analytics')}
+            className={`pb-4 px-4 font-semibold transition-colors ${
+              activeTab === 'analytics'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <BarChart3 className="w-5 h-5 inline mr-2" />
+            Аналитика
+          </button>
+          <button
+            onClick={() => setActiveTab('users')}
+            className={`pb-4 px-4 font-semibold transition-colors ${
+              activeTab === 'users'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Users className="w-5 h-5 inline mr-2" />
+            Пользователи
+          </button>
+          <button
+            onClick={() => setActiveTab('categories')}
+            className={`pb-4 px-4 font-semibold transition-colors ${
+              activeTab === 'categories'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Package className="w-5 h-5 inline mr-2" />
+            Категории
+          </button>
+        </div>
+
+        {/* Analytics Tab */}
+        {activeTab === 'analytics' && <AnalyticsDashboard />}
+
+        {/* Users Tab */}
+        {activeTab === 'users' && (
+          <div className="bg-white rounded-2xl p-6 border border-gray-200">
+            <h2 className="text-2xl font-bold mb-6">Список пользователей</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4">Email</th>
+                    <th className="text-left py-3 px-4">Имя</th>
+                    <th className="text-left py-3 px-4">Роль</th>
+                    <th className="text-left py-3 px-4">Дата регистрации</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user) => (
+                    <tr key={user.id} className="border-b hover:bg-gray-50">
+                      <td className="py-3 px-4">{user.email}</td>
+                      <td className="py-3 px-4">{user.full_name}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                          user.role === 'admin' ? 'bg-red-100 text-red-600' :
+                          user.role === 'seller' ? 'bg-blue-100 text-blue-600' :
+                          'bg-gray-100 text-gray-600'
+                        }`}>
+                          {user.role}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-600">
+                        {new Date(user.created_at).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Categories Tab */}
+        {activeTab === 'categories' && (
+          <div>
+
         {/* Stats */}
         {stats && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
