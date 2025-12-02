@@ -102,9 +102,9 @@ const Home = () => {
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0071E3]"></div>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {newProducts.slice(0, 10).map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {newProducts.slice(0, 9).map((product) => (
+                    <ProductCardCompact key={product.id} product={product} />
                   ))}
                 </div>
               )}
