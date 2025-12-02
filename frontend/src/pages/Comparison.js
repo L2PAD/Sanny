@@ -6,11 +6,13 @@ import { useAuth } from '../contexts/AuthContext';
 import { Scale, ShoppingBag, X, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Comparison = () => {
   const { comparisonItems, removeFromComparison, clearComparison } = useComparison();
   const { addToCart } = useCart();
   const { isAuthenticated } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleAddToCart = (productId) => {
