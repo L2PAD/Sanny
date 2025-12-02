@@ -95,7 +95,7 @@ const Comparison = () => {
                       <button
                         onClick={() => removeFromComparison(product.id)}
                         className="absolute top-2 right-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
-                        title="Удалить из сравнения"
+                        title={t('removeFromComparison')}
                       >
                         <X className="w-4 h-4 text-gray-600" />
                       </button>
