@@ -312,7 +312,6 @@ const Products = () => {
                     key={product.id} 
                     product={product} 
                     viewMode={viewMode}
-                    priceDisplay={priceDisplay}
                   />
                 ))}
               </div>
