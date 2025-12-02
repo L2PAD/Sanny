@@ -185,14 +185,13 @@ const Checkout = () => {
 
       const order = await response.json();
 
-      // If online payment with token, process payment with RozetkaPay
-      if (paymentMethod === 'online' && cardToken) {
+      // If online payment, process payment with RozetkaPay (Hosted Checkout)
+      if (paymentMethod === 'online') {
         try {
           const paymentData = {
             external_id: orderNumber,
             amount: totalWithDelivery,
             currency: 'UAH',
-            card_token: cardToken.token,
             customer: {
               email: recipientData.email,
               first_name: recipientData.firstName,
@@ -220,22 +219,21 @@ const Checkout = () => {
 
           const paymentResult = await paymentResponse.json();
 
-          if (paymentResult.success) {
-            // Check if 3DS verification is required
-            if (paymentResult.action_required && paymentResult.action) {
-              // Redirect to 3DS page
+          if (paymentResult.success && paymentResult.action) {
+            // Redirect to RozetkaPay hosted checkout page
+            toast.info('Перенаправлення на сторінку оплати...');
+            setTimeout(() => {
               window.location.href = paymentResult.action.value;
-              return;
-            }
-
-            toast.success('Оплата успішно проведена!');
+            }, 1000);
+            return;
           } else {
-            throw new Error(paymentResult.error || 'Payment failed');
+            throw new Error(paymentResult.error || 'Payment creation failed');
           }
         } catch (paymentError) {
           console.error('Payment error:', paymentError);
-          toast.error(`Помилка оплати: ${paymentError.message}. Замовлення створено, але не оплачено.`);
-          // Order is created but payment failed - still navigate to success
+          toast.error(`Помилка оплати: ${paymentError.message}`);
+          setIsProcessingPayment(false);
+          return;
         }
       }
 
