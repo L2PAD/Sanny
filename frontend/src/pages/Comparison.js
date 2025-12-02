@@ -264,14 +264,14 @@ const Comparison = () => {
               {/* Actions */}
               <div className="flex gap-2">
                 <Link to={`/products/${product.id}`} className="flex-1">
-                  <Button variant="outline" className="w-full">Подробнее</Button>
+                  <Button variant="outline" className="w-full">{t('details')}</Button>
                 </Link>
                 <Button
                   onClick={() => handleAddToCart(product.id)}
                   className="flex-1"
                   disabled={product.stock_level === 0}
                 >
-                  В корзину
+                  {t('addToCart')}
                 </Button>
               </div>
             </div>
