@@ -299,7 +299,7 @@ const CategorySidebar = ({ categories, selectedCategory, onCategoryClick }) => {
                 </div>
                 
                 {/* Subcategories */}
-                {isExpanded && (
+                {isExpanded && category.subcategories && category.subcategories.length > 0 && (
                   <div className="bg-gray-50 px-4 py-2">
                     {category.subcategories.map((subcategory) => (
                       <button
@@ -314,8 +314,9 @@ const CategorySidebar = ({ categories, selectedCategory, onCategoryClick }) => {
                 )}
               </div>
             );
-          })}
-        </div>
+            })}
+          </div>
+        )}
       </div>
     </aside>
   );
