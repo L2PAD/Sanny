@@ -486,6 +486,20 @@ export const translations = {
     actions: 'Дії',
     details: 'Докладніше',
     
+    // Header Navigation
+    catalog: 'Каталог',
+    contactInfo: 'Контактна інформація',
+    deliveryPayment: 'Доставка і оплата',
+    exchangeReturn: 'Обмін та повернення',
+    aboutUs: 'Про нас',
+    userAgreement: 'Угода користувача',
+    blog: 'Блог',
+    myCart: 'Мій кошик',
+    login: 'Вхід',
+    searchProducts: 'пошук товарів',
+    workingHours: 'Пн–Пт: 09:00 – 18:00',
+    weekends: 'Сб–Нд: Вихідні',
+    
     // Cart
     shoppingCart: 'Кошик покупок',
     clearCart: 'Очистити кошик',
