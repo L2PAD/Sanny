@@ -94,7 +94,7 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
         {installmentPrice && (
           <div className="absolute bottom-2 left-2 z-10">
             <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-              Кредит 0%
+              {t('creditZero')}
             </div>
           </div>
         )}
