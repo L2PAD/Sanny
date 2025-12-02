@@ -70,7 +70,7 @@ const PaymentDeliveryInfo = () => {
               <div className="flex items-start gap-3">
                 <Truck className="w-5 h-5 text-gray-600 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="font-semibold">Кур'єром по Києву</p>
+                  <p className="font-semibold">Кур&apos;єром по Києву</p>
                   <p className="text-sm text-gray-600">Доставка за вашою адресою протягом 1-2 днів</p>
                   <p className="text-sm text-green-600 font-medium mt-1">Вартість: 80 грн</p>
                 </div>
