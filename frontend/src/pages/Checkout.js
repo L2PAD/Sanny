@@ -10,7 +10,7 @@ import NovaPoshtaDelivery from '../components/NovaPoshtaDelivery';
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const { cart: cartData, cartTotal, clearCart } = useCart();
+  const { cart: cartData, cartTotal, clearCart, fetchCart } = useCart();
   const { isAuthenticated, user } = useAuth();
   
   const cart = cartData?.items || [];
@@ -33,6 +33,11 @@ const Checkout = () => {
   const [errors, setErrors] = useState({});
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [novaPoshtaData, setNovaPoshtaData] = useState(null);
+
+  useEffect(() => {
+    // Fetch cart on mount to ensure we have latest data
+    fetchCart();
+  }, []);
 
   useEffect(() => {
     if (cart.length === 0) {
