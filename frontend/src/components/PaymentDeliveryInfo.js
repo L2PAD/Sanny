@@ -87,34 +87,6 @@ const PaymentDeliveryInfo = () => {
             </div>
           </div>
         </div>
-
-        {/* Important Notice */}
-        <div className="mt-8 bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
-          <div className="flex items-start gap-3">
-            <ShieldCheck className="w-6 h-6 text-yellow-600 mt-1 flex-shrink-0" />
-            <div>
-              <p className="font-bold text-lg text-gray-900 mb-2">Важлива інформація</p>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-yellow-600 rounded-full"></span>
-                  <span><strong>Мінімальна сума замовлення:</strong> 200 грн</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-yellow-600 rounded-full"></span>
-                  <span><strong>Гарантія повернення:</strong> 14 днів</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-yellow-600 rounded-full"></span>
-                  <span><strong>Офіційна гарантія:</strong> 12-24 місяці від виробника</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-yellow-600 rounded-full"></span>
-                  <span><strong>Перевірка товару:</strong> можлива при отриманні</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
