@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { productsAPI } from '../utils/api';
-import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
+import { useFavorites } from '../contexts/FavoritesContext';
+import { useComparison } from '../contexts/ComparisonContext';
+import { productsAPI, reviewsAPI } from '../utils/api';
+import { Star, Heart, GitCompare, ShoppingCart, Minus, Plus, ChevronRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { ShoppingCart, Star, Package, Shield, TruckIcon } from 'lucide-react';
-import ReviewsSection from '../components/ReviewsSection';
+import { toast } from 'sonner';
+import ProductGallery from '../components/ProductGallery';
+import ProductSpecs from '../components/ProductSpecs';
+import DeliveryOptions from '../components/DeliveryOptions';
+import BuyTogether from '../components/BuyTogether';
 import AIRecommendations from '../components/AIRecommendations';
+import ReviewsSection from '../components/ReviewsSection';
 
 const ProductDetail = () => {
   const { id } = useParams();
