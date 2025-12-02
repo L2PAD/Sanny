@@ -467,8 +467,65 @@ const EnhancedProductDetail = () => {
           </div>
         </div>
 
+        {/* Similar Products from Same Category */}
+        <SimilarProducts product={product} />
+
         {/* AI Recommendations */}
         <AIRecommendations product={product} />
+      </div>
+    </div>
+  );
+};
+
+// Similar Products Component
+const SimilarProducts = ({ product }) => {
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    if (product?.category_id) {
+      fetchSimilarProducts();
+    }
+  }, [product]);
+
+  const fetchSimilarProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await productsAPI.getAll({
+        category_id: product.category_id,
+        limit: 8
+      });
+      
+      // Filter out current product
+      const filtered = response.data.filter(p => p.id !== product.id).slice(0, 7);
+      setSimilarProducts(filtered);
+    } catch (error) {
+      console.error('Failed to fetch similar products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading || similarProducts.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="bg-white rounded-2xl p-8 border border-gray-200 mb-8">
+      <h2 className="text-2xl font-bold mb-6">
+        {t('language') === 'ru' ? 'Похожие товары из этой категории' : 'Схожі товари з цієї категорії'}
+      </h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {similarProducts.map((prod) => (
+          <div 
+            key={prod.id}
+            onClick={() => window.location.href = `/product/${prod.id}`}
+            className="cursor-pointer"
+          >
+            <ProductCardCompact product={prod} />
+          </div>
+        ))}
       </div>
     </div>
   );
