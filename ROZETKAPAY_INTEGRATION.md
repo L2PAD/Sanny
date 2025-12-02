@@ -50,7 +50,7 @@
 
 ```env
 ROZETKAPAY_API_URL=https://api.rozetkapay.com
-ROZETKAPAY_LOGIN=7e5ba9f2-572b-4fb9-af69-d243c5ab56a6
+ROZETKAPAY_LOGIN=globaluka
 ROZETKAPAY_PASSWORD=ZE9lcjdnWng5S0RKRHFhR2tQYTRWSnRa
 ROZETKAPAY_WIDGET_KEY=<получить от RozetkaPay>
 ```
