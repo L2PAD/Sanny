@@ -79,19 +79,6 @@ const ProductCard = ({ product }) => {
               className={`w-5 h-5 ${isFavorite(product.id) ? 'fill-current' : ''}`}
             />
           </button>
-          
-          {/* Comparison Button */}
-          <button
-            onClick={handleToggleComparison}
-            className={`p-2 rounded-full backdrop-blur-sm transition-all ${
-              isInComparison(product.id)
-                ? 'bg-blue-500 text-white'
-                : 'bg-white/80 text-gray-600 hover:bg-white'
-            }`}
-            title={isInComparison(product.id) ? 'Удалить из сравнения' : 'Добавить к сравнению'}
-          >
-            <Scale className="w-5 h-5" />
-          </button>
         </div>
         
         {discount > 0 && (
