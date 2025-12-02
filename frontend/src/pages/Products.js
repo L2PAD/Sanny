@@ -17,7 +17,6 @@ const Products = () => {
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [sortBy, setSortBy] = useState('newest');
   const [viewMode, setViewMode] = useState('grid');
-  const [priceDisplay, setPriceDisplay] = useState('full');
   const [expandedCategories, setExpandedCategories] = useState([]);
   const [categorySearch, setCategorySearch] = useState('');
 
