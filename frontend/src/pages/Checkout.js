@@ -143,7 +143,8 @@ const Checkout = () => {
       newErrors.email = 'Невірний формат email';
     }
 
-    if (deliveryMethod !== 'self-pickup') {
+    // Address validation only for delivery methods that need it
+    if (deliveryMethod === 'courier' || deliveryMethod === 'nova-poshta') {
       if (!recipientData.city.trim()) {
         newErrors.city = 'Введіть місто';
       }
