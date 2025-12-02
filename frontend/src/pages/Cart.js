@@ -13,6 +13,11 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Fetch cart on mount to ensure we have latest data
+    fetchCart();
+  }, []);
+
+  useEffect(() => {
     fetchCartProducts();
   }, [cart]);
 
