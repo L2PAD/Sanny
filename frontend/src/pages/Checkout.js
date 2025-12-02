@@ -177,13 +177,16 @@ const Checkout = () => {
       const orderData = {
         order_number: orderNumber,
         buyer_id: user?.id || 'guest',
-        items: cart.map(item => ({
-          product_id: item.product_id || item.id,
-          title: item.title,
-          quantity: item.quantity,
-          price: item.price,
-          seller_id: item.seller_id || 'unknown'
-        })),
+        items: cart.map(item => {
+          const product = products[item.product_id];
+          return {
+            product_id: item.product_id,
+            title: product?.title || 'Unknown Product',
+            quantity: item.quantity,
+            price: item.price,
+            seller_id: product?.seller_id || 'unknown'
+          };
+        }),
         total_amount: totalWithDelivery,
         currency: 'UAH',
         shipping_address: {
