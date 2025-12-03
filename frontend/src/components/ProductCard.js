@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star, Heart } from 'lucide-react';
+import { ShoppingCart, Star, Heart, Video, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { useCart } from '../contexts/CartContext';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -13,6 +13,7 @@ const ProductCard = ({ product }) => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
