@@ -70,9 +70,9 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Contact Info & Navigation Links */}
+      {/* Contact Info */}
       <div className="container-main py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-4">Y-store</h3>
@@ -81,7 +81,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact */}
           <div>
             <h3 className="text-lg font-semibold mb-4">{t('contactInfo')}</h3>
             <div className="space-y-3 text-gray-300">
@@ -109,107 +109,47 @@ const Footer = () => {
                   dynamo1402om@gmail.com
                 </a>
               </div>
-            </div>
-          </div>
-
-          {/* Delivery & Payment */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t('deliveryPayment')}</h3>
-            <div className="space-y-2">
-              <Link to="/delivery-payment" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('deliveryInfo')}
-              </Link>
-              <Link to="/delivery-payment" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('paymentMethods')}
-              </Link>
-              <Link to="/delivery-payment" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('shippingCosts')}
-              </Link>
-              <Link to="/delivery-payment" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('fastDelivery')}
-              </Link>
-            </div>
-          </div>
-
-          {/* Exchange & Returns */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t('exchangeReturn')}</h3>
-            <div className="space-y-2">
-              <Link to="/exchange-return" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('returnPolicy')}
-              </Link>
-              <Link to="/exchange-return" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('exchangeConditions')}
-              </Link>
-              <Link to="/exchange-return" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('warrantyService')}
-              </Link>
-              <Link to="/exchange-return" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('refundProcess')}
-              </Link>
-            </div>
-          </div>
-
-          {/* About Us & Legal */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t('aboutCompany')}</h3>
-            <div className="space-y-2">
-              <Link to="/about" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('aboutUs')}
-              </Link>
-              <Link to="/contact" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('contacts')}
-              </Link>
-              <Link to="/terms" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('privacyPolicy')}
-              </Link>
-              <Link to="/terms" className="block text-gray-300 hover:text-[#0071E3] transition-colors">
-                {t('agreement')}
-              </Link>
-            </div>
-
-            {/* Social Media */}
-            <div className="mt-6">
-              <p className="text-sm font-semibold mb-3">{t('followUs')}</p>
-              <div className="flex items-center gap-3">
-                <a 
-                  href="https://t.me/yourtelegram" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
-                  aria-label="Telegram"
-                >
-                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://instagram.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-5 h-5 text-white" />
-                </a>
-                <a 
-                  href="viber://chat?number=%2B380502474161" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
-                  aria-label="Viber"
-                >
-                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.35.5C6.697.5 2.09 5.107 2.09 10.76c0 1.904.522 3.684 1.427 5.214L2 20.5l4.74-1.474c1.452.803 3.13 1.264 4.91 1.264 5.653 0 10.26-4.607 10.26-10.26C21.91 5.107 17.303.5 12.35.5zm5.8 13.96c-.226.634-1.132 1.165-1.85 1.314-.493.098-.947.442-3.206-.668-2.715-1.337-4.458-4.123-4.594-4.312-.136-.19-1.11-1.477-1.11-2.817 0-1.34.704-1.998.952-.77.247.002.588.092.845.092.248 0 .548-.097.858.656.317.772 1.08 2.634 1.174 2.825.095.19.158.412.032.603-.127.19-.19.308-.38.474-.19.165-.4.37-.57.497-.19.143-.388.297-.167.583.222.286.987 1.628 2.12 2.635 1.458 1.297 2.687 1.698 3.067 1.888.38.19.603.158.825-.095.222-.254.95-1.108 1.204-1.49.254-.38.507-.317.857-.19.35.126 2.223 1.048 2.603 1.238.38.19.634.285.73.444.095.158.095.92-.13 1.553z"/>
-                  </svg>
-                </a>
+              
+              {/* Social Media */}
+              <div className="pt-4 border-t border-gray-700">
+                <p className="text-sm font-semibold mb-3">{t('followUs')}</p>
+                <div className="flex items-center gap-3">
+                  <a 
+                    href="https://t.me/yourtelegram" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
+                    aria-label="Telegram"
+                  >
+                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+                    </svg>
+                  </a>
+                  <a 
+                    href="https://instagram.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-5 h-5 text-white" />
+                  </a>
+                  <a 
+                    href="viber://chat?number=%2B380502474161" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
+                    aria-label="Viber"
+                  >
+                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.35.5C6.697.5 2.09 5.107 2.09 10.76c0 1.904.522 3.684 1.427 5.214L2 20.5l4.74-1.474c1.452.803 3.13 1.264 4.91 1.264 5.653 0 10.26-4.607 10.26-10.26C21.91 5.107 17.303.5 12.35.5zm5.8 13.96c-.226.634-1.132 1.165-1.85 1.314-.493.098-.947.442-3.206-.668-2.715-1.337-4.458-4.123-4.594-4.312-.136-.19-1.11-1.477-1.11-2.817 0-1.34.704-1.998.952-.77.247.002.588.092.845.092.248 0 .548-.097.858.656.317.772 1.08 2.634 1.174 2.825.095.19.158.412.032.603-.127.19-.19.308-.38.474-.19.165-.4.37-.57.497-.19.143-.388.297-.167.583.222.286.987 1.628 2.12 2.635 1.458 1.297 2.687 1.698 3.067 1.888.38.19.603.158.825-.095.222-.254.95-1.108 1.204-1.49.254-.38.507-.317.857-.19.35.126 2.223 1.048 2.603 1.238.38.19.634.285.73.444.095.158.095.92-.13 1.553z"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Working Hours & Callback Form Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 pt-12 border-t border-white/10">
           {/* Working Hours */}
           <div>
             <h3 className="text-lg font-semibold mb-4">{t('workingHours')}</h3>
