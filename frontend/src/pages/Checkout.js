@@ -147,12 +147,27 @@ const Checkout = () => {
     }
 
     // Address validation for standard delivery methods
-    if (deliveryMethod === 'courier' || deliveryMethod === 'ukrposhta') {
+    if (deliveryMethod === 'courier') {
       if (!recipientData.city.trim()) {
         newErrors.city = t('enterCity');
       }
       if (!recipientData.address.trim()) {
         newErrors.address = t('enterAddress');
+      }
+    }
+
+    // Ukrposhta validation (включает индекс)
+    if (deliveryMethod === 'ukrposhta') {
+      if (!recipientData.city.trim()) {
+        newErrors.city = t('enterCity');
+      }
+      if (!recipientData.address.trim()) {
+        newErrors.address = t('enterAddress');
+      }
+      if (!recipientData.postalCode.trim()) {
+        newErrors.postalCode = t('language') === 'ru' ? 'Введите почтовый индекс' : 'Введіть поштовий індекс';
+      } else if (!/^\d{5}$/.test(recipientData.postalCode)) {
+        newErrors.postalCode = t('language') === 'ru' ? 'Индекс должен состоять из 5 цифр' : 'Індекс має складатися з 5 цифр';
       }
     }
 
