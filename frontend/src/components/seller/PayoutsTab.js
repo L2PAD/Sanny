@@ -5,8 +5,10 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const PayoutsTab = () => {
+  const { t } = useLanguage();
   const [balance, setBalance] = useState(null);
   const [payouts, setPayouts] = useState([]);
   const [showRequestForm, setShowRequestForm] = useState(false);
