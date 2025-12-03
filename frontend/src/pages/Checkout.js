@@ -109,17 +109,17 @@ const Checkout = () => {
   const paymentOptions = [
     {
       id: 'on-delivery',
-      name: 'Оплата під час отримання товару',
-      description: 'Готівкою або карткою при отриманні'
+      name: t('payOnDelivery'),
+      description: t('payOnDeliveryDesc')
     },
     {
       id: 'online',
-      name: 'Оплатити зараз (RozetkaPay)',
-      description: 'Безпечна оплата карткою онлайн'
+      name: t('payOnlineRozetka'),
+      description: t('payOnlineDesc')
     },
     {
       id: 'card-rozetka',
-      name: 'Оплатити Карткою Y-store зараз',
+      name: t('payWithBazaarCard'),
       description: 'При оплаті онлайн Карткою Y-store застосується знижка',
       badge: 'Discount',
       disabled: true
