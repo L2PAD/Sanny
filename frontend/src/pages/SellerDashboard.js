@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { sellerAPI, productsAPI, categoriesAPI, aiAPI } from '../utils/api';
-import { generateProductDescription, generateSEO } from '../services/openaiService';
+import { generateProductDescription, generateSEO } from '../services/aiService';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
