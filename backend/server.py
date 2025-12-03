@@ -1125,7 +1125,7 @@ async def ai_chatbot(request: AIChatRequest):
     AI Chatbot for customer support (SECURE - Backend only)
     """
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage, AssistantMessage
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
         
         api_key = os.environ.get('EMERGENT_LLM_KEY')
         
