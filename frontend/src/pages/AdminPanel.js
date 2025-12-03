@@ -225,6 +225,9 @@ const AdminPanel = () => {
             </div>
           </div>
         )}
+
+        {/* Products Tab */}
+        {activeTab === 'products' && <ProductManagement />}
       </div>
     </div>
   );
