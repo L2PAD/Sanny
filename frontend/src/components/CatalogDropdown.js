@@ -112,7 +112,7 @@ const CatalogDropdown = () => {
             </div>
 
             {/* Right Area - Subcategories in columns */}
-            <div className="flex-1 bg-white overflow-y-auto max-h-[80vh]">
+            <div className="flex-1 bg-white overflow-y-auto max-h-[600px]">
               {hoveredCategoryData && subcategories.length > 0 ? (
                 <div className="p-8">
                   <h3 className="text-xl font-bold text-gray-900 mb-6">
