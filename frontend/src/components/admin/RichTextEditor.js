@@ -59,11 +59,39 @@ const RichTextEditor = ({
     }
   };
 
-  const insertImage = () => {
+  const insertImageFromUrl = () => {
     const url = prompt('Enter image URL:', 'https://example.com/image.jpg');
     if (url) {
       insertAtCursor(`<img src="${url}" alt="Product image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0;" />\n`);
     }
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 2MB for description images)
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image size must be less than 2MB');
+      return;
+    }
+
+    // Convert to Base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      insertAtCursor(`<img src="${base64String}" alt="Product image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0;" />\n`);
+    };
+    reader.readAsDataURL(file);
+
+    // Reset input
+    e.target.value = '';
   };
 
   const insertList = () => {
