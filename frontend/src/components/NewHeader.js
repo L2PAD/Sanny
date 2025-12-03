@@ -40,7 +40,12 @@ const NewHeader = () => {
   };
 
   const toggleLanguage = () => {
-    changeLanguage(language === 'ru' ? 'ua' : 'ru');
+    setShowLanguageModal(true);
+  };
+
+  const selectLanguage = (lang) => {
+    changeLanguage(lang);
+    setShowLanguageModal(false);
   };
 
   return (
