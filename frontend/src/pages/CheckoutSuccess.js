@@ -19,8 +19,28 @@ const CheckoutSuccess = () => {
   useEffect(() => {
     if (sessionId) {
       checkPaymentStatus();
+    } else if (orderNumberFromState) {
+      // For cash on delivery, fetch order details
+      fetchOrderDetails(orderNumberFromState);
     }
-  }, [sessionId, attempts]);
+  }, [sessionId, attempts, orderNumberFromState]);
+
+  const fetchOrderDetails = async (orderNumber) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/orders`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      const order = response.data.find(o => o.order_number === orderNumber);
+      if (order) {
+        setOrderDetails(order);
+      }
+    } catch (error) {
+      console.error('Failed to fetch order details:', error);
+    }
+  };
 
   const checkPaymentStatus = async () => {
     try {
