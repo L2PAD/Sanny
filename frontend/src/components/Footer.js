@@ -52,11 +52,11 @@ const Footer = () => {
             <div>
               <h3 className="font-bold text-lg text-[#121212] mb-1">Bazaar</h3>
               <p className="text-gray-700 text-sm mb-2">
-                ул. Крещатик, 36<br />
-                Киев, Украина, 01001
+                проспект Миколи Бажана, 24/1<br />
+                Київ, Україна, 02149
               </p>
               <a
-                href="https://www.google.com/maps/dir//Крещатик,+36,+Киев,+02000"
+                href="https://www.google.com/maps/dir//проспект+Миколи+Бажана,+24/1,+Київ,+02149"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#0071E3] hover:text-[#0051c3] text-sm font-semibold inline-flex items-center gap-1"
