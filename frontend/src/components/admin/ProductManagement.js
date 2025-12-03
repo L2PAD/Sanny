@@ -113,9 +113,20 @@ const ProductManagement = () => {
         return;
       }
 
+      // Generate slug from title
+      const generateSlug = (text) => {
+        return text
+          .toLowerCase()
+          .trim()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/[\s_-]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      };
+
       // Prepare product data
       const productData = {
         title: formData.title.trim(),
+        slug: generateSlug(formData.title),
         description: formData.description || formData.title.trim(),
         description_html: formData.description_html || '',
         price: parseFloat(formData.price),
