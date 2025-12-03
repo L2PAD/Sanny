@@ -3,6 +3,7 @@ import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { categoriesAPI } from '../utils/api';
 import { useCatalog } from '../contexts/CatalogContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const CatalogDropdown = () => {
   const { isCatalogOpen, closeCatalog } = useCatalog();
