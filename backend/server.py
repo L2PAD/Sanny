@@ -1396,6 +1396,41 @@ async def get_category_performance(current_user: User = Depends(get_current_admi
     analytics = get_advanced_analytics_service(db)
     return await analytics.get_category_performance()
 
+# ============= ANALYTICS EVENT TRACKING =============
+
+class AnalyticsEvent(BaseModel):
+    session_id: str
+    user_id: str
+    event_type: str
+    timestamp: str
+    page_path: Optional[str] = None
+    page_title: Optional[str] = None
+    time_spent: Optional[int] = None
+    product_id: Optional[str] = None
+    product_name: Optional[str] = None
+    category: Optional[str] = None
+    price: Optional[float] = None
+    quantity: Optional[int] = None
+    query: Optional[str] = None
+    results_count: Optional[int] = None
+    metadata: Optional[Dict[str, Any]] = {}
+
+@api_router.post("/analytics/event")
+async def track_analytics_event(event: AnalyticsEvent):
+    """
+    Track user analytics event (page views, time spent, interactions)
+    """
+    try:
+        event_doc = event.model_dump()
+        event_doc["created_at"] = datetime.now(timezone.utc).isoformat()
+        
+        await db.analytics_events.insert_one(event_doc)
+        
+        return {"success": True}
+    except Exception as e:
+        logger.error(f"Error tracking analytics event: {str(e)}")
+        return {"success": False, "error": str(e)}
+
 # ============= CONTACT & SUPPORT =============
 
 @api_router.post("/contact/callback")
