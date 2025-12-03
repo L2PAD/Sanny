@@ -16,7 +16,7 @@ const NewHeader = () => {
   const { favorites } = useFavorites();
   const { comparison } = useComparison();
   const { openCatalog } = useCatalog();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, changeLanguage, t } = useLanguage();
   const { hasUnreadNotifications } = useNotifications();
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,7 +39,7 @@ const NewHeader = () => {
   };
 
   const toggleLanguage = () => {
-    setLanguage(language === 'ru' ? 'ua' : 'ru');
+    changeLanguage(language === 'ru' ? 'ua' : 'ru');
   };
 
   return (
