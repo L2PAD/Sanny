@@ -352,11 +352,16 @@ const EnhancedProductDetail = () => {
                     dangerouslySetInnerHTML={{ __html: product.description_html }}
                     style={{
                       fontSize: '16px',
-                      lineHeight: '1.8'
+                      lineHeight: '1.8',
+                      wordBreak: 'break-word',
+                      overflowWrap: 'break-word'
                     }}
                   />
                 ) : (
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap text-base">
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap text-base" style={{
+                    wordBreak: 'break-word',
+                    overflowWrap: 'break-word'
+                  }}>
                     {product.description}
                   </p>
                 )}
