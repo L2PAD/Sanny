@@ -130,12 +130,16 @@ class ProductCreate(BaseModel):
 class ProductUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
+    description_html: Optional[str] = None
     short_description: Optional[str] = None
     category_id: Optional[str] = None
+    category_name: Optional[str] = None
     price: Optional[float] = None
     compare_price: Optional[float] = None
     stock_level: Optional[int] = None
     images: Optional[List[str]] = None
+    videos: Optional[List[str]] = None
+    specifications: Optional[List[Dict[str, Any]]] = None
     status: Optional[str] = None
 
 class Review(BaseModel):
