@@ -117,8 +117,8 @@ const NewHeader = () => {
         </div>
       </div>
 
-      {/* Dark Navigation Bar */}
-      <div className="bg-[#2c3e50] text-white">
+      {/* Dark Navigation Bar - BLACK */}
+      <div className="bg-black text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-3">
             {/* Left Navigation */}
