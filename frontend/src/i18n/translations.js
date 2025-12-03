@@ -1,6 +1,7 @@
 export const translations = {
   ru: {
     // Header
+    searchPlaceholder: 'Поиск товаров...',
     search: 'Поиск товаров...',
     login: 'Войти',
     signup: 'Регистрация',
