@@ -1359,6 +1359,7 @@ async def get_order_status_distribution(current_user: User = Depends(get_current
 # ============= AI FEATURES =============
 
 from ai_service import ai_service
+from email_service import email_service
 
 class AIGenerateDescriptionRequest(BaseModel):
     product_name: str
