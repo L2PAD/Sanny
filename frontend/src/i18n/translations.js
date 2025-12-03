@@ -375,6 +375,18 @@ export const translations = {
     total: 'Разом',
     proceedToCheckout: 'Перейти до оформлення',
     continueShopping: 'Продовжити покупки',
+    // Product actions
+    addToCart: 'До кошика',
+    outOfStock: 'Немає в наявності',
+    addedToFavorites: 'Додано до улюблених',
+    removedFromFavorites: 'Видалено з улюблених',
+    // Toast messages
+    addedToCart: 'Додано до кошика',
+    removedFromCart: 'Видалено з кошика',
+    cartCleared: 'Кошик очищено',
+    failedToAddToCart: 'Не вдалося додати до кошика',
+    failedToRemoveFromCart: 'Не вдалося видалити з кошика',
+    failedToClearCart: 'Не вдалося очистити кошик',
     // Empty Cart
     yourCartIsEmpty: 'Ваш кошик порожній',
     addSomeProducts: 'Додайте товари щоб почати!',
