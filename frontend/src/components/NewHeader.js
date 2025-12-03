@@ -217,13 +217,15 @@ const NewHeader = () => {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
-            <Link
-              to="/products"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors font-medium"
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                toggleCatalog();
+              }}
+              className="px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors font-medium text-left"
             >
               {t('catalog')}
-            </Link>
+            </button>
             {navigationLinks.map((link) => (
               <Link
                 key={link.path}
