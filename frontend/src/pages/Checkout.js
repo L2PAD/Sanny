@@ -117,8 +117,8 @@ const Checkout = () => {
     },
     {
       id: 'card-rozetka',
-      name: 'Оплатити Карткою Bazaar зараз',
-      description: 'При оплаті онлайн Карткою Bazaar застосується знижка',
+      name: 'Оплатити Карткою Y-store зараз',
+      description: 'При оплаті онлайн Карткою Y-store застосується знижка',
       badge: 'Discount',
       disabled: true
     }
