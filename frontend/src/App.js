@@ -46,6 +46,7 @@ function App() {
                   <CartProvider>
                     <div data-testid="app" className="App">
                     <Toaster position="top-right" />
+                    <CatalogSidebar />
                     <NewHeader />
                     <Routes>
                       <Route path="/" element={<Home />} />
