@@ -61,37 +61,39 @@ function App() {
               <FavoritesProvider>
                 <CatalogProvider>
                   <CartProvider>
-                    <div data-testid="app" className="App">
-                    <Toaster position="top-right" />
-                    <CatalogDropdown />
-                    <NewHeader />
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/register" element={<Register />} />
-                      <Route path="/products" element={<Products />} />
-                      <Route path="/product/:id" element={<EnhancedProductDetail />} />
-                      <Route path="/favorites" element={<Favorites />} />
-                      <Route path="/comparison" element={<Comparison />} />
-                      <Route path="/cart" element={<Cart />} />
-                      <Route path="/checkout" element={<Checkout />} />
-                      <Route path="/checkout/success" element={<CheckoutSuccess />} />
-                      <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
-                      <Route path="/seller/dashboard" element={<SellerDashboard />} />
-                      <Route path="/admin" element={<AdminPanel />} />
-                      <Route path="/contact" element={<ContactInfo />} />
-                      <Route path="/delivery-payment" element={<DeliveryPayment />} />
-                      <Route path="/exchange-return" element={<ExchangeReturn />} />
-                      <Route path="/about" element={<AboutUs />} />
-                      <Route path="/terms" element={<Terms />} />
-                      <Route path="/blog" element={<Blog />} />
-                      <Route path="*" element={<Navigate to="/" />} />
-                    </Routes>
-                    <Footer />
-                    <AIChatbot />
-                    <SupportWidget />
-                  </div>
-                </CartProvider>
+                    <AnalyticsWrapper>
+                      <div data-testid="app" className="App">
+                        <Toaster position="top-right" />
+                        <CatalogDropdown />
+                        <NewHeader />
+                        <Routes>
+                          <Route path="/" element={<Home />} />
+                          <Route path="/login" element={<Login />} />
+                          <Route path="/register" element={<Register />} />
+                          <Route path="/products" element={<Products />} />
+                          <Route path="/product/:id" element={<EnhancedProductDetail />} />
+                          <Route path="/favorites" element={<Favorites />} />
+                          <Route path="/comparison" element={<Comparison />} />
+                          <Route path="/cart" element={<Cart />} />
+                          <Route path="/checkout" element={<Checkout />} />
+                          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+                          <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
+                          <Route path="/seller/dashboard" element={<SellerDashboard />} />
+                          <Route path="/admin" element={<AdminPanel />} />
+                          <Route path="/contact" element={<ContactInfo />} />
+                          <Route path="/delivery-payment" element={<DeliveryPayment />} />
+                          <Route path="/exchange-return" element={<ExchangeReturn />} />
+                          <Route path="/about" element={<AboutUs />} />
+                          <Route path="/terms" element={<Terms />} />
+                          <Route path="/blog" element={<Blog />} />
+                          <Route path="*" element={<Navigate to="/" />} />
+                        </Routes>
+                        <Footer />
+                        <AIChatbot />
+                        <SupportWidget />
+                      </div>
+                    </AnalyticsWrapper>
+                  </CartProvider>
                 </CatalogProvider>
               </FavoritesProvider>
             </ComparisonProvider>
