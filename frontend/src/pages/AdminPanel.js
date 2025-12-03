@@ -144,6 +144,17 @@ const AdminPanel = () => {
             <Wallet className="w-5 h-5 inline mr-2" />
             Выплаты
           </button>
+          <button
+            onClick={() => setActiveTab('orders')}
+            className={`pb-4 px-4 font-semibold transition-colors ${
+              activeTab === 'orders'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <ClipboardList className="w-5 h-5 inline mr-2" />
+            Заказы
+          </button>
         </div>
 
         {/* Analytics Tab */}
@@ -151,6 +162,9 @@ const AdminPanel = () => {
 
         {/* Payouts Tab */}
         {activeTab === 'payouts' && <PayoutsDashboard />}
+
+        {/* Orders Tab */}
+        {activeTab === 'orders' && <OrdersAnalytics />}
 
         {/* Users Tab */}
         {activeTab === 'users' && (
