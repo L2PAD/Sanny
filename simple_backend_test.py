@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 # Configuration
-BACKEND_URL = "https://ecommerce-hub-261.preview.emergentagent.com/api"
+BACKEND_URL = "https://bazaar-platform.preview.emergentagent.com/api"
 ADMIN_EMAIL = "admin@bazaar.com"
 ADMIN_PASSWORD = "admin123"
 
