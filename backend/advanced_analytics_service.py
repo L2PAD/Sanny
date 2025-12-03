@@ -68,7 +68,8 @@ class AdvancedAnalyticsService:
             avg_session_duration = 0
             total_sessions = 0
             if session_result:
-                avg_session_duration = session_result[0].get("avg_duration", 0) / 1000  # Convert to seconds
+                avg_duration = session_result[0].get("avg_duration", 0)
+                avg_session_duration = avg_duration / 1000 if avg_duration else 0  # Convert to seconds
                 total_sessions = session_result[0].get("total_sessions", 0)
             
             # Get bounce rate (sessions with only 1 page view)
