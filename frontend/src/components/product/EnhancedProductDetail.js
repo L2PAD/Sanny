@@ -381,6 +381,15 @@ const EnhancedProductDetail = () => {
 
             {activeTab === 'reviews' && (
               <div>
+                {/* Review Form */}
+                <ReviewForm
+                  productId={product.id}
+                  isAuthenticated={isAuthenticated}
+                  onReviewAdded={fetchReviews}
+                  onLoginRequired={() => navigate('/login')}
+                />
+
+                {/* Reviews List */}
                 {reviews.length > 0 ? (
                   <div className="space-y-6">
                     {reviews.map((review) => (
