@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { productsAPI } from '../utils/api';
 import { Button } from '../components/ui/button';
 import { MapPin, CreditCard, Building2, User, Phone, Mail, ChevronRight, AlertCircle, Package, Truck, Home } from 'lucide-react';
@@ -12,6 +13,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { cart: cartData, cartTotal, clearCart, fetchCart } = useCart();
   const { isAuthenticated, user } = useAuth();
+  const { t } = useLanguage();
   
   const cart = cartData?.items || [];
   const [products, setProducts] = useState({});
