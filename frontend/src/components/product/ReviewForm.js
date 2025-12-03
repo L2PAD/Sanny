@@ -100,11 +100,7 @@ const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired
             onChange={(e) => setComment(e.target.value)}
             rows={4}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder={
-              t('language') === 'ru'
-                ? 'Поделитесь своим мнением о товаре...'
-                : 'Поділіться своєю думкою про товар...'
-            }
+            placeholder={t('shareYourOpinion')}
             disabled={!isAuthenticated}
           />
         </div>
