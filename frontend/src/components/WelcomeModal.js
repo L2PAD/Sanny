@@ -17,7 +17,7 @@ const WelcomeModal = () => {
       setSelectedLang('ua');
       changeLanguage('ua');
     }
-  }, [changeLanguage]);
+  }, []); // Empty dependency array - run only once on mount
 
   const handleLanguageSelect = (lang) => {
     console.log('🌐 Language selected:', lang);
