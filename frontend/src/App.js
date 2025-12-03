@@ -42,7 +42,8 @@ function App() {
           <NotificationsProvider>
             <ComparisonProvider>
               <FavoritesProvider>
-                <CartProvider>
+                <CatalogProvider>
+                  <CartProvider>
                   <div data-testid="app" className="App">
                     <Toaster position="top-right" />
                     <NewHeader />
