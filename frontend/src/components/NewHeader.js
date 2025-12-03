@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ShoppingCart, Heart, GitCompare, User, LogOut, Menu } from 'lucide-react';
-import { AuthContext } from '../contexts/AuthContext';
-import { CartContext } from '../contexts/CartContext';
-import { FavoritesContext } from '../contexts/FavoritesContext';
-import { ComparisonContext } from '../contexts/ComparisonContext';
-import { CatalogContext } from '../contexts/CatalogContext';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { NotificationsContext } from '../contexts/NotificationsContext';
+import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
+import { useFavorites } from '../contexts/FavoritesContext';
+import { useComparison } from '../contexts/ComparisonContext';
+import { useCatalog } from '../contexts/CatalogContext';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useNotifications } from '../contexts/NotificationsContext';
 
 const NewHeader = () => {
   const navigate = useNavigate();
