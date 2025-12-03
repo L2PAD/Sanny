@@ -176,7 +176,7 @@ const Footer = () => {
               </div>
             </div>
             <a
-              href="https://www.google.com/maps/place/Крещатик,+36,+Киев"
+              href="https://www.google.com/maps/dir//проспект+Миколи+Бажана,+24/1,+Київ,+02149"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-block"
