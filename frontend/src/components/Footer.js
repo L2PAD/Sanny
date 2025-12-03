@@ -35,7 +35,7 @@ const Footer = () => {
       <div className="w-full h-[400px] md:h-[500px] relative">
         <iframe
           title="Наше расположение"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.562920422844!2d30.520526315741807!3d50.44864997947381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce56b2456d3b%3A0x7abb4e2ca04e4e52!2z0YPQuy4g0JrRgNC10YnQsNGC0LjQuiwgMzYsINCa0LjQtdCyLCAwMjAwMA!5e0!3m2!1sru!2sua!4v1234567890123!5m2!1sru!2sua"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2541.8355344869385!2d30.62019931574054!3d50.419936679474754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4c5c6e3d3b3b3%3A0x1234567890abcdef!2z0L_RgNC-0YHQv9C10LrRgiDQnNC40LrQvtC70Lgg0JHQsNC20LDQvdCwLCAyNC8xLCDQmtC40ZfQsiwg0KPQutGA0LDRl9C90LAsIDAyMTQ5!5e0!3m2!1suk!2sua!4v1234567890123!5m2!1suk!2sua"
           width="100%"
           height="100%"
           style={{ border: 0 }}
