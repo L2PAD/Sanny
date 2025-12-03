@@ -197,25 +197,11 @@ const EnhancedProductDetail = () => {
                         ${product.compare_price.toFixed(2)}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-base">
-                      <CreditCard className="w-5 h-5 text-green-600" />
-                      <span className="text-green-600 font-medium">
-                        {t('language') === 'ru' ? 'Оплата частями от' : 'Оплата частинами від'} ${(product.price / 12).toFixed(2)}/{t('language') === 'ru' ? 'мес' : 'міс'}
-                      </span>
-                    </div>
                   </div>
                 ) : (
                   // Without discount
-                  <div className="space-y-3">
-                    <div className="text-5xl font-bold text-black">
-                      ${product.price.toFixed(2)}
-                    </div>
-                    <div className="flex items-center gap-2 text-base">
-                      <CreditCard className="w-5 h-5 text-green-600" />
-                      <span className="text-green-600 font-medium">
-                        {t('language') === 'ru' ? 'Оплата частями от' : 'Оплата частинами від'} ${(product.price / 12).toFixed(2)}/{t('language') === 'ru' ? 'мес' : 'міс'}
-                      </span>
-                    </div>
+                  <div className="text-5xl font-bold text-black">
+                    ${product.price.toFixed(2)}
                   </div>
                 )}
               </div>
