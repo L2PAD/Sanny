@@ -127,17 +127,20 @@ const WelcomeModal = () => {
         </div>
 
         {/* Cookie Consent */}
-        <div key={`cookie-${contentKey}`} className="px-6 py-4">
+        <div className="px-6 py-4">
           <div className="flex items-start gap-3 mb-3">
             <div className="flex-shrink-0 w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
               <Cookie className="w-5 h-5 text-orange-600" />
             </div>
             <div className="flex-1">
               <h3 className="text-sm font-semibold text-gray-800 mb-1">
-                {currentContent.cookieTitle}
+                {selectedLang === 'ua' ? 'Ми використовуємо файли cookie' : 'Мы используем файлы cookie'}
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                {currentContent.cookieText}
+                {selectedLang === 'ua' 
+                  ? 'Для покращення вашого досвіду та персоналізації контенту'
+                  : 'Для улучшения вашего опыта и персонализации контента'
+                }
               </p>
             </div>
           </div>
@@ -147,7 +150,7 @@ const WelcomeModal = () => {
             href="/terms"
             className="text-xs text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
           >
-            {currentContent.privacyLink}
+            {selectedLang === 'ua' ? 'Політика конфіденційності' : 'Политика конфиденциальности'}
             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
