@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useLocation } from 'react-router-dom';
 import { checkoutAPI } from '../utils/api';
 import { Button } from '../components/ui/button';
-import { CheckCircle, Package, Loader2 } from 'lucide-react';
+import { CheckCircle, Package, Loader2, Clock, MapPin, CreditCard, Phone, Mail } from 'lucide-react';
+import axios from 'axios';
 
 const CheckoutSuccess = () => {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const sessionId = searchParams.get('session_id');
-  const [status, setStatus] = useState('checking');
+  const orderNumberFromState = location.state?.orderNumber;
+  const paymentMethodFromState = location.state?.paymentMethod;
+  
+  const [status, setStatus] = useState(sessionId ? 'checking' : 'success');
   const [attempts, setAttempts] = useState(0);
+  const [orderDetails, setOrderDetails] = useState(null);
 
   useEffect(() => {
     if (sessionId) {
