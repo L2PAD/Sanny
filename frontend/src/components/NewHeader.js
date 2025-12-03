@@ -90,7 +90,7 @@ const NewHeader = () => {
           {/* Logo & Catalog Button */}
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setIsOpen(true)}
+              onClick={openCatalog}
               className="flex items-center gap-2 px-4 py-2 bg-[#2563eb] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors font-medium"
             >
               <Menu className="w-5 h-5" />
