@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { Users, Package, ShoppingBag, DollarSign, Plus, BarChart3 } from 'lucide-react';
 import AnalyticsDashboard from '../components/admin/AnalyticsDashboard';
 import ProductManagement from '../components/admin/ProductManagement';
+import CategoryManagement from '../components/admin/CategoryManagement';
 
 const AdminPanel = () => {
   const { isAdmin } = useAuth();
