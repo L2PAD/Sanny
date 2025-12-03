@@ -11,6 +11,7 @@ const NewHeader = () => {
   const { isAuthenticated, user, logout, isSeller, isAdmin } = useAuth();
   const { cartItemsCount } = useCart();
   const { t, language } = useLanguage();
+  const { toggleCatalog } = useCatalog();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
