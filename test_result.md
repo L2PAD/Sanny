@@ -426,9 +426,11 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Advanced Analytics User Behavior Tab"
     - "RozetkaPay Payment Integration"
   stuck_tasks:
     - "RozetkaPay Payment Integration"
+    - "Advanced Analytics User Behavior Tab"
   test_all: false
   test_priority: "high_first"
 
