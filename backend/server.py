@@ -1337,6 +1337,65 @@ Respond in JSON format:
             error=str(e)
         )
 
+# ============= ADVANCED ANALYTICS ENDPOINTS =============
+
+@api_router.get("/admin/analytics/advanced/visits")
+async def get_site_visits_analytics(
+    days: int = 30,
+    current_user: User = Depends(get_current_admin)
+):
+    """Get site visit statistics"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_site_visits(days)
+
+@api_router.get("/admin/analytics/advanced/abandoned-carts")
+async def get_abandoned_carts_analytics(current_user: User = Depends(get_current_admin)):
+    """Get abandoned cart statistics"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_abandoned_carts()
+
+@api_router.get("/admin/analytics/advanced/wishlist")
+async def get_wishlist_analytics(current_user: User = Depends(get_current_admin)):
+    """Get wishlist analytics"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_wishlist_analytics()
+
+@api_router.get("/admin/analytics/advanced/conversion-funnel")
+async def get_conversion_funnel(current_user: User = Depends(get_current_admin)):
+    """Get conversion funnel data"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_conversion_funnel()
+
+@api_router.get("/admin/analytics/advanced/product-performance")
+async def get_product_performance(
+    days: int = 30,
+    current_user: User = Depends(get_current_admin)
+):
+    """Get product performance metrics"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_product_performance(days)
+
+@api_router.get("/admin/analytics/advanced/time-based")
+async def get_time_based_analytics(
+    months: int = 12,
+    current_user: User = Depends(get_current_admin)
+):
+    """Get time-based analytics"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_time_based_analytics(months)
+
+@api_router.get("/admin/analytics/advanced/customer-ltv")
+async def get_customer_ltv(current_user: User = Depends(get_current_admin)):
+    """Get customer lifetime value"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_customer_lifetime_value()
+
+@api_router.get("/admin/analytics/advanced/category-performance")
+async def get_category_performance(current_user: User = Depends(get_current_admin)):
+    """Get category performance"""
+    analytics = get_advanced_analytics_service(db)
+    return await analytics.get_category_performance()
+
 # ============= CONTACT & SUPPORT =============
 
 @api_router.post("/contact/callback")
