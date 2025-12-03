@@ -43,7 +43,10 @@ const AdvancedAnalytics = () => {
         performanceRes,
         timeRes,
         ltvRes,
-        categoryRes
+        categoryRes,
+        timeOnPagesRes,
+        productPageRes,
+        behaviorFlowRes
       ] = await Promise.all([
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/visits`, config),
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/abandoned-carts`, config),
@@ -52,7 +55,10 @@ const AdvancedAnalytics = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/product-performance`, config),
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/time-based`, config),
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/customer-ltv`, config),
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/category-performance`, config)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/category-performance`, config),
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/time-on-pages`, config),
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/product-page-analytics`, config),
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/advanced/user-behavior-flow`, config)
       ]);
 
       setVisits(visitsRes.data);
@@ -63,6 +69,9 @@ const AdvancedAnalytics = () => {
       setTimeBasedData(timeRes.data);
       setCustomerLTV(ltvRes.data);
       setCategoryPerformance(categoryRes.data);
+      setTimeOnPages(timeOnPagesRes.data);
+      setProductPageAnalytics(productPageRes.data);
+      setUserBehaviorFlow(behaviorFlowRes.data);
     } catch (error) {
       console.error('Failed to fetch analytics:', error);
     } finally {
