@@ -1432,6 +1432,13 @@ class AnalyticsEvent(BaseModel):
     quantity: Optional[int] = None
     query: Optional[str] = None
     results_count: Optional[int] = None
+    # Session tracking fields
+    session_duration: Optional[int] = None
+    pages_viewed: Optional[int] = None
+    pages_list: Optional[List[Dict[str, Any]]] = None
+    total_time: Optional[int] = None
+    pages_viewed_count: Optional[int] = None
+    current_page: Optional[str] = None
     metadata: Optional[Dict[str, Any]] = {}
 
 @api_router.post("/analytics/event")
