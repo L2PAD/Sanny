@@ -292,9 +292,11 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
             <p>© 2025 Y-store. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link to="/" className="hover:text-white">Политика конфиденциальности</Link>
-              <Link to="/" className="hover:text-white">Условия использования</Link>
-              <Link to="/" className="hover:text-white">Контакты</Link>
+              <Link to="/contact" className="hover:text-white">{t('contactInfo')}</Link>
+              <Link to="/delivery-payment" className="hover:text-white">{t('deliveryPayment')}</Link>
+              <Link to="/exchange-return" className="hover:text-white">{t('exchangeReturn')}</Link>
+              <Link to="/about" className="hover:text-white">{t('aboutUs')}</Link>
+              <Link to="/terms" className="hover:text-white">{t('agreement')}</Link>
             </div>
           </div>
         </div>
