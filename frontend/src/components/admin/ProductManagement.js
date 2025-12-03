@@ -142,18 +142,7 @@ const ProductManagement = () => {
     }
   };
 
-  const handleImageChange = (index, value) => {
-    const newImages = [...formData.images];
-    newImages[index] = value;
-    setFormData({ ...formData, images: newImages });
-  };
-
-  const addImageField = () => {
-    setFormData({ ...formData, images: [...formData.images, ''] });
-  };
-
-  const removeImageField = (index) => {
-    const newImages = formData.images.filter((_, i) => i !== index);
+  const handleImagesChange = (newImages) => {
     setFormData({ ...formData, images: newImages });
   };
 
