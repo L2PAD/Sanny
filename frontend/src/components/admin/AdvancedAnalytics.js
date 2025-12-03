@@ -99,12 +99,12 @@ const AdvancedAnalytics = () => {
 
       {/* Tabs */}
       <div className="border-b border-gray-200">
-        <div className="flex gap-4">
-          {['overview', 'products', 'customers', 'time'].map(tab => (
+        <div className="flex gap-4 overflow-x-auto">
+          {['overview', 'products', 'customers', 'time', 'user-behavior'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-4 px-4 font-semibold transition-colors ${
+              className={`pb-4 px-4 font-semibold transition-colors whitespace-nowrap ${
                 activeTab === tab
                   ? 'border-b-2 border-blue-600 text-blue-600'
                   : 'text-gray-600 hover:text-gray-900'
@@ -114,6 +114,7 @@ const AdvancedAnalytics = () => {
               {tab === 'products' && '📦 Товары'}
               {tab === 'customers' && '👥 Покупатели'}
               {tab === 'time' && '📅 По времени'}
+              {tab === 'user-behavior' && '⏱️ Поведение'}
             </button>
           ))}
         </div>
