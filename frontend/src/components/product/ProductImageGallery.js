@@ -5,7 +5,6 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   
-  // Combine images and videos
   const media = [
     ...images.map(img => ({ type: 'image', url: img })),
     ...videos.map(vid => ({ type: 'video', url: vid }))
@@ -19,7 +18,6 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
 
   return (
     <div className="flex gap-3 sticky top-4">
-      {/* Vertical Thumbnails (Left Side) */}
       {media.length > 1 && (
         <div className="flex flex-col gap-2" style={{ width: '90px' }}>
           {media.map((item, index) => (
@@ -38,7 +36,7 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
               {item.type === 'image' ? (
                 <img
                   src={item.url}
-                  alt={`Миниатюра ${index + 1}`}
+                  alt={`Photo ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -57,11 +55,9 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
         </div>
       )}
 
-      {/* Main Image Display */}
       <div className="flex-1">
         <div className="bg-white rounded-xl border border-gray-200 relative group overflow-hidden">
           <div className="relative" style={{ paddingBottom: '100%' }}>
-            {/* Discount Badge */}
             {discount > 0 && (
               <div className="absolute top-4 left-4 z-10">
                 <div className="bg-red-500 text-white px-3 py-2 rounded-md text-sm font-bold shadow-lg">
@@ -70,14 +66,12 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
               </div>
             )}
 
-            {/* Zoom Icon */}
             <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
               <div className="bg-white/90 p-2 rounded-full shadow-lg cursor-pointer hover:bg-white">
                 <ZoomIn className="w-5 h-5 text-gray-700" />
               </div>
             </div>
 
-            {/* Media Content */}
             <div className="absolute inset-0 p-8 flex items-center justify-center">
               {currentMedia.type === 'image' ? (
                 <img
@@ -109,13 +103,12 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
           </div>
         </div>
 
-        {/* Quick Info Badges (Like on anser.in.ua) */}
         <div className="flex gap-2 mt-3">
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 flex items-center gap-2">
-            <span className="text-yellow-600 text-sm font-medium">⚡ Швидка доставка</span>
+            <span className="text-yellow-600 text-sm font-medium">Fast Delivery</span>
           </div>
           <div className="bg-green-50 border border-green-200 rounded-lg px-3 py-2 flex items-center gap-2">
-            <span className="text-green-600 text-sm font-medium">✓ Товар у наявності</span>
+            <span className="text-green-600 text-sm font-medium">In Stock</span>
           </div>
         </div>
       </div>
