@@ -241,7 +241,7 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container-main py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-            <p>© 2025 Bazaar. All rights reserved.</p>
+            <p>© 2025 Y-store. All rights reserved.</p>
             <div className="flex gap-6">
               <Link to="/" className="hover:text-white">Политика конфиденциальности</Link>
               <Link to="/" className="hover:text-white">Условия использования</Link>
