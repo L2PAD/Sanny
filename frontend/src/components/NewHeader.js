@@ -15,7 +15,7 @@ const NewHeader = () => {
   const { cart } = useCart();
   const { favorites } = useFavorites();
   const { comparison } = useComparison();
-  const { setIsOpen } = useCatalog();
+  const { openCatalog } = useCatalog();
   const { language, setLanguage, t } = useLanguage();
   const { hasUnreadNotifications } = useNotifications();
   const [searchQuery, setSearchQuery] = useState('');
