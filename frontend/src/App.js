@@ -66,6 +66,8 @@ function App() {
                     <AnalyticsWrapper>
                       <div data-testid="app" className="App">
                         <Toaster position="top-right" />
+                        <LanguageSelectionModal />
+                        <CookieConsentModal />
                         <CatalogDropdown />
                         <NewHeader />
                         <Routes>
