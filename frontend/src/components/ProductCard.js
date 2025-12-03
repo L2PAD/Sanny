@@ -35,10 +35,10 @@ const ProductCard = ({ product }) => {
     
     if (isFavorite(product.id)) {
       removeFromFavorites(product.id);
-      toast.success('Удалено из избранного');
+      toast.success(t('removedFromFavorites'));
     } else {
       addToFavorites(product);
-      toast.success('Добавлено в избранное');
+      toast.success(t('addedToFavorites'));
     }
   };
 
