@@ -353,6 +353,22 @@ export const translations = {
     enterAddressUa: 'Введите адрес',
   },
   ua: {
+    // Cart
+    myCart: 'Мій кошик',
+    shoppingCart: 'Кошик покупок',
+    clearCart: 'Очистити кошик',
+    quantity: 'Кількість',
+    orderSummary: 'Підсумок замовлення',
+    subtotal: 'Проміжний підсумок',
+    items: 'товарів',
+    shipping: 'Доставка',
+    free: 'Безкоштовно',
+    total: 'Разом',
+    proceedToCheckout: 'Перейти до оформлення',
+    continueShopping: 'Продовжити покупки',
+    // Empty Cart
+    yourCartIsEmpty: 'Ваш кошик порожній',
+    addSomeProducts: 'Додайте товари щоб почати!',
     // Header
     searchPlaceholder: 'Пошук товарів...',
     search: 'Пошук товарів...',
