@@ -84,46 +84,6 @@ const NewHeader = () => {
         </div>
       </div>
 
-      {/* Navigation Bar - Black Strip */}
-      <div className="bg-[#1a1a1a] border-b border-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center py-3">
-            <nav className="flex items-center gap-8 text-sm">
-              <Link 
-                to="/contact" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t('contactInfo')}
-              </Link>
-              <Link 
-                to="/delivery-payment" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t('deliveryPayment')}
-              </Link>
-              <Link 
-                to="/exchange-return" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t('exchangeReturn')}
-              </Link>
-              <Link 
-                to="/about" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t('aboutUs')}
-              </Link>
-              <Link 
-                to="/terms" 
-                className="text-gray-300 hover:text-white transition-colors"
-              >
-                {t('agreement')}
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
-
       {/* Main Header */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4 gap-4">
