@@ -364,13 +364,35 @@ const EnhancedProductDetail = () => {
             )}
 
             {activeTab === 'specifications' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-6">
+                {/* Custom specifications from admin */}
+                {product.specifications && product.specifications.length > 0 && (
+                  <div>
+                    <h3 className="font-bold text-xl mb-4">Детальні характеристики</h3>
+                    <div className="space-y-4">
+                      {product.specifications.map((spec, index) => (
+                        <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                          <p className="text-gray-800 mb-2">{spec.text}</p>
+                          {spec.image && (
+                            <img 
+                              src={spec.image} 
+                              alt={spec.text}
+                              className="mt-2 w-full max-w-md h-48 object-cover rounded-lg"
+                            />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Basic product info */}
                 <div className="border border-gray-200 rounded-lg p-4">
-                  <h3 className="font-bold text-lg mb-4">Основні характеристики</h3>
+                  <h3 className="font-bold text-lg mb-4">Основна інформація</h3>
                   <dl className="space-y-2">
                     <div className="flex justify-between py-2 border-b border-gray-100">
                       <dt className="text-gray-600">Категорія</dt>
-                      <dd className="font-semibold">{product.category_id}</dd>
+                      <dd className="font-semibold">{product.category_name || product.category_id}</dd>
                     </div>
                     <div className="flex justify-between py-2 border-b border-gray-100">
                       <dt className="text-gray-600">Артикул</dt>
@@ -388,6 +410,32 @@ const EnhancedProductDetail = () => {
                     </div>
                   </dl>
                 </div>
+
+                {/* Videos section if available */}
+                {product.videos && product.videos.length > 0 && (
+                  <div>
+                    <h3 className="font-bold text-lg mb-4">Відео огляди</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {product.videos.map((videoUrl, index) => (
+                        <div key={index} className="aspect-video">
+                          <a 
+                            href={videoUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="block w-full h-full bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
+                          >
+                            <div className="text-center">
+                              <svg className="w-16 h-16 mx-auto text-gray-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+                              </svg>
+                              <p className="text-sm text-gray-600">Переглянути відео {index + 1}</p>
+                            </div>
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
