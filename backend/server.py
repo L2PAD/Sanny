@@ -519,9 +519,16 @@ async def create_product(
     product_data: ProductCreate,
     current_user: User = Depends(get_current_seller)
 ):
+    # Auto-generate slug from title if not provided
+    product_dict = product_data.model_dump()
+    if not product_dict.get("slug"):
+        import re
+        slug_base = re.sub(r'[^a-z0-9]+', '-', product_dict["title"].lower()).strip('-')
+        product_dict["slug"] = f"{slug_base}-{str(uuid.uuid4())[:8]}"
+    
     product = Product(
         seller_id=current_user.id,
-        **product_data.model_dump()
+        **product_dict
     )
     
     prod_doc = product.model_dump()
