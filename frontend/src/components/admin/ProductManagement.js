@@ -282,13 +282,13 @@ const ProductManagement = () => {
               />
             </div>
 
-            {/* Specifications with Images */}
+            {/* Structured Specifications - Rozetka Style */}
             <div>
-              <Label>Product Specifications (with Images)</Label>
+              <Label>Характеристики товара (структурированные)</Label>
               <p className="text-sm text-gray-500 mb-2">
-                Add specifications with text descriptions and optional images
+                Добавьте характеристики в формате групп с полями ключ-значение (как на Rozetka)
               </p>
-              <SpecificationsEditor
+              <StructuredSpecificationsEditor
                 specifications={formData.specifications}
                 onChange={(specs) => setFormData({ ...formData, specifications: specs })}
               />
