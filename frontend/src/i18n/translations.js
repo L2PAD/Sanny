@@ -209,8 +209,8 @@ export const translations = {
     myCart: 'Моя корзина',
     login: 'Вход',
     searchProducts: 'поиск товаров',
-    workingHours: 'Пн–Пт: 09:00 – 18:00',
-    weekends: 'Сб–Нд: Выходные',
+    workingHours: 'Будни: 09:00 – 19:00',
+    weekends: 'Сб-Нд: 10:00 – 18:00',
     
     // Cart
     shoppingCart: 'Корзина покупок',
