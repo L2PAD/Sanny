@@ -360,9 +360,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Buy Together Feature Testing Completed Successfully"
+    - "Admin Panel Product Management"
+    - "Admin Panel Category Management"
   stuck_tasks:
     - "RozetkaPay Payment Integration"
+    - "Admin Panel Product Management"
+    - "Admin Panel Category Management"
   test_all: false
   test_priority: "high_first"
 
