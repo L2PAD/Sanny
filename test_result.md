@@ -366,12 +366,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Admin Panel Product Management"
-    - "Admin Panel Category Management"
+    - "RozetkaPay Payment Integration"
   stuck_tasks:
     - "RozetkaPay Payment Integration"
-    - "Admin Panel Product Management"
-    - "Admin Panel Category Management"
   test_all: false
   test_priority: "high_first"
 
