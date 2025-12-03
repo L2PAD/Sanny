@@ -79,7 +79,7 @@ const CatalogDropdown = () => {
         <div className="container mx-auto">
           <div className="flex">
             {/* Left Column - Main Categories */}
-            <div className="w-80 bg-gray-50 border-r border-gray-200 overflow-y-auto max-h-[80vh]">
+            <div className="w-80 bg-gray-50 border-r border-gray-200 overflow-y-auto max-h-[600px]">
               {loading ? (
                 <div className="flex justify-center items-center py-20">
                   <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
