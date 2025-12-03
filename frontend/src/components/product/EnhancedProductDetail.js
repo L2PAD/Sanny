@@ -154,9 +154,9 @@ const EnhancedProductDetail = () => {
         </nav>
 
         {/* Main Product Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-          {/* Left: Gallery */}
-          <div className="lg:col-span-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {/* Left: Gallery - Takes more space */}
+          <div>
             <ProductImageGallery 
               images={images}
               videos={videos}
@@ -166,7 +166,7 @@ const EnhancedProductDetail = () => {
           </div>
 
           {/* Right: Product Info */}
-          <div className="lg:col-span-7">
+          <div>
             <div className="bg-white rounded-2xl p-8 border border-gray-200">
               {/* Title & Code */}
               <div className="mb-6">
