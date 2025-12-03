@@ -164,15 +164,18 @@ const Footer = () => {
             <div className="space-y-2 text-gray-300">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{t('mondayFriday')}: 9:00 - 21:00</span>
+                <span>{t('mondayFriday')}: 9:00 - 19:00</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{t('saturday')}: 10:00 - 20:00</span>
+                <span>{t('saturday')}: 10:00 - 18:00</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 <span>{t('sunday')}: 10:00 - 18:00</span>
+              </div>
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-700">
+                <span className="text-green-400 font-semibold">🌐 {t('language') === 'ru' ? 'Заказы: online 24/7' : 'Замовлення: online 24/7'}</span>
               </div>
             </div>
             <a
