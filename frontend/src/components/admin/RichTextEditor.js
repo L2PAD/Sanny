@@ -177,12 +177,31 @@ const RichTextEditor = ({
 
         <button
           type="button"
-          onClick={insertImage}
+          onClick={insertImageFromUrl}
           className="p-2 border border-gray-300 rounded hover:bg-gray-100"
-          title="Insert Image"
+          title="Insert Image from URL"
         >
           <Image className="w-4 h-4" />
         </button>
+
+        <button
+          type="button"
+          onClick={() => document.getElementById('image-upload').click()}
+          className="p-2 border border-gray-300 rounded hover:bg-gray-100"
+          title="Upload Image from Computer"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+          </svg>
+        </button>
+
+        <input
+          id="image-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          style={{ display: 'none' }}
+        />
 
         <button
           type="button"
