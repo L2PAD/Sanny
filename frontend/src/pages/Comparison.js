@@ -251,12 +251,6 @@ const Comparison = () => {
                     {product.stock_level > 0 ? `${product.stock_level} ${t('pieces')}` : t('notAvailable')}
                   </span>
                 </div>
-                {product.installment_available && (
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">{t('installment')}:</span>
-                    <span className="text-green-600">✓ {product.installment_months} {t('months')}</span>
-                  </div>
-                )}
               </div>
 
               {/* Actions */}
