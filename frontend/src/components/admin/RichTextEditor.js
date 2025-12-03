@@ -275,10 +275,10 @@ const RichTextEditor = ({
             <strong>Bold:</strong> <code className="bg-gray-200 px-1">&lt;strong&gt;Bold&lt;/strong&gt;</code>
           </div>
           <div>
-            <strong>Image:</strong> <code className="bg-gray-200 px-1">&lt;img src="url" alt="description" /&gt;</code>
+            <strong>Image:</strong> <code className="bg-gray-200 px-1">&lt;img src=&quot;url&quot; alt=&quot;description&quot; /&gt;</code>
           </div>
           <div>
-            <strong>Link:</strong> <code className="bg-gray-200 px-1">&lt;a href="url"&gt;Link text&lt;/a&gt;</code>
+            <strong>Link:</strong> <code className="bg-gray-200 px-1">&lt;a href=&quot;url&quot;&gt;Link text&lt;/a&gt;</code>
           </div>
         </div>
       </details>
