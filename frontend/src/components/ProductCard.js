@@ -86,11 +86,6 @@ const ProductCard = ({ product }) => {
             -{discount}%
           </div>
         )}
-        {product.installment_available && (
-          <div className="absolute bottom-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-            Кредит 0%
-          </div>
-        )}
         {product.stock_level === 0 && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
             <span className="text-white font-semibold">Out of Stock</span>
