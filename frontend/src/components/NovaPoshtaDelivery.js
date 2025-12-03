@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Package, Search } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const NovaPoshtaDelivery = ({ onAddressChange, initialCity, initialWarehouse }) => {
+  const { t } = useLanguage();
   const [cityQuery, setCityQuery] = useState(initialCity || '');
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
