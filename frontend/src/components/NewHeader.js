@@ -191,6 +191,39 @@ const NewHeader = () => {
           </div>
         </div>
       </div>
+      
+      {/* Language Selection Modal */}
+      {showLanguageModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg shadow-xl max-w-sm w-full mx-4">
+            <div className="p-6">
+              <h3 className="text-lg font-semibold mb-4 text-center">Выберите язык / Оберіть мову</h3>
+              <div className="space-y-3">
+                <button
+                  onClick={() => selectLanguage('ua')}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                >
+                  <span className="text-2xl">🇺🇦</span>
+                  <span className="font-medium">Українська</span>
+                </button>
+                <button
+                  onClick={() => selectLanguage('ru')}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                >
+                  <span className="text-2xl">🇷🇺</span>
+                  <span className="font-medium">Русский</span>
+                </button>
+              </div>
+              <button
+                onClick={() => setShowLanguageModal(false)}
+                className="w-full mt-4 px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+              >
+                Отмена / Скасувати
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
