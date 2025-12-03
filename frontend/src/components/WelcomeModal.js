@@ -20,10 +20,8 @@ const WelcomeModal = () => {
   }, []); // Empty dependency array - run only once on mount
 
   const handleLanguageSelect = (lang) => {
-    console.log('🌐 Language selected:', lang);
     setSelectedLang(lang);
     changeLanguage(lang);
-    console.log('✅ State updated to:', lang);
   };
 
   const handleAccept = () => {
