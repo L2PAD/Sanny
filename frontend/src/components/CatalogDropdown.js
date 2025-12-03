@@ -203,7 +203,6 @@ const CatalogDropdown = () => {
                 </div>
               )}
             </div>
-          </div>
         </div>
       </div>
     </>
