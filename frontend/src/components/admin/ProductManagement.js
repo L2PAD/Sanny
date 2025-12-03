@@ -228,25 +228,12 @@ const ProductManagement = () => {
             </div>
 
             <div>
-              <Label>Product Images (URLs)</Label>
-              <p className="text-sm text-gray-500 mb-2">Add multiple images for product gallery</p>
-              {formData.images.map((image, index) => (
-                <div key={index} className="flex gap-2 mb-2">
-                  <Input
-                    value={image}
-                    onChange={(e) => handleImageChange(index, e.target.value)}
-                    placeholder="https://example.com/image.jpg"
-                  />
-                  {formData.images.length > 1 && (
-                    <Button type="button" variant="outline" onClick={() => removeImageField(index)}>
-                      <X className="w-4 h-4" />
-                    </Button>
-                  )}
-                </div>
-              ))}
-              <Button type="button" variant="outline" onClick={addImageField} className="mt-2">
-                <Plus className="w-4 h-4 mr-2" /> Add Image
-              </Button>
+              <Label>Product Images</Label>
+              <p className="text-sm text-gray-500 mb-2">Upload images or provide URLs</p>
+              <ImageUploader
+                images={formData.images}
+                onChange={handleImagesChange}
+              />
             </div>
 
             <div>
