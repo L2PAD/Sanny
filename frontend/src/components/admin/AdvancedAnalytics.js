@@ -527,6 +527,195 @@ const AdvancedAnalytics = () => {
               </div>
             </div>
           </div>
+
+
+      {/* User Behavior Tab */}
+      {activeTab === 'user-behavior' && (
+        <div className="space-y-6">
+          {/* Session Stats Card */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-2xl p-6">
+              <p className="text-sm opacity-90 mb-1">Всего сессий</p>
+              <p className="text-4xl font-bold">{visits.total_sessions || 0}</p>
+              <p className="text-xs opacity-75 mt-2">за 30 дней</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-2xl p-6">
+              <p className="text-sm opacity-90 mb-1">Среднее время</p>
+              <p className="text-4xl font-bold">
+                {visits.avg_session_duration ? 
+                  `${Math.floor(visits.avg_session_duration / 60)}м` : '0м'}
+              </p>
+              <p className="text-xs opacity-75 mt-2">
+                {visits.avg_session_duration ? `${Math.round(visits.avg_session_duration % 60)}с` : 'на сессию'}
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-2xl p-6">
+              <p className="text-sm opacity-90 mb-1">Страниц/Сессию</p>
+              <p className="text-4xl font-bold">{visits.pages_per_session?.toFixed(1) || '0.0'}</p>
+              <p className="text-xs opacity-75 mt-2">среднее количество</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-2xl p-6">
+              <p className="text-sm opacity-90 mb-1">Bounce Rate</p>
+              <p className="text-4xl font-bold">{visits.bounce_rate?.toFixed(1) || '0'}%</p>
+              <p className="text-xs opacity-75 mt-2">одна страница</p>
+            </div>
+          </div>
+
+          {/* Time on Pages */}
+          <div className="bg-white rounded-2xl border border-gray-200">
+            <div className="p-6 border-b border-gray-200">
+              <h3 className="text-xl font-bold">⏱️ Время на страницах</h3>
+              <p className="text-gray-600 text-sm mt-1">
+                Среднее время, которое пользователи проводят на разных страницах сайта
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Страница</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Визитов</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Среднее время</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Мин. время</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Макс. время</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {timeOnPages.length > 0 ? (
+                    timeOnPages.map((page, idx) => (
+                      <tr key={idx} className="hover:bg-gray-50">
+                        <td className="py-4 px-6 font-medium text-blue-600">
+                          {page.page}
+                        </td>
+                        <td className="py-4 px-6 text-right">
+                          {page.total_visits}
+                        </td>
+                        <td className="py-4 px-6 text-right font-bold text-green-600">
+                          {Math.floor(page.avg_time_seconds / 60)}м {Math.round(page.avg_time_seconds % 60)}с
+                        </td>
+                        <td className="py-4 px-6 text-right text-gray-600">
+                          {Math.floor(page.min_time_seconds / 60)}м {Math.round(page.min_time_seconds % 60)}с
+                        </td>
+                        <td className="py-4 px-6 text-right text-gray-600">
+                          {Math.floor(page.max_time_seconds / 60)}м {Math.round(page.max_time_seconds % 60)}с
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="py-8 text-center text-gray-500">
+                        Нет данных о времени на страницах
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Product Page Analytics */}
+          <div className="bg-white rounded-2xl border border-gray-200">
+            <div className="p-6 border-b border-gray-200">
+              <h3 className="text-xl font-bold">🛍️ Аналитика страниц товаров</h3>
+              <p className="text-gray-600 text-sm mt-1">
+                Время на странице товара и конверсия в добавление в корзину
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Товар</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Визитов</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Среднее время</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Добавлено в корзину</th>
+                    <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Конверсия</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {productPageAnalytics.length > 0 ? (
+                    productPageAnalytics.slice(0, 20).map((product, idx) => (
+                      <tr key={idx} className="hover:bg-gray-50">
+                        <td className="py-4 px-6">
+                          <div>
+                            <div className="font-medium">{product.product_name}</div>
+                            <div className="text-sm text-gray-500">{product.category}</div>
+                          </div>
+                        </td>
+                        <td className="py-4 px-6 text-right">
+                          {product.page_visits}
+                        </td>
+                        <td className="py-4 px-6 text-right font-medium text-blue-600">
+                          {Math.floor(product.avg_time_seconds / 60)}м {Math.round(product.avg_time_seconds % 60)}с
+                        </td>
+                        <td className="py-4 px-6 text-right font-medium text-green-600">
+                          {product.add_to_cart_count}
+                        </td>
+                        <td className="py-4 px-6 text-right">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            product.view_to_cart_rate > 30
+                              ? 'bg-green-100 text-green-700'
+                              : product.view_to_cart_rate > 15
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-red-100 text-red-700'
+                          }`}>
+                            {product.view_to_cart_rate.toFixed(1)}%
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="py-8 text-center text-gray-500">
+                        Нет данных об аналитике товаров
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* User Behavior Flow */}
+          <div className="bg-white rounded-2xl border border-gray-200">
+            <div className="p-6 border-b border-gray-200">
+              <h3 className="text-xl font-bold">🔀 Поток поведения пользователей</h3>
+              <p className="text-gray-600 text-sm mt-1">
+                Наиболее частые переходы между страницами
+              </p>
+            </div>
+            <div className="p-6">
+              <div className="space-y-3">
+                {userBehaviorFlow.top_transitions && userBehaviorFlow.top_transitions.length > 0 ? (
+                  userBehaviorFlow.top_transitions.map((transition, idx) => (
+                    <div key={idx} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                      <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        {idx + 1}
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-gray-900">{transition.flow}</div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full font-bold text-sm">
+                          {transition.count} переходов
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-500 py-8">
+                    Нет данных о переходах между страницами
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
         </div>
       )}
     </div>
