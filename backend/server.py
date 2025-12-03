@@ -89,13 +89,17 @@ class Product(BaseModel):
     title: str
     slug: str
     description: str
+    description_html: Optional[str] = None
     short_description: Optional[str] = None
     category_id: str
+    category_name: Optional[str] = None
     price: float
     compare_price: Optional[float] = None
     currency: str = "USD"
     stock_level: int = 0
     images: List[str] = []
+    videos: Optional[List[str]] = []
+    specifications: Optional[List[Dict[str, Any]]] = []
     status: str = "published"
     rating: float = 0.0
     reviews_count: int = 0
