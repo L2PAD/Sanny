@@ -65,7 +65,7 @@ const WelcomeModal = () => {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm animate-in fade-in duration-300">
       <div key={selectedLang} className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-in zoom-in duration-500">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-center">
+        <div key={`header-${contentKey}`} className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5 text-center">
           <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
             <Globe className="w-6 h-6" />
             {currentContent.welcome}
@@ -74,7 +74,7 @@ const WelcomeModal = () => {
 
         {/* Language Selection */}
         <div className="p-6 pb-4">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <h3 key={`lang-${contentKey}`} className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
             <Globe className="w-4 h-4 text-blue-600" />
             {currentContent.selectLanguage}
           </h3>
