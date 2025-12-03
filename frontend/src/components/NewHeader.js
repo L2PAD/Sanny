@@ -127,8 +127,8 @@ const NewHeader = () => {
       <div className="bg-black text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-3">
-            {/* Left Navigation */}
-            <div className="flex items-center gap-8">
+            {/* Left - Catalog */}
+            <div className="flex items-center">
               <button
                 onClick={openCatalog}
                 className="flex items-center gap-2 hover:text-gray-300 transition-colors"
@@ -136,7 +136,10 @@ const NewHeader = () => {
                 <Menu className="w-4 h-4" />
                 <span>{t('catalog')}</span>
               </button>
-              
+            </div>
+            
+            {/* Center Navigation */}
+            <div className="flex items-center gap-8">
               <Link to="/contact" className="hover:text-gray-300 transition-colors">
                 {t('contactInfo')}
               </Link>
@@ -163,13 +166,33 @@ const NewHeader = () => {
             </div>
 
             {/* Right Side - Language and Login */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={toggleLanguageDropdown}
-                className="flex items-center gap-1 hover:text-gray-300 transition-colors"
-              >
-                🌐 {language === 'ru' ? 'RU' : 'UA'}
-              </button>
+            <div className="flex items-center gap-4 relative">
+              <div className="relative">
+                <button
+                  onClick={toggleLanguageDropdown}
+                  className="flex items-center gap-1 hover:text-gray-300 transition-colors"
+                >
+                  🌐 {language === 'ru' ? 'RU' : 'UA'}
+                </button>
+                
+                {/* Language Dropdown */}
+                {showLanguageDropdown && (
+                  <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg py-2 min-w-[140px] z-50">
+                    <button
+                      onClick={() => selectLanguage('ru')}
+                      className="w-full px-4 py-2 text-black hover:bg-gray-100 flex items-center gap-2"
+                    >
+                      🇷🇺 Русский
+                    </button>
+                    <button
+                      onClick={() => selectLanguage('ua')}
+                      className="w-full px-4 py-2 text-black hover:bg-gray-100 flex items-center gap-2"
+                    >
+                      🇺🇦 Українська
+                    </button>
+                  </div>
+                )}
+              </div>
 
               {user ? (
                 <div className="flex items-center gap-4">
