@@ -9,6 +9,7 @@ import { Card } from '../components/ui/card';
 import { toast } from 'sonner';
 import { Users, Package, ShoppingBag, DollarSign, Plus, BarChart3 } from 'lucide-react';
 import AnalyticsDashboard from '../components/admin/AnalyticsDashboard';
+import ProductManagement from '../components/admin/ProductManagement';
 
 const AdminPanel = () => {
   const { isAdmin } = useAuth();
