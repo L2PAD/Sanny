@@ -241,7 +241,7 @@ const NovaPoshtaDelivery = ({ onAddressChange, initialCity, initialWarehouse }) 
                 <Package className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="font-medium text-green-800">
-                    Відділення №{selectedWarehouse.number}
+                    {t('warehouseNo')}{selectedWarehouse.number}
                   </div>
                   <div className="text-sm text-green-700 mt-1">
                     {selectedWarehouse.short_address}
