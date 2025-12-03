@@ -120,7 +120,7 @@ const Checkout = () => {
     {
       id: 'card-rozetka',
       name: t('payWithBazaarCard'),
-      description: 'При оплаті онлайн Карткою Y-store застосується знижка',
+      description: t('payWithBazaarCardDesc'),
       badge: 'Discount',
       disabled: true
     }
