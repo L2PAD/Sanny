@@ -131,9 +131,12 @@ const AdvancedAnalytics = () => {
                 <TrendingUp className="w-5 h-5" />
               </div>
               <p className="text-sm opacity-90 mb-1">Посещений (30 дней)</p>
-              <p className="text-4xl font-bold">{visits.total_visits}</p>
+              <p className="text-4xl font-bold">{visits.total_page_views || visits.total_visits || 0}</p>
               <p className="text-sm opacity-75 mt-2">
-                Уникальных: {visits.unique_visitors}
+                Уникальных: {visits.unique_visitors || 0}
+              </p>
+              <p className="text-xs opacity-70 mt-1">
+                Среднее время: {visits.avg_session_duration ? `${Math.floor(visits.avg_session_duration / 60)}м ${Math.round(visits.avg_session_duration % 60)}с` : 'N/A'}
               </p>
             </div>
 
