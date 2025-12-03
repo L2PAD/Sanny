@@ -44,7 +44,7 @@ function App() {
               <FavoritesProvider>
                 <CatalogProvider>
                   <CartProvider>
-                  <div data-testid="app" className="App">
+                    <div data-testid="app" className="App">
                     <Toaster position="top-right" />
                     <NewHeader />
                     <Routes>
