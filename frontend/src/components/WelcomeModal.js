@@ -20,8 +20,10 @@ const WelcomeModal = () => {
   }, [changeLanguage]);
 
   const handleLanguageSelect = (lang) => {
+    console.log('🌐 Language selected:', lang);
     setSelectedLang(lang);
     changeLanguage(lang);
+    console.log('✅ State updated to:', lang);
   };
 
   const handleAccept = () => {
