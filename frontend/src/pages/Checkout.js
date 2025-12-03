@@ -29,6 +29,7 @@ const Checkout = () => {
     email: user?.email || '',
     city: '',
     address: '',
+    postalCode: '',
     comment: ''
   });
 
