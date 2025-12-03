@@ -54,6 +54,23 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
   // Generate SKU from product ID
   const sku = product.id ? product.id.substring(0, 8).toUpperCase() : 'N/A';
 
+  // Check for new features
+  const hasVideos = product.videos && product.videos.length > 0;
+  const hasSpecs = product.specifications && product.specifications.length > 0;
+  const hasMultipleImages = images.length > 1;
+
+  const nextImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
     <div
       onClick={() => navigate(`/product/${product.id}`)}
@@ -65,19 +82,31 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Discount Badge */}
-        {discount > 0 && (
-          <div className="absolute top-2 left-2 z-10">
+        {/* Badges Container - Top Left */}
+        <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
+          {discount > 0 && (
             <div className="bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold shadow-lg">
               -{discount}%
             </div>
-          </div>
-        )}
+          )}
+          {hasVideos && (
+            <div className="bg-purple-500 text-white px-2 py-1 rounded-md text-xs font-medium shadow-lg flex items-center gap-1">
+              <Video className="w-3 h-3" />
+              Відео
+            </div>
+          )}
+          {hasSpecs && (
+            <div className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs font-medium shadow-lg flex items-center gap-1">
+              <FileText className="w-3 h-3" />
+              Specs
+            </div>
+          )}
+        </div>
 
         {/* Favorite Button */}
         <button
           onClick={handleToggleFavorite}
-          className={`absolute top-2 right-2 z-10 p-2 rounded-full backdrop-blur-sm transition-all ${
+          className={`absolute top-2 right-2 z-10 p-2 rounded-full backdrop-blur-sm transition-all shadow-lg ${
             isFavorite(product.id)
               ? 'bg-red-500 text-white'
               : 'bg-white/80 text-gray-600 hover:bg-white'
@@ -93,10 +122,28 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
           className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
         />
 
-        {/* Image Thumbnails on Hover */}
-        {images.length > 1 && isHovered && (
+        {/* Image Navigation Arrows */}
+        {hasMultipleImages && isHovered && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-lg z-10"
+            >
+              <ChevronLeft className="w-4 h-4 text-gray-800" />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-lg z-10"
+            >
+              <ChevronRight className="w-4 h-4 text-gray-800" />
+            </button>
+          </>
+        )}
+
+        {/* Image Dots Indicator */}
+        {images.length > 1 && (
           <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-10">
-            {images.slice(0, 4).map((_, index) => (
+            {images.slice(0, 5).map((_, index) => (
               <button
                 key={index}
                 onClick={(e) => {
@@ -104,10 +151,10 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
                   e.stopPropagation();
                   setCurrentImageIndex(index);
                 }}
-                className={`w-2 h-2 rounded-full transition-all ${
+                className={`w-1.5 h-1.5 rounded-full transition-all ${
                   currentImageIndex === index 
-                    ? 'bg-blue-500 w-4' 
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    ? 'bg-white w-3' 
+                    : 'bg-white/50 hover:bg-white/70'
                 }`}
               />
             ))}
