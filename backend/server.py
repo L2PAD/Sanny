@@ -891,6 +891,45 @@ async def create_order(
             {"$set": {"items": []}}
         )
         
+        # Send email notifications
+        try:
+            # Get customer info
+            customer = await db.users.find_one({"id": current_user.id}, {"_id": 0})
+            customer_name = customer.get("full_name", "Покупатель") if customer else "Покупатель"
+            customer_email = customer.get("email", "") if customer else ""
+            
+            # Enrich order data for emails
+            email_order_data = {
+                "order_number": order.order_number,
+                "buyer_id": order.buyer_id,
+                "customer_name": customer_name,
+                "customer_email": customer_email,
+                "items": [],
+                "total_amount": order.total_amount,
+                "status": order.status,
+                "payment_method": order.payment_method
+            }
+            
+            # Enrich items with product names
+            for item in order.items:
+                product = await db.products.find_one({"id": item.get("product_id")}, {"_id": 0})
+                email_order_data["items"].append({
+                    "product_name": product.get("title", "Unknown") if product else "Unknown",
+                    "quantity": item.get("quantity", 0),
+                    "price": item.get("price", 0)
+                })
+            
+            # Send confirmation to customer
+            if customer_email:
+                email_service.send_order_confirmation(customer_email, email_order_data)
+            
+            # Send notification to admin
+            email_service.send_admin_notification(email_order_data)
+            
+        except Exception as e:
+            logger.error(f"Failed to send email notifications: {str(e)}")
+            # Don't fail the order creation if email fails
+        
         return order
         
     except Exception as e:
