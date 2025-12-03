@@ -344,14 +344,18 @@ const EnhancedProductDetail = () => {
           {/* Tab Content */}
           <div className="p-8">
             {activeTab === 'description' && (
-              <div className="prose max-w-none">
+              <div className="prose prose-lg max-w-none">
                 {product.description_html ? (
                   <div 
-                    className="text-gray-700 leading-relaxed"
+                    className="text-gray-700 leading-relaxed product-description"
                     dangerouslySetInnerHTML={{ __html: product.description_html }}
+                    style={{
+                      fontSize: '16px',
+                      lineHeight: '1.8'
+                    }}
                   />
                 ) : (
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap text-base">
                     {product.description}
                   </p>
                 )}
