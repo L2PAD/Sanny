@@ -182,7 +182,7 @@ const PayoutsTab = () => {
                 value={formData.amount}
                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                 required
-                placeholder="Введите сумму"
+                placeholder={t('enterAmount')}
               />
               <p className="text-sm text-gray-500 mt-1">
                 Доступно: ${balance?.available_balance?.toFixed(2)}
