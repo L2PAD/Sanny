@@ -110,7 +110,7 @@ const ProductComments = ({ productId, isAuthenticated, onLoginRequired }) => {
       <div className="flex items-center gap-3 mb-6">
         <MessageCircle className="w-6 h-6 text-blue-600" />
         <h3 className="text-2xl font-bold text-gray-900">
-          {t('language') === 'ru' ? 'Комментарии' : 'Comments'} ({comments.length})
+          {t('comments')} ({comments.length})
         </h3>
       </div>
 
