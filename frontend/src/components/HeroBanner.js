@@ -108,26 +108,26 @@ const HeroBanner = () => {
     }
 
     return (
-      <div className="flex items-center gap-4 bg-black/30 backdrop-blur-md px-6 py-3 rounded-full">
-        <Clock className="w-5 h-5" />
-        <div className="flex gap-3">
+      <div className="flex items-center gap-2 md:gap-4 bg-black/30 backdrop-blur-md px-3 md:px-6 py-2 md:py-3 rounded-full text-xs md:text-base">
+        <Clock className="w-4 h-4 md:w-5 md:h-5" />
+        <div className="flex gap-1 md:gap-3">
           {timeLeft.days > 0 && (
             <div className="text-center">
-              <div className="text-2xl font-bold">{timeLeft.days}</div>
-              <div className="text-xs opacity-80">дней</div>
+              <div className="text-lg md:text-2xl font-bold">{timeLeft.days}</div>
+              <div className="text-[10px] md:text-xs opacity-80">днів</div>
             </div>
           )}
           <div className="text-center">
-            <div className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-xs opacity-80">часов</div>
+            <div className="text-lg md:text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</div>
+            <div className="text-[10px] md:text-xs opacity-80">годин</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-xs opacity-80">минут</div>
+            <div className="text-lg md:text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</div>
+            <div className="text-[10px] md:text-xs opacity-80">хвилин</div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-xs opacity-80">секунд</div>
+          <div className="text-center hidden sm:block">
+            <div className="text-lg md:text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</div>
+            <div className="text-[10px] md:text-xs opacity-80">секунд</div>
           </div>
         </div>
       </div>
