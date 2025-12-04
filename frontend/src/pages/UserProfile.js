@@ -436,19 +436,38 @@ const UserProfile = () => {
                   <p className="text-sm text-gray-500 mt-1">Укажите город доставки</p>
                 </div>
 
-                {/* Nova Poshta Department */}
-                <div>
-                  <Label htmlFor="np_department">Номер отделения Новой Почты</Label>
-                  <Input
-                    id="np_department"
-                    value={userProfile.np_department || ''}
-                    onChange={(e) => setUserProfile({ ...userProfile, np_department: e.target.value })}
-                    disabled={!isEditing}
-                    placeholder="Например: №15 или Отделение 15"
-                    className="mt-1"
-                  />
-                  <p className="text-sm text-gray-500 mt-1">Номер вашего отделения Новой Почты</p>
-                </div>
+                {/* Nova Poshta Department - Show only for Nova Poshta */}
+                {selectedDelivery === 'nova_poshta' && (
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <Label htmlFor="np_department" className="text-blue-900 font-semibold">
+                      Номер отделения Новой Почты *
+                    </Label>
+                    <Input
+                      id="np_department"
+                      value={userProfile.np_department || ''}
+                      onChange={(e) => setUserProfile({ ...userProfile, np_department: e.target.value })}
+                      disabled={!isEditing}
+                      placeholder="Например: №15 или Отделение 15"
+                      className="mt-2 bg-white"
+                    />
+                    <p className="text-sm text-blue-700 mt-2">
+                      📦 Укажите номер вашего отделения Новой Почты для самовывоза
+                    </p>
+                  </div>
+                )}
+
+                {/* Ukrposhta Info - Show only for Ukrposhta */}
+                {selectedDelivery === 'ukrposhta' && (
+                  <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <Label className="text-green-900 font-semibold mb-2 block">
+                      📮 Доставка Укрпоштой
+                    </Label>
+                    <p className="text-sm text-green-700">
+                      Доставка будет осуществлена на указанный ниже адрес. 
+                      Обязательно укажите полный адрес и почтовый индекс.
+                    </p>
+                  </div>
+                )}
 
                 {/* Street Address */}
                 <div>
