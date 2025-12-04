@@ -82,51 +82,56 @@ const AdminPanel = () => {
   if (!isAdmin) return null;
 
   return (
-    <div data-testid="admin-panel" className="min-h-screen bg-gray-50 py-8">
-      <div className="container-main">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">Админ Панель</h1>
-          <Button onClick={() => setShowAddCategory(!showAddCategory)}>
+    <div data-testid="admin-panel" className="min-h-screen bg-gray-50 py-4 md:py-8">
+      <div className="container-main px-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">Админ Панель</h1>
+          <Button onClick={() => setShowAddCategory(!showAddCategory)} className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
-            Добавить категорию
+            <span className="hidden md:inline">Добавить категорию</span>
+            <span className="md:hidden">Категорія</span>
           </Button>
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-4 mb-8 border-b">
-          <button
-            onClick={() => setActiveTab('analytics')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
-              activeTab === 'analytics'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <BarChart3 className="w-5 h-5 inline mr-2" />
-            Аналитика
-          </button>
-          <button
-            onClick={() => setActiveTab('users')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
-              activeTab === 'users'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <Users className="w-5 h-5 inline mr-2" />
-            Пользователи
-          </button>
-          <button
-            onClick={() => setActiveTab('categories')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
-              activeTab === 'categories'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <Package className="w-5 h-5 inline mr-2" />
-            Категории
-          </button>
+        {/* Tabs - Horizontal scroll on mobile */}
+        <div className="border-b mb-6 md:mb-8 overflow-x-auto -mx-4 px-4">
+          <div className="flex gap-2 md:gap-4 min-w-max">
+            <button
+              onClick={() => setActiveTab('analytics')}
+              className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+                activeTab === 'analytics'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <BarChart3 className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+              <span className="hidden sm:inline">Аналитика</span>
+              <span className="sm:hidden">📊</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('users')}
+              className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+                activeTab === 'users'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Users className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+              <span className="hidden sm:inline">Пользователи</span>
+              <span className="sm:hidden">👥</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('categories')}
+              className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+                activeTab === 'categories'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Package className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+              <span className="hidden sm:inline">Категории</span>
+              <span className="sm:hidden">📦</span>
+            </button>
           <button
             onClick={() => setActiveTab('products')}
             className={`pb-4 px-4 font-semibold transition-colors ${
