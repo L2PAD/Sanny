@@ -74,10 +74,10 @@ export const CartProvider = ({ children }) => {
     try {
       await cartAPI.clear();
       setCart({ items: [] });
-      toast.success('Cart cleared');
+      toast.success(t('cartCleared'));
       return { success: true };
     } catch (error) {
-      toast.error('Failed to clear cart');
+      toast.error(t('failedToClearCart'));
       return { success: false };
     }
   };
