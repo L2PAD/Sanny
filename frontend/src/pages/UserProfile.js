@@ -322,7 +322,10 @@ const UserProfile = () => {
                             phone: user.phone || '',
                             address: user.address || '',
                             city: user.city || '',
-                            postal_code: user.postal_code || ''
+                            postal_code: user.postal_code || '',
+                            region: user.region || '',
+                            np_department: user.np_department || '',
+                            delivery_notes: user.delivery_notes || ''
                           });
                         }}
                       >
