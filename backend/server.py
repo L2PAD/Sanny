@@ -2060,6 +2060,78 @@ async def get_payment_info(
         logger.error(f"Error getting payment info: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# ============= HERO SLIDES MANAGEMENT =============
+
+@api_router.get("/slides", response_model=List[HeroSlide])
+async def get_active_slides():
+    """
+    Get all active hero slides for homepage (public endpoint)
+    """
+    slides = await db.hero_slides.find({"active": True}).sort("order", 1).to_list(100)
+    return slides
+
+@api_router.get("/admin/slides", response_model=List[HeroSlide])
+async def get_all_slides(current_user: User = Depends(require_admin)):
+    """
+    Get all hero slides (admin only)
+    """
+    slides = await db.hero_slides.find({}).sort("order", 1).to_list(100)
+    return slides
+
+@api_router.post("/admin/slides", response_model=HeroSlide)
+async def create_slide(
+    slide: HeroSlideCreate,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Create a new hero slide (admin only)
+    """
+    slide_dict = slide.model_dump()
+    slide_dict["id"] = str(uuid.uuid4())
+    slide_dict["created_at"] = datetime.now(timezone.utc)
+    slide_dict["updated_at"] = datetime.now(timezone.utc)
+    
+    await db.hero_slides.insert_one(slide_dict)
+    return HeroSlide(**slide_dict)
+
+@api_router.put("/admin/slides/{slide_id}", response_model=HeroSlide)
+async def update_slide(
+    slide_id: str,
+    slide_update: HeroSlideUpdate,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Update a hero slide (admin only)
+    """
+    existing_slide = await db.hero_slides.find_one({"id": slide_id})
+    if not existing_slide:
+        raise HTTPException(status_code=404, detail="Slide not found")
+    
+    update_data = slide_update.model_dump(exclude_unset=True)
+    update_data["updated_at"] = datetime.now(timezone.utc)
+    
+    await db.hero_slides.update_one(
+        {"id": slide_id},
+        {"$set": update_data}
+    )
+    
+    updated_slide = await db.hero_slides.find_one({"id": slide_id})
+    return HeroSlide(**updated_slide)
+
+@api_router.delete("/admin/slides/{slide_id}")
+async def delete_slide(
+    slide_id: str,
+    current_user: User = Depends(require_admin)
+):
+    """
+    Delete a hero slide (admin only)
+    """
+    result = await db.hero_slides.delete_one({"id": slide_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Slide not found")
+    
+    return {"message": "Slide deleted successfully"}
+
 # ============= INITIALIZE APP =============
 
 app.include_router(api_router)
