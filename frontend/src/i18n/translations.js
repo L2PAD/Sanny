@@ -483,6 +483,11 @@ export const translations = {
     continueAsGuest: 'Продовжити як гість',
     dataAutoFilled: 'Дані автоматично заповнені',
     savedDeliveryData: 'Використовуються ваші збережені дані доставки',
+    savedAddress: 'Збережена адреса',
+    useSavedAddress: 'Використайте збережені дані для швидкого оформлення',
+    useThisAddress: 'Використати цю адресу',
+    editAddress: 'Редагувати адресу',
+    canEnterNewAddress: 'Ви також можете ввести нову адресу нижче, якщо потрібно',
     adminPanel: 'Панель адміністратора',
     logout: 'Вийти',
     
