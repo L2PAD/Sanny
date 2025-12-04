@@ -511,6 +511,18 @@ test_plan:
         agent: "testing"
         comment: "✅ ✅ ✅ LOGIN TOAST MESSAGES TRANSLATION VERIFIED SUCCESSFULLY: Comprehensive testing of the login functionality confirms ALL toast messages are now displaying in Ukrainian/Russian as required. TEST RESULTS: 1) ✅ Welcome modal handling: Successfully closed Ukrainian welcome modal ('Прийняти та продовжити' button clicked) 2) ✅ Login form: Successfully filled with admin@bazaar.com/admin123 credentials 3) ✅ ✅ ✅ UKRAINIAN SUCCESS TOAST CONFIRMED: Toast message 'Вхід виконано успішно!' (Login successful!) detected and displayed in Ukrainian (Cyrillic characters) 4) ✅ Login API: POST /api/auth/login returned 200 OK 5) ✅ Authentication: JWT token stored in localStorage with admin role 6) ✅ Redirect: Successfully redirected to /admin page 7) ✅ Admin panel: Loaded correctly with all tabs visible. LANGUAGE VERIFICATION: Toast message is in Ukrainian (Cyrillic), NOT English. The translation fix from 'Login success' to 'Вхід виконано успішно!' is working correctly. Error messages also translated: 'Invalid credentials' → 'Невірний email або пароль'. All test scenarios from the review request completed successfully. Screenshots captured showing toast message in top-right corner of page."
 
+  - task: "Login Page Ukrainian Translation - Bottom Text and Toast Messages"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Login.js, /app/frontend/src/i18n/translations.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "🎉 UKRAINIAN LOGIN PAGE TRANSLATION FULLY VERIFIED: Comprehensive testing at https://goapp-7.preview.emergentagent.com/login confirms ALL Ukrainian translations are working perfectly. TESTING FLOW: 1) ✅ Welcome modal detected and Ukrainian language (UA flag) selected successfully 2) ✅ Welcome modal closed with 'Прийняти та продовжити' button 3) ✅ ✅ ✅ BOTTOM TEXT VERIFIED IN UKRAINIAN: Found 'Немає облікового запису?' (Don't have account?) and 'Зареєструватися' (Sign up) text in Ukrainian - NO English text present 4) ✅ Login form filled with admin@bazaar.com/admin123 credentials 5) ✅ ✅ ✅ SUCCESS TOAST MESSAGE IN UKRAINIAN: Toast message 'Вхід виконано успішно!' (Login successful!) detected and displayed correctly in Ukrainian 6) ✅ NO English toast 'Login success' found 7) ✅ Redirect to /admin working correctly 8) ✅ Admin panel loaded successfully. TRANSLATION VERIFICATION: ✅ translations.js contains correct Ukrainian translations: dontHaveAccount: 'Немає облікового запису?', signUp: 'Зареєструватися', loginSuccess: 'Вхід виконано успішно!' ✅ Login.js correctly uses t('dontHaveAccount'), t('signUp'), and t('loginSuccess') for dynamic translation ✅ Toast message uses t('loginSuccess') instead of hardcoded English text. SCREENSHOTS CAPTURED: login_ukrainian_text.png (showing bottom text in Ukrainian), login_ukrainian_toast.png (showing success toast in Ukrainian). ALL CRITICAL CHECK POINTS PASSED: ✅ Bottom text under login button is in Ukrainian ✅ Success toast message is in Ukrainian: 'Вхід виконано успішно!' ✅ NO English text appears anywhere. The fixes for missing Ukrainian translations (dontHaveAccount, signUp) and hardcoded success message are working perfectly in production."
+
   - task: "Saved Address Feature on Checkout Page"
     implemented: true
     working: "NA"
