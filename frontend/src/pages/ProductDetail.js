@@ -181,7 +181,7 @@ const ProductDetail = () => {
           {/* Product Info Section */}
           <div className="space-y-6">
             <div>
-              <h1 data-testid="product-title" className="text-4xl font-bold text-[#121212] mb-4">
+              <h1 data-testid="product-title" className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#121212] mb-4">
                 {product.title}
               </h1>
               
