@@ -540,9 +540,9 @@ const CRMDashboard = () => {
 
       {/* Customer Modal */}
       {showCustomerModal && selectedCustomer && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-0 md:p-4">
+          <Card className="w-full h-full md:h-auto md:max-w-4xl md:w-full md:max-h-[90vh] overflow-y-auto md:rounded-2xl">
+            <div className="p-4 md:p-6">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold">{selectedCustomer.full_name || selectedCustomer.email}</h3>
