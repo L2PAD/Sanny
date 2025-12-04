@@ -20,7 +20,10 @@ const UserProfile = () => {
     phone: '',
     address: '',
     city: '',
-    postal_code: ''
+    postal_code: '',
+    region: '',
+    np_department: '',
+    delivery_notes: ''
   });
   const [isEditing, setIsEditing] = useState(false);
   const [loadingOrders, setLoadingOrders] = useState(false);
