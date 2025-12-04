@@ -19,26 +19,40 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
 
-    const result = await login(email, password);
-    
-    if (result.success) {
-      toast.success(t('loginSuccess'));
+    try {
+      const result = await login(email, password);
       
-      // Redirect based on user role
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user.role === 'admin') {
-        navigate('/admin');
-      } else if (user.role === 'seller') {
-        navigate('/seller/dashboard');
+      if (result.success) {
+        toast.success('Вхід виконано успішно!');
+        
+        // Redirect based on user role
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user.role === 'admin') {
+          navigate('/admin');
+        } else if (user.role === 'seller') {
+          navigate('/seller/dashboard');
+        } else {
+          // Regular users go to their profile
+          navigate('/profile');
+        }
       } else {
-        // Regular users go to their profile
-        navigate('/profile');
+        // Переводим сообщение об ошибке на украинский
+        let errorMsg = result.error;
+        if (errorMsg.includes('Invalid credentials')) {
+          errorMsg = 'Невірний email або пароль';
+        } else if (errorMsg.includes('User not found')) {
+          errorMsg = 'Користувача не знайдено';
+        } else if (!errorMsg.includes('Помилка')) {
+          errorMsg = 'Помилка входу. Перевірте дані.';
+        }
+        toast.error(errorMsg);
       }
-    } else {
-      toast.error(result.error || t('loginFailed'));
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('Помилка підключення до серверу');
+    } finally {
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   return (
