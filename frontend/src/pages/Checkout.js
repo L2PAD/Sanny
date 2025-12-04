@@ -42,6 +42,35 @@ const Checkout = () => {
     fetchCart();
   }, []);
 
+  // Auto-fill user data if authenticated
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      setRecipientData(prev => ({
+        ...prev,
+        firstName: user.full_name?.split(' ')[0] || prev.firstName,
+        lastName: user.full_name?.split(' ')[1] || prev.lastName,
+        phone: user.phone || prev.phone,
+        email: user.email || prev.email,
+        city: user.city || prev.city,
+        address: user.address || prev.address,
+        postalCode: user.postal_code || prev.postalCode,
+      }));
+      
+      // Set delivery method based on saved data
+      if (user.delivery_method) {
+        setDeliveryMethod(user.delivery_method);
+      }
+      
+      // Pre-fill Nova Poshta data if available
+      if (user.delivery_method === 'nova_poshta' && user.np_department) {
+        setNovaPoshtaData({
+          department: user.np_department,
+          city: user.city || ''
+        });
+      }
+    }
+  }, [isAuthenticated, user]);
+
   useEffect(() => {
     if (cart.length === 0) {
       navigate('/cart');
