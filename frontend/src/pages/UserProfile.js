@@ -517,18 +517,38 @@ const UserProfile = () => {
                 {selectedDelivery === 'nova_poshta' && (
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <Label htmlFor="np_department" className="text-blue-900 font-semibold">
-                      Номер отделения Новой Почты *
+                      Отделение Новой Почты *
                     </Label>
-                    <Input
-                      id="np_department"
-                      value={userProfile.np_department || ''}
-                      onChange={(e) => setUserProfile({ ...userProfile, np_department: e.target.value })}
-                      disabled={!isEditing}
-                      placeholder="Например: №15 или Отделение 15"
-                      className="mt-2 bg-white"
-                    />
+                    {userProfile.city && npDepartments.length > 0 ? (
+                      <select
+                        id="np_department"
+                        value={userProfile.np_department || ''}
+                        onChange={(e) => setUserProfile({ ...userProfile, np_department: e.target.value })}
+                        disabled={!isEditing}
+                        className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        <option value="">Выберите отделение</option>
+                        {npDepartments.map((dept, idx) => (
+                          <option key={idx} value={dept}>
+                            {dept}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <Input
+                        id="np_department"
+                        value={userProfile.np_department || ''}
+                        onChange={(e) => setUserProfile({ ...userProfile, np_department: e.target.value })}
+                        disabled={!isEditing}
+                        placeholder="Сначала укажите город"
+                        className="mt-2 bg-white"
+                      />
+                    )}
+                    {loadingDepartments && (
+                      <p className="text-sm text-blue-600 mt-2">Загрузка отделений...</p>
+                    )}
                     <p className="text-sm text-blue-700 mt-2">
-                      📦 Укажите номер вашего отделения Новой Почты для самовывоза
+                      📦 Выберите отделение Новой Почты для самовывоза
                     </p>
                   </div>
                 )}
