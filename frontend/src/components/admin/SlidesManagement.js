@@ -75,6 +75,11 @@ const SlidesManagement = () => {
     
     try {
       const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error('Необхідна авторизація');
+        return;
+      }
+      
       const slideData = { ...slideForm };
       
       // Конвертируем countdown_end_date в ISO формат
@@ -82,21 +87,25 @@ const SlidesManagement = () => {
         slideData.countdown_end_date = new Date(slideData.countdown_end_date).toISOString();
       }
       
+      console.log('Saving slide:', slideData);
+      
       if (editingSlide) {
         // Update existing slide
-        await axios.put(
+        const response = await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/api/admin/slides/${editingSlide.id}`,
           slideData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        console.log('Slide updated:', response.data);
         toast.success('Слайд оновлено!');
       } else {
         // Create new slide
-        await axios.post(
+        const response = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/api/admin/slides`,
           slideData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        console.log('Slide created:', response.data);
         toast.success('Слайд створено!');
       }
       
@@ -106,7 +115,13 @@ const SlidesManagement = () => {
       fetchSlides();
     } catch (error) {
       console.error('Failed to save slide:', error);
-      toast.error('Помилка збереження слайду');
+      console.error('Error details:', error.response?.data);
+      
+      const errorMessage = error.response?.data?.detail || 
+                          error.response?.data?.message || 
+                          'Помилка збереження слайду';
+      
+      toast.error(errorMessage);
     }
   };
 
