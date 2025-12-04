@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShoppingCart, Heart, GitCompare, User, LogOut, Menu } from 'lucide-react';
+import { Search, ShoppingCart, Heart, GitCompare, User, LogOut, Menu, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -8,6 +8,7 @@ import { useComparison } from '../contexts/ComparisonContext';
 import { useCatalog } from '../contexts/CatalogContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNotifications } from '../contexts/NotificationsContext';
+import MobileMenu from './MobileMenu';
 
 const NewHeader = () => {
   const navigate = useNavigate();
