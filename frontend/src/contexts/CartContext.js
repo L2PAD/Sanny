@@ -18,6 +18,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({ items: [] });
   const [loading, setLoading] = useState(false);
   const { isAuthenticated } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (isAuthenticated) {
