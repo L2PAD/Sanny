@@ -66,7 +66,7 @@ const SupportWidget = () => {
               href={channel.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${channel.bgColor} ${channel.hoverColor} w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-200 hover:scale-110 transform`}
+              className={`${channel.bgColor} ${channel.hoverColor} w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-200 hover:scale-110 transform`}
               title={channel.name}
               style={{
                 transitionDelay: isOpen ? `${index * 50}ms` : '0ms'
