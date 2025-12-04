@@ -474,31 +474,170 @@ const UserProfile = () => {
 
         {/* Settings Tab */}
         {activeTab === 'settings' && (
-          <div className="max-w-2xl">
+          <div className="max-w-2xl space-y-6">
             <h2 className="text-2xl font-bold mb-6">Настройки аккаунта</h2>
             
+            {/* Change Email */}
             <Card className="p-6">
-              <div className="space-y-6">
+              <h3 className="font-semibold mb-4 text-lg">Изменить Email</h3>
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const newEmail = formData.get('new_email');
+                const password = formData.get('current_password_email');
+                
+                try {
+                  const token = localStorage.getItem('token');
+                  await axios.post(
+                    `${process.env.REACT_APP_BACKEND_URL}/api/users/change-email`,
+                    { new_email: newEmail, current_password: password },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                  );
+                  
+                  // Update local storage
+                  const updatedUser = { ...user, email: newEmail };
+                  localStorage.setItem('user', JSON.stringify(updatedUser));
+                  
+                  toast.success('Email успешно изменен!');
+                  e.target.reset();
+                } catch (error) {
+                  toast.error(error.response?.data?.detail || 'Ошибка изменения email');
+                }
+              }} className="space-y-4">
                 <div>
-                  <h3 className="font-semibold mb-2">Изменить пароль</h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Для изменения пароля обратитесь в службу поддержки
-                  </p>
-                  <Button variant="outline" disabled>
-                    Изменить пароль (скоро)
-                  </Button>
+                  <Label htmlFor="current_email">Текущий Email</Label>
+                  <Input
+                    id="current_email"
+                    type="email"
+                    value={user?.email}
+                    disabled
+                    className="mt-1 bg-gray-50"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="new_email">Новый Email *</Label>
+                  <Input
+                    id="new_email"
+                    name="new_email"
+                    type="email"
+                    required
+                    placeholder="newemail@example.com"
+                    className="mt-1"
+                  />
                 </div>
 
-                <div className="border-t pt-6">
-                  <h3 className="font-semibold mb-2 text-red-600">Удалить аккаунт</h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Это действие необратимо. Все ваши данные будут удалены.
-                  </p>
-                  <Button variant="destructive" disabled>
-                    Удалить аккаунт (скоро)
-                  </Button>
+                <div>
+                  <Label htmlFor="current_password_email">Текущий пароль (для подтверждения) *</Label>
+                  <Input
+                    id="current_password_email"
+                    name="current_password_email"
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    className="mt-1"
+                  />
                 </div>
-              </div>
+
+                <Button type="submit" className="w-full">
+                  Изменить Email
+                </Button>
+              </form>
+            </Card>
+
+            {/* Change Password */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4 text-lg">Изменить пароль</h3>
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const currentPassword = formData.get('current_password');
+                const newPassword = formData.get('new_password');
+                const confirmPassword = formData.get('confirm_password');
+                
+                if (newPassword !== confirmPassword) {
+                  toast.error('Новые пароли не совпадают');
+                  return;
+                }
+                
+                if (newPassword.length < 6) {
+                  toast.error('Пароль должен быть минимум 6 символов');
+                  return;
+                }
+                
+                try {
+                  const token = localStorage.getItem('token');
+                  await axios.post(
+                    `${process.env.REACT_APP_BACKEND_URL}/api/users/change-password`,
+                    { 
+                      current_password: currentPassword, 
+                      new_password: newPassword 
+                    },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                  );
+                  
+                  toast.success('Пароль успешно изменен!');
+                  e.target.reset();
+                } catch (error) {
+                  toast.error(error.response?.data?.detail || 'Ошибка изменения пароля');
+                }
+              }} className="space-y-4">
+                <div>
+                  <Label htmlFor="current_password">Текущий пароль *</Label>
+                  <Input
+                    id="current_password"
+                    name="current_password"
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="new_password">Новый пароль *</Label>
+                  <Input
+                    id="new_password"
+                    name="new_password"
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    className="mt-1"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Минимум 6 символов</p>
+                </div>
+
+                <div>
+                  <Label htmlFor="confirm_password">Подтвердите новый пароль *</Label>
+                  <Input
+                    id="confirm_password"
+                    name="confirm_password"
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    className="mt-1"
+                  />
+                </div>
+
+                <Button type="submit" className="w-full">
+                  Изменить пароль
+                </Button>
+              </form>
+            </Card>
+
+            {/* Delete Account */}
+            <Card className="p-6 border-red-200">
+              <h3 className="font-semibold mb-2 text-red-600 text-lg">Удалить аккаунт</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Это действие необратимо. Все ваши данные, заказы и история покупок будут удалены навсегда.
+              </p>
+              <Button variant="destructive" onClick={() => {
+                if (window.confirm('Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить!')) {
+                  toast.error('Функция удаления аккаунта будет доступна скоро');
+                }
+              }}>
+                Удалить аккаунт
+              </Button>
             </Card>
           </div>
         )}
