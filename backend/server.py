@@ -2350,6 +2350,256 @@ async def delete_slide(
     
     return {"message": "Slide deleted successfully"}
 
+
+# ============= CRM API =============
+
+@api_router.get("/crm/customers")
+async def get_crm_customers(
+    segment: Optional[str] = None,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Get all customers with CRM metrics
+    """
+    customers = await crm_service.get_all_customers_with_metrics()
+    
+    # Filter by segment if provided
+    if segment:
+        customers = [c for c in customers if c.get("segment") == segment]
+    
+    return customers
+
+@api_router.get("/crm/customer/{customer_id}")
+async def get_customer_profile(
+    customer_id: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Get detailed customer profile
+    """
+    profile = await crm_service.get_customer_profile(customer_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    return profile
+
+@api_router.post("/crm/notes", response_model=CustomerNote)
+async def create_customer_note(
+    note: CustomerNoteCreate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Add note to customer
+    """
+    note_dict = note.model_dump()
+    note_dict["id"] = str(uuid.uuid4())
+    note_dict["author_id"] = current_user.id
+    note_dict["author_name"] = current_user.full_name
+    note_dict["created_at"] = datetime.now(timezone.utc)
+    
+    await db.customer_notes.insert_one(note_dict)
+    return CustomerNote(**note_dict)
+
+@api_router.get("/crm/notes/{customer_id}")
+async def get_customer_notes(
+    customer_id: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Get all notes for a customer
+    """
+    notes = await db.customer_notes.find({"customer_id": customer_id}).sort("created_at", -1).to_list(100)
+    return notes
+
+@api_router.post("/crm/tasks", response_model=CRMTask)
+async def create_task(
+    task: CRMTaskCreate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Create a CRM task
+    """
+    task_dict = task.model_dump()
+    task_dict["id"] = str(uuid.uuid4())
+    task_dict["created_at"] = datetime.now(timezone.utc)
+    task_dict["updated_at"] = datetime.now(timezone.utc)
+    
+    await db.crm_tasks.insert_one(task_dict)
+    return CRMTask(**task_dict)
+
+@api_router.get("/crm/tasks")
+async def get_tasks(
+    status: Optional[str] = None,
+    customer_id: Optional[str] = None,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Get CRM tasks with optional filters
+    """
+    query = {}
+    if status:
+        query["status"] = status
+    if customer_id:
+        query["customer_id"] = customer_id
+    
+    tasks = await db.crm_tasks.find(query).sort("due_date", 1).to_list(1000)
+    return tasks
+
+@api_router.put("/crm/tasks/{task_id}")
+async def update_task(
+    task_id: str,
+    task_update: CRMTaskUpdate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Update a CRM task
+    """
+    update_data = task_update.model_dump(exclude_unset=True)
+    update_data["updated_at"] = datetime.now(timezone.utc)
+    
+    if update_data.get("status") == "completed":
+        update_data["completed_at"] = datetime.now(timezone.utc)
+    
+    result = await db.crm_tasks.update_one(
+        {"id": task_id},
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    updated_task = await db.crm_tasks.find_one({"id": task_id})
+    return updated_task
+
+@api_router.get("/crm/dashboard")
+async def get_crm_dashboard(
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Get CRM dashboard metrics
+    """
+    # Get sales funnel
+    funnel = await crm_service.get_sales_pipeline()
+    
+    # Get customer segments
+    segments = await crm_service.get_customer_segments_stats()
+    
+    # Get recent activity (30 days)
+    activity = await crm_service.get_customer_activity(30)
+    
+    # Get pending tasks
+    pending_tasks = await db.crm_tasks.count_documents({"status": "pending"})
+    overdue_tasks = await db.crm_tasks.count_documents({
+        "status": {"$in": ["pending", "in_progress"]},
+        "due_date": {"$lt": datetime.now(timezone.utc)}
+    })
+    
+    # Get recent customers (last 7 days)
+    week_ago = datetime.now(timezone.utc) - timedelta(days=7)
+    new_customers_week = await db.users.count_documents({
+        "created_at": {"$gte": week_ago}
+    })
+    
+    return {
+        "sales_funnel": funnel,
+        "customer_segments": segments,
+        "customer_activity": activity,
+        "pending_tasks": pending_tasks,
+        "overdue_tasks": overdue_tasks,
+        "new_customers_week": new_customers_week
+    }
+
+@api_router.get("/crm/leads")
+async def get_leads(
+    status: Optional[str] = None,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Get all leads
+    """
+    query = {}
+    if status:
+        query["status"] = status
+    
+    leads = await db.leads.find(query).sort("created_at", -1).to_list(1000)
+    return leads
+
+@api_router.post("/crm/leads", response_model=Lead)
+async def create_lead(
+    lead: LeadCreate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Create a new lead
+    """
+    lead_dict = lead.model_dump()
+    lead_dict["id"] = str(uuid.uuid4())
+    lead_dict["created_at"] = datetime.now(timezone.utc)
+    lead_dict["updated_at"] = datetime.now(timezone.utc)
+    
+    await db.leads.insert_one(lead_dict)
+    return Lead(**lead_dict)
+
+@api_router.put("/crm/leads/{lead_id}")
+async def update_lead(
+    lead_id: str,
+    lead_update: LeadUpdate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Update a lead
+    """
+    update_data = lead_update.model_dump(exclude_unset=True)
+    update_data["updated_at"] = datetime.now(timezone.utc)
+    
+    result = await db.leads.update_one(
+        {"id": lead_id},
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    
+    updated_lead = await db.leads.find_one({"id": lead_id})
+    return updated_lead
+
+@api_router.put("/crm/order/{order_id}/status")
+async def update_order_status(
+    order_id: str,
+    status: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Update order status for CRM
+    """
+    valid_statuses = ["pending", "confirmed", "processing", "shipped", "delivered", "cancelled"]
+    if status not in valid_statuses:
+        raise HTTPException(status_code=400, detail="Invalid status")
+    
+    result = await db.orders.update_one(
+        {"id": order_id},
+        {"$set": {"status": status, "updated_at": datetime.now(timezone.utc)}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    # Create note about status change
+    order = await db.orders.find_one({"id": order_id})
+    if order:
+        note_dict = {
+            "id": str(uuid.uuid4()),
+            "customer_id": order["buyer_id"],
+            "author_id": current_user.id,
+            "author_name": current_user.full_name,
+            "note": f"Статус заказа #{order.get('order_number', order_id[:8])} изменен на: {status}",
+            "type": "order_update",
+            "created_at": datetime.now(timezone.utc)
+        }
+        await db.customer_notes.insert_one(note_dict)
+    
+    return {"success": True, "order_id": order_id, "new_status": status}
+
+
 # ============= INITIALIZE APP =============
 
 app.include_router(api_router)
