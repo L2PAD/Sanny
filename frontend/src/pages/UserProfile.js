@@ -498,7 +498,14 @@ const UserProfile = () => {
                   <Input
                     id="city"
                     value={userProfile.city}
-                    onChange={(e) => setUserProfile({ ...userProfile, city: e.target.value })}
+                    onChange={(e) => {
+                      const city = e.target.value;
+                      setUserProfile({ ...userProfile, city });
+                      // Fetch departments for Nova Poshta when city changes
+                      if (selectedDelivery === 'nova_poshta') {
+                        fetchNPDepartments(city);
+                      }
+                    }}
                     disabled={!isEditing}
                     placeholder="Киев"
                     className="mt-1"
