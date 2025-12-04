@@ -80,18 +80,24 @@ const UserProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put(
+      const response = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
         userProfile,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
-      // Update local storage
-      const updatedUser = { ...user, ...userProfile };
+      // Update local storage with response from server
+      const updatedUser = response.data;
       localStorage.setItem('user', JSON.stringify(updatedUser));
       
+      // Force page reload to reflect changes
       toast.success('Профиль успешно обновлен!');
       setIsEditing(false);
+      
+      // Reload page to show updated data
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error('Failed to update profile:', error);
       toast.error('Ошибка обновления профиля');
