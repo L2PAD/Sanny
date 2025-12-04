@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { productsAPI } from '../utils/api';
 import { Button } from '../components/ui/button';
-import { MapPin, CreditCard, Building2, User, Phone, Mail, ChevronRight, AlertCircle, Package, Truck, Home } from 'lucide-react';
+import { MapPin, CreditCard, Building2, User, Phone, Mail, ChevronRight, AlertCircle, Package, Truck, Home, Settings } from 'lucide-react';
 import { toast } from 'sonner';
 import NovaPoshtaDelivery from '../components/NovaPoshtaDelivery';
 
