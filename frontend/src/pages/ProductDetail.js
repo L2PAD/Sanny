@@ -280,7 +280,7 @@ const ProductDetail = () => {
                     className="flex-1"
                   >
                     <ShoppingCart className="w-5 h-5 mr-2" />
-                    Add to Cart
+                    {t('addToCart')}
                   </Button>
                   <Button
                     data-testid="buy-now-button"
@@ -288,7 +288,7 @@ const ProductDetail = () => {
                     size="lg"
                     className="flex-1"
                   >
-                    Buy Now
+                    {t('buyNow') || 'Купить сейчас'}
                   </Button>
                 </div>
               </div>
