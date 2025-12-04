@@ -639,3 +639,91 @@ agent_communication:
     message: "✅ FINAL ADMIN LOGIN VERIFICATION AFTER REACT_APP_BACKEND_URL FIX COMPLETED SUCCESSFULLY: Critical user issue resolved - admin login and panel access now working perfectly. COMPREHENSIVE TEST RESULTS: 1) ✅ REACT_APP_BACKEND_URL fix to http://0.0.0.0:8001 working correctly - no more ERR_ABORTED issues 2) ✅ Complete login flow verified: Welcome Modal (RU language + accept) → Login form (admin@bazaar.com/admin123) → JWT token storage → Admin panel access 3) ✅ All requested verification points confirmed: 'Админ Панель' heading, all 7 navigation tabs present, metric cards displaying backend data (Общий доход: $0, Всего заказов: 10, Пользователи: 24, Продукты: 14), revenue chart rendering with 46 SVG elements 4) ✅ Screenshot captured showing complete admin dashboard functionality 5) ✅ No console errors or JavaScript issues detected. CRITICAL ISSUE RESOLVED: User can now login and access admin panel immediately as requested. The backend URL configuration fix has restored full admin functionality."
   - agent: "testing"
     message: "🔍 NEW TESTING TASK ADDED: Saved Address Feature on Checkout Page - Testing the newly implemented saved address functionality for logged-in users. This includes testing the green saved address block display, auto-fill functionality, and user experience improvements on the checkout page. Will test with testcustomer@example.com user credentials as specified in the review request."
+  - task: "CRM Dashboard API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/crm_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRM Dashboard API fully functional. GET /api/crm/dashboard returns all required fields: sales_funnel (lead pipeline with conversion rates), customer_segments (VIP, Active, At Risk, etc.), customer_activity (new customers, orders, active customers for last 30 days), pending_tasks, overdue_tasks, new_customers_week. Fixed MongoDB ObjectId serialization issue by adding '_id': 0 to queries and adding missing get_customer_activity() method to CRM service."
+
+  - task: "CRM Customers List API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/crm_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Customers List API fully functional. GET /api/crm/customers returns array of customers with all required metrics: total_orders, total_spent, avg_order_value, segment (VIP/Active/At Risk/Inactive/New/Regular), notes_count, pending_tasks. Tested with 3 customers in database. Fixed MongoDB ObjectId serialization by excluding '_id' field in aggregation pipeline."
+
+  - task: "CRM Customer Profile API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/crm_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Customer Profile API fully functional. GET /api/crm/customer/{customer_id} returns detailed profile with orders, notes, tasks arrays. Profile includes comprehensive metrics: total_orders, total_spent, avg_order_value, last_order_date, days_since_last_order, segment, has_abandoned_cart. Returns last 10 orders, 20 notes, and 20 tasks. Fixed MongoDB ObjectId serialization in get_customer_profile() method."
+
+  - task: "CRM Customer Notes API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Customer Notes API fully functional. POST /api/crm/notes successfully creates notes with customer_id, note text, and type (general/call/email/meeting/complaint). GET /api/crm/notes/{customer_id} returns all notes for customer sorted by created_at descending. Notes include author_id, author_name, and timestamps. Fixed MongoDB ObjectId serialization by adding {'_id': 0} to find queries."
+
+  - task: "CRM Tasks API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRM Tasks API fully functional. POST /api/crm/tasks successfully creates tasks with title, description, priority (low/medium/high/urgent), type (follow_up/call/email/meeting), assigned_to user ID, and optional customer_id. GET /api/crm/tasks returns all tasks with optional filters for status and customer_id, sorted by due_date. Tasks include status tracking (pending/in_progress/completed/cancelled). Fixed MongoDB ObjectId serialization."
+
+  - task: "CRM Leads API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRM Leads API fully functional. POST /api/crm/leads successfully creates leads with name, email, phone, source (website/referral/social/ads/other), interest, and notes. GET /api/crm/leads returns all leads with optional status filter, sorted by created_at descending. Leads include status tracking (new/contacted/qualified/converted/lost) and assigned_to field. Fixed MongoDB ObjectId serialization by adding {'_id': 0} to find queries."
+
+  - task: "Image Upload API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Image Upload API fully functional. POST /api/upload/image accepts multipart form data with 'file' field (admin only). Validates image content type, generates unique UUID filename, saves to /app/frontend/public/uploads/slides/ directory, and returns public URL path. Successfully tested with 1x1 pixel PNG image. Returns response with public_url field containing path like '/uploads/slides/{uuid}.png'."
+
+agent_communication:
+  - agent: "testing"
+    message: "🎉 CRM API TESTING COMPLETED SUCCESSFULLY - ALL 10 SCENARIOS PASSED: Comprehensive testing of all CRM endpoints completed with 100% success rate (11/11 tests passed). FIXED ISSUES: 1) Added missing get_customer_activity() method to CRM service for dashboard endpoint. 2) Fixed MongoDB ObjectId serialization errors by excluding '_id' field from all database queries (added {'_id': 0} projection). 3) Fixed image upload test to use correct form field name 'file' instead of 'image'. ALL ENDPOINTS WORKING: ✅ CRM Dashboard (sales_funnel, customer_segments, customer_activity, pending_tasks, overdue_tasks, new_customers_week) ✅ Customers List (with metrics: total_orders, total_spent, avg_order_value, segment) ✅ Customer Profile (detailed profile with orders, notes, tasks) ✅ Create Customer Note (with type: general/call/email/meeting/complaint) ✅ Get Customer Notes (sorted by created_at) ✅ Create Task (with priority, type, assigned_to) ✅ Get Tasks (with optional filters) ✅ Create Lead (with source, status tracking) ✅ Get Leads (with status filter) ✅ Image Upload (multipart form data, admin only). Backend CRM functionality is production-ready."
+
