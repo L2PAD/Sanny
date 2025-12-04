@@ -134,69 +134,75 @@ const AdminPanel = () => {
             </button>
           <button
             onClick={() => setActiveTab('products')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
               activeTab === 'products'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            <ShoppingBag className="w-5 h-5 inline mr-2" />
-            Товары
+            <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Товары</span>
+            <span className="sm:hidden">🛍️</span>
           </button>
           <button
             onClick={() => setActiveTab('payouts')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
               activeTab === 'payouts'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            <Wallet className="w-5 h-5 inline mr-2" />
-            Выплаты
+            <Wallet className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Выплаты</span>
+            <span className="sm:hidden">💰</span>
           </button>
           <button
             onClick={() => setActiveTab('orders')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
               activeTab === 'orders'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            <ClipboardList className="w-5 h-5 inline mr-2" />
-            Заказы
+            <ClipboardList className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Заказы</span>
+            <span className="sm:hidden">📋</span>
           </button>
           <button
             onClick={() => setActiveTab('advanced')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
               activeTab === 'advanced'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            <TrendingUp className="w-5 h-5 inline mr-2" />
-            Расширенная
+            <TrendingUp className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Расширенная</span>
+            <span className="sm:hidden">📈</span>
           </button>
           <button
             onClick={() => setActiveTab('slides')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
               activeTab === 'slides'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            <Monitor className="w-5 h-5 inline mr-2" />
-            Слайдер
+            <Monitor className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Слайдер</span>
+            <span className="sm:hidden">🖼️</span>
           </button>
           <button
             onClick={() => setActiveTab('crm')}
-            className={`pb-4 px-4 font-semibold transition-colors ${
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
               activeTab === 'crm'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            <Briefcase className="w-5 h-5 inline mr-2" />
-            CRM
+            <Briefcase className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">CRM</span>
+            <span className="sm:hidden">💼</span>
           </button>
         </div>
 
