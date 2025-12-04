@@ -141,7 +141,7 @@ const ProductComments = ({ productId, isAuthenticated, onLoginRequired }) => {
               className="flex items-center gap-2"
             >
               <Send className="w-4 h-4" />
-              {isSubmitting ? 'Sending...' : 'Send'}
+              {isSubmitting ? (t('sending') || 'Отправка...') : t('postComment')}
             </Button>
           </div>
         </form>
