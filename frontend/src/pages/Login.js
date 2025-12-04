@@ -22,7 +22,7 @@ const Login = () => {
     const result = await login(email, password);
     
     if (result.success) {
-      toast.success('Logged in successfully!');
+      toast.success(t('loginSuccess'));
       
       // Redirect based on user role
       const user = JSON.parse(localStorage.getItem('user'));
@@ -35,7 +35,7 @@ const Login = () => {
         navigate('/profile');
       }
     } else {
-      toast.error(result.error || 'Login failed');
+      toast.error(result.error || t('loginFailed'));
     }
     
     setLoading(false);
