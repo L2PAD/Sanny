@@ -60,7 +60,7 @@ const CatalogSidebar = () => {
       />
 
       {/* Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto transform transition-transform">
+      <div className="fixed left-0 top-0 h-full w-full sm:w-96 md:w-[400px] lg:w-[450px] bg-white shadow-2xl z-50 overflow-y-auto transform transition-transform">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 z-10">
           <div className="flex items-center justify-between mb-4">
