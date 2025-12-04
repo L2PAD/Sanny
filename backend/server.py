@@ -40,6 +40,9 @@ api_router = APIRouter(prefix="/api")
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Initialize CRM Service
+crm_service = CRMService(db)
+
 # ============= MODELS =============
 
 class User(BaseModel):
