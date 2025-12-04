@@ -2071,7 +2071,7 @@ async def get_active_slides():
     return slides
 
 @api_router.get("/admin/slides", response_model=List[HeroSlide])
-async def get_all_slides(current_user: User = Depends(require_admin)):
+async def get_all_slides(current_user: User = Depends(get_current_admin)):
     """
     Get all hero slides (admin only)
     """
@@ -2081,7 +2081,7 @@ async def get_all_slides(current_user: User = Depends(require_admin)):
 @api_router.post("/admin/slides", response_model=HeroSlide)
 async def create_slide(
     slide: HeroSlideCreate,
-    current_user: User = Depends(require_admin)
+    current_user: User = Depends(get_current_admin)
 ):
     """
     Create a new hero slide (admin only)
@@ -2098,7 +2098,7 @@ async def create_slide(
 async def update_slide(
     slide_id: str,
     slide_update: HeroSlideUpdate,
-    current_user: User = Depends(require_admin)
+    current_user: User = Depends(get_current_admin)
 ):
     """
     Update a hero slide (admin only)
@@ -2121,7 +2121,7 @@ async def update_slide(
 @api_router.delete("/admin/slides/{slide_id}")
 async def delete_slide(
     slide_id: str,
-    current_user: User = Depends(require_admin)
+    current_user: User = Depends(get_current_admin)
 ):
     """
     Delete a hero slide (admin only)
