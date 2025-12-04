@@ -30,14 +30,21 @@ Email: admin@marketplace.com
 
 ## 👥 ТЕСТОВЫЕ ПОКУПАТЕЛИ
 
-### Покупатель 1:
+### Покупатель 1 (Рабочий):
+```
+Email: testcustomer@example.com
+Пароль: customer123
+Имя: Test Customer
+```
+
+### Покупатель 2:
 ```
 Email: customer1@test.com
 Пароль: password123
 Имя: Анна Петренко
 ```
 
-### Покупатель 2:
+### Покупатель 3:
 ```
 Email: customer2@test.com
 Пароль: password123
