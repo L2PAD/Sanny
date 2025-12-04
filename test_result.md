@@ -490,6 +490,18 @@ test_plan:
         agent: "testing"
         comment: "🎉 PRODUCTION ADMIN PANEL VERIFICATION SUCCESSFUL: Comprehensive testing of production URL (https://rozetka-clone-1.preview.emergentagent.com) confirms admin panel is FULLY FUNCTIONAL. TESTING RESULTS: 1) ✅ Backend API working perfectly - POST /api/auth/login returns valid JWT token for admin@bazaar.com/admin123 2) ✅ Admin panel accessible at /admin with authentication token 3) ✅ ALL 7 REQUIRED TABS PRESENT: Аналитика, Пользователи, Категории, Товары, Выплаты, Заказы, Расширенная 4) ✅ All tabs are clickable and functional 5) ✅ Admin panel heading 'Админ Панель' displayed correctly 6) ✅ Tab navigation working properly. MINOR ISSUE IDENTIFIED: Frontend login form has welcome modal overlay that blocks login button clicks, but this doesn't affect admin panel functionality once authenticated. The admin panel itself is 100% operational and meets all requirements. User can access admin panel by properly handling the welcome modal or using direct authentication methods."
 
+  - task: "Role-Based Login Redirect Logic Testing"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages/Login.js, /app/frontend/src/contexts/AuthContext.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL FRONTEND LOGIN BUG IDENTIFIED: Comprehensive testing reveals that the login form is NOT submitting API requests when users click the login button. TESTING RESULTS: 1) ✅ Backend authentication working perfectly - manual API calls successful for both admin@bazaar.com (role: admin) and testcustomer@example.com (role: customer) 2) ✅ Role-based access control working correctly - customer redirected away from /admin to homepage, admin can access /admin panel 3) ✅ User roles properly assigned in database (admin=admin, customer=customer) 4) ❌ CRITICAL ISSUE: Frontend login form does NOT make API requests when submit button clicked - network monitoring shows zero login API calls 5) ❌ No authentication tokens stored in localStorage after form submission 6) ❌ Users cannot login through the UI despite backend working correctly. ROOT CAUSE: Frontend Login component form submission logic is broken - the handleSubmit function is not executing the API call. This explains why users report login issues and why the role-based redirect testing cannot be completed through the UI. The reported customer→admin redirect issue cannot be reproduced because the login form itself is non-functional."
+
 agent_communication:
   - agent: "testing"
     message: "🎉 URGENT ADMIN LOGIN ISSUE RESOLVED: The critical issue has been identified and fixed. ROOT CAUSE: REACT_APP_BACKEND_URL was empty in frontend/.env, causing API calls to go to wrong port (3000 instead of 8001). SOLUTION APPLIED: Set REACT_APP_BACKEND_URL=http://localhost:8001 and restarted frontend service. VERIFICATION: Admin login (admin@bazaar.com/admin123) now works perfectly - JWT token stored, admin panel accessible with all tabs and metrics. The user's frustration should be resolved as the admin functionality is now fully operational on localhost. Production URL may need similar configuration or server wake-up."
