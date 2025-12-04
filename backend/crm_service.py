@@ -19,12 +19,12 @@ class CRMService:
         """
         try:
             # Get user info
-            user = await self.db.users.find_one({"id": user_id})
+            user = await self.db.users.find_one({"id": user_id}, {"_id": 0})
             if not user:
                 return None
             
             # Get orders
-            orders = await self.db.orders.find({"buyer_id": user_id}).to_list(1000)
+            orders = await self.db.orders.find({"buyer_id": user_id}, {"_id": 0}).to_list(1000)
             
             # Calculate metrics
             total_orders = len(orders)
@@ -45,13 +45,13 @@ class CRMService:
             segment = self.determine_segment(total_orders, total_spent, days_since_last_order)
             
             # Get notes
-            notes = await self.db.customer_notes.find({"customer_id": user_id}).sort("created_at", -1).to_list(100)
+            notes = await self.db.customer_notes.find({"customer_id": user_id}, {"_id": 0}).sort("created_at", -1).to_list(100)
             
             # Get tasks
-            tasks = await self.db.crm_tasks.find({"customer_id": user_id}).to_list(100)
+            tasks = await self.db.crm_tasks.find({"customer_id": user_id}, {"_id": 0}).to_list(100)
             
             # Get cart (abandoned cart check)
-            cart = await self.db.carts.find_one({"user_id": user_id})
+            cart = await self.db.carts.find_one({"user_id": user_id}, {"_id": 0})
             has_abandoned_cart = cart and len(cart.get("items", [])) > 0
             
             return {
