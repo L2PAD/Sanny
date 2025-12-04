@@ -60,6 +60,7 @@ export const translations = {
     noComments: 'Комментариев пока нет',
     writeComment: 'Написать комментарий...',
     postComment: 'Отправить',
+    sending: 'Отправка...',
     productManagement: 'Управление товарами',
     addProduct: 'Добавить товар',
     product: 'Товар',
