@@ -404,18 +404,70 @@ const SlidesManagement = () => {
                 </select>
               </div>
             ) : (
-              <div className="border-l-4 border-blue-500 pl-4">
-                <Label>URL изображения для баннера *</Label>
-                <Input
-                  value={slideForm.image_url}
-                  onChange={(e) => setSlideForm({ ...slideForm, image_url: e.target.value })}
-                  placeholder="https://example.com/promo-banner.jpg"
-                  required={slideForm.type === 'banner'}
-                  className="mt-2"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  💡 Рекомендуемый размер: 1920x400px. Картинка будет фоном, на котором отобразятся текст и таймер.
-                </p>
+              <div className="border-l-4 border-blue-500 pl-4 space-y-3">
+                <div>
+                  <Label>Изображение для баннера *</Label>
+                  <p className="text-xs text-gray-600 mb-2">
+                    Выберите один из вариантов:
+                  </p>
+                  
+                  {/* Кнопка загрузки файла */}
+                  <div className="mb-3">
+                    <input
+                      type="file"
+                      id="image-upload"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                    <label
+                      htmlFor="image-upload"
+                      className={`inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-700 transition-colors ${
+                        uploadingImage ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      <Image className="w-4 h-4" />
+                      {uploadingImage ? 'Завантаження...' : 'Завантажити з комп\'ютера'}
+                    </label>
+                  </div>
+                  
+                  {/* ИЛИ разделитель */}
+                  <div className="flex items-center gap-3 my-3">
+                    <div className="flex-1 border-t border-gray-300"></div>
+                    <span className="text-sm text-gray-500">АБО</span>
+                    <div className="flex-1 border-t border-gray-300"></div>
+                  </div>
+                  
+                  {/* Поле для URL */}
+                  <div>
+                    <Label>URL изображения</Label>
+                    <Input
+                      value={slideForm.image_url}
+                      onChange={(e) => setSlideForm({ ...slideForm, image_url: e.target.value })}
+                      placeholder="https://example.com/promo-banner.jpg"
+                      className="mt-2"
+                    />
+                  </div>
+                  
+                  {/* Предпросмотр */}
+                  {slideForm.image_url && (
+                    <div className="mt-3">
+                      <Label className="text-sm text-gray-600 mb-2 block">Передпрогляд:</Label>
+                      <img 
+                        src={slideForm.image_url} 
+                        alt="Preview"
+                        className="w-full h-32 object-cover rounded-lg border-2 border-gray-300"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
+                  
+                  <p className="text-xs text-gray-500 mt-2">
+                    💡 Рекомендуемый размер: 1920x400px. Картинка будет фоном, на котором отобразятся текст и таймер.
+                  </p>
+                </div>
               </div>
             )}
 
