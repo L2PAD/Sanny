@@ -33,7 +33,7 @@ const DeliveryOptions = () => {
             <Home className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
             <div>
               <p className="font-semibold text-gray-900">Самовивіз</p>
-              <p className="text-sm text-gray-600">вул. Хрещатик, 1, Київ</p>
+              <p className="text-sm text-gray-600">проспект Миколи Бажана, 24/1, Київ, Україна, 02149</p>
               <p className="text-sm font-medium text-green-600 mt-1">Безкоштовно</p>
             </div>
           </div>
