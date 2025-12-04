@@ -81,6 +81,33 @@ const UserProfile = () => {
     }
   };
 
+  const fetchNPDepartments = async (city) => {
+    if (!city || city.length < 2) {
+      setNpDepartments([]);
+      return;
+    }
+    
+    try {
+      setLoadingDepartments(true);
+      // Mock data - в продакшені тут буде API Нової Пошти
+      const mockDepartments = [
+        `Відділення №1 (${city}, вул. Центральна, 1)`,
+        `Відділення №2 (${city}, просп. Миру, 15)`,
+        `Відділення №5 (${city}, вул. Шевченка, 23)`,
+        `Відділення №8 (${city}, бул. Слави, 45)`,
+        `Відділення №12 (${city}, вул. Київська, 78)`,
+        `Відділення №15 (${city}, просп. Перемоги, 120)`,
+        `Відділення №20 (${city}, вул. Лесі Українки, 5)`,
+      ];
+      
+      setNpDepartments(mockDepartments);
+    } catch (error) {
+      console.error('Failed to fetch departments:', error);
+    } finally {
+      setLoadingDepartments(false);
+    }
+  };
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     
