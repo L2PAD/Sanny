@@ -195,6 +195,9 @@ const AdminPanel = () => {
         {/* Advanced Analytics Tab */}
         {activeTab === 'advanced' && <AdvancedAnalytics />}
 
+        {/* Slides Management Tab */}
+        {activeTab === 'slides' && <SlidesManagement />}
+
         {/* Users Tab */}
         {activeTab === 'users' && (
           <div className="bg-white rounded-2xl p-6 border border-gray-200">
