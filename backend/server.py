@@ -2060,6 +2060,50 @@ async def get_payment_info(
         logger.error(f"Error getting payment info: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# ============= IMAGE UPLOAD =============
+
+@api_router.post("/upload/image")
+async def upload_image(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Upload image for slides or other purposes (admin only)
+    """
+    try:
+        # Validate file type
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+        
+        # Generate unique filename
+        file_extension = file.filename.split('.')[-1]
+        unique_filename = f"{uuid.uuid4()}.{file_extension}"
+        
+        # Save file to public uploads folder
+        upload_dir = Path("/app/frontend/public/uploads/slides")
+        upload_dir.mkdir(parents=True, exist_ok=True)
+        
+        file_path = upload_dir / unique_filename
+        
+        # Read and write file
+        content = await file.read()
+        with open(file_path, 'wb') as f:
+            f.write(content)
+        
+        # Return public URL
+        public_url = f"/uploads/slides/{unique_filename}"
+        
+        return {
+            "url": public_url,
+            "filename": unique_filename,
+            "original_filename": file.filename
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error uploading image: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to upload image: {str(e)}")
+
 # ============= HERO SLIDES MANAGEMENT =============
 
 @api_router.get("/slides", response_model=List[HeroSlide])
