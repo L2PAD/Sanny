@@ -502,6 +502,18 @@ test_plan:
         agent: "testing"
         comment: "❌ CRITICAL FRONTEND LOGIN BUG IDENTIFIED: Comprehensive testing reveals that the login form is NOT submitting API requests when users click the login button. TESTING RESULTS: 1) ✅ Backend authentication working perfectly - manual API calls successful for both admin@bazaar.com (role: admin) and testcustomer@example.com (role: customer) 2) ✅ Role-based access control working correctly - customer redirected away from /admin to homepage, admin can access /admin panel 3) ✅ User roles properly assigned in database (admin=admin, customer=customer) 4) ❌ CRITICAL ISSUE: Frontend login form does NOT make API requests when submit button clicked - network monitoring shows zero login API calls 5) ❌ No authentication tokens stored in localStorage after form submission 6) ❌ Users cannot login through the UI despite backend working correctly. ROOT CAUSE: Frontend Login component form submission logic is broken - the handleSubmit function is not executing the API call. This explains why users report login issues and why the role-based redirect testing cannot be completed through the UI. The reported customer→admin redirect issue cannot be reproduced because the login form itself is non-functional."
 
+  - task: "Profile Editing Functionality with Console Logs"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages/UserProfile.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL PROFILE EDITING BUG IDENTIFIED: Comprehensive testing reveals that profile editing functionality has a React state management issue. TESTING RESULTS: 1) ✅ Login successful (testcustomer@example.com/customer123) 2) ✅ Redirect to /profile working correctly 3) ✅ 'Личные данные' tab accessible and clickable 4) ✅ Console logs working correctly - 'Profile tab - isEditing: false' appears initially 5) ✅ 'Редактировать профиль' button clickable 6) ✅ Console log 'Editing enabled' appears when button clicked 7) ✅ Console log 'Profile tab - isEditing: true' appears (state changes correctly) 8) ❌ CRITICAL BUG: Console immediately shows 'Profile tab - isEditing: false' twice, indicating state reverts back to false 9) ❌ Input fields remain DISABLED (cannot type in them) 10) ❌ Save/Cancel buttons do not appear (edit mode UI not activated). ROOT CAUSE: React state management bug in UserProfile.js where isEditing state is being reset immediately after being set to true. The console.log on line 311 shows the state flipping from true back to false, suggesting a useEffect or state update conflict that's overriding the edit button's setIsEditing(true) call."
+
 agent_communication:
   - agent: "testing"
     message: "🎉 URGENT ADMIN LOGIN ISSUE RESOLVED: The critical issue has been identified and fixed. ROOT CAUSE: REACT_APP_BACKEND_URL was empty in frontend/.env, causing API calls to go to wrong port (3000 instead of 8001). SOLUTION APPLIED: Set REACT_APP_BACKEND_URL=http://localhost:8001 and restarted frontend service. VERIFICATION: Admin login (admin@bazaar.com/admin123) now works perfectly - JWT token stored, admin panel accessible with all tabs and metrics. The user's frustration should be resolved as the admin functionality is now fully operational on localhost. Production URL may need similar configuration or server wake-up."
