@@ -456,7 +456,7 @@ class CRMTester:
         try:
             # Create form data with file
             form_data = aiohttp.FormData()
-            form_data.add_field('image',
+            form_data.add_field('file',
                               test_image_data,
                               filename='test.png',
                               content_type='image/png')
@@ -472,8 +472,8 @@ class CRMTester:
                 
                 success = response.status < 400
                 
-                if success and (response_data.get("url") or response_data.get("image_url")):
-                    image_url = response_data.get("url") or response_data.get("image_url")
+                if success and (response_data.get("url") or response_data.get("image_url") or response_data.get("public_url")):
+                    image_url = response_data.get("url") or response_data.get("image_url") or response_data.get("public_url")
                     self.log_result(
                         "Image Upload", 
                         True, 
