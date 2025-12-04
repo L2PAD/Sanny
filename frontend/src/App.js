@@ -67,7 +67,7 @@ function App() {
                       <div data-testid="app" className="App">
                         <Toaster position="top-right" />
                         <WelcomeModal />
-                        <CatalogDropdown />
+                        <CatalogSidebar />
                         <NewHeader />
                         <Routes>
                           <Route path="/" element={<Home />} />
