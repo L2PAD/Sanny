@@ -78,6 +78,26 @@ const UserProfile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    
+    // Check if anything actually changed
+    const hasChanges = 
+      userProfile.full_name !== (user.full_name || '') ||
+      userProfile.email !== (user.email || '') ||
+      userProfile.phone !== (user.phone || '') ||
+      userProfile.address !== (user.address || '') ||
+      userProfile.city !== (user.city || '') ||
+      userProfile.postal_code !== (user.postal_code || '') ||
+      userProfile.region !== (user.region || '') ||
+      userProfile.np_department !== (user.np_department || '') ||
+      userProfile.delivery_notes !== (user.delivery_notes || '') ||
+      userProfile.delivery_method !== (user.delivery_method || 'nova_poshta');
+    
+    if (!hasChanges) {
+      toast.info('Нет изменений для сохранения');
+      setIsEditing(false);
+      return;
+    }
+    
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
@@ -90,7 +110,6 @@ const UserProfile = () => {
       const updatedUser = response.data;
       localStorage.setItem('user', JSON.stringify(updatedUser));
       
-      // Force page reload to reflect changes
       toast.success('Профиль успешно обновлен!');
       setIsEditing(false);
       
