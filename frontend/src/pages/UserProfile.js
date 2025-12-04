@@ -339,7 +339,14 @@ const UserProfile = () => {
 
                 <div className="flex gap-3 mt-6">
                   {!isEditing ? (
-                    <Button type="button" onClick={() => setIsEditing(true)}>
+                    <Button 
+                      type="button" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setIsEditing(true);
+                      }}
+                    >
                       Редактировать профиль
                     </Button>
                   ) : (
@@ -348,7 +355,9 @@ const UserProfile = () => {
                       <Button 
                         type="button" 
                         variant="outline" 
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
                           setIsEditing(false);
                           const deliveryMethod = user.delivery_method || 'nova_poshta';
                           setUserProfile({
