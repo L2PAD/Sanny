@@ -243,6 +243,61 @@ class ContactRequest(BaseModel):
     phone: str
     message: str
 
+class HeroSlide(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    subtitle: Optional[str] = None
+    description: Optional[str] = None
+    type: str = "banner"  # "banner" or "product"
+    product_id: Optional[str] = None
+    image_url: Optional[str] = None
+    background_color: Optional[str] = None
+    background_gradient: Optional[str] = None
+    promo_text: Optional[str] = None
+    button_text: Optional[str] = None
+    button_link: Optional[str] = None
+    countdown_enabled: bool = False
+    countdown_end_date: Optional[datetime] = None
+    order: int = 0
+    active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class HeroSlideCreate(BaseModel):
+    title: str
+    subtitle: Optional[str] = None
+    description: Optional[str] = None
+    type: str = "banner"
+    product_id: Optional[str] = None
+    image_url: Optional[str] = None
+    background_color: Optional[str] = None
+    background_gradient: Optional[str] = None
+    promo_text: Optional[str] = None
+    button_text: Optional[str] = None
+    button_link: Optional[str] = None
+    countdown_enabled: bool = False
+    countdown_end_date: Optional[datetime] = None
+    order: int = 0
+    active: bool = True
+
+class HeroSlideUpdate(BaseModel):
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    description: Optional[str] = None
+    type: Optional[str] = None
+    product_id: Optional[str] = None
+    image_url: Optional[str] = None
+    background_color: Optional[str] = None
+    background_gradient: Optional[str] = None
+    promo_text: Optional[str] = None
+    button_text: Optional[str] = None
+    button_link: Optional[str] = None
+    countdown_enabled: Optional[bool] = None
+    countdown_end_date: Optional[datetime] = None
+    order: Optional[int] = None
+    active: Optional[bool] = None
+
 # ============= AUTH UTILITIES =============
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
