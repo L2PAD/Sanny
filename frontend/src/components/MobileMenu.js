@@ -36,7 +36,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
           {/* Logo */}
           <Link to="/" onClick={onClose} className="block mb-8">
-            <h2 className="text-3xl font-bold text-blue-600">Y-store</h2>
+            <h2 className="text-3xl font-bold text-black">Y-store</h2>
           </Link>
 
           {/* User Section */}
