@@ -449,6 +449,13 @@ export const translations = {
     noComments: 'Коментарів поки немає',
     writeComment: 'Написати коментар...',
     postComment: 'Відправити',
+    productManagement: 'Управління товарами',
+    addProduct: 'Додати товар',
+    product: 'Товар',
+    price: 'Ціна',
+    stock: 'Наявність',
+    edit: 'Редагувати',
+    delete: 'Видалити',
     
     // Search
     searchResults: 'Результати пошуку',
