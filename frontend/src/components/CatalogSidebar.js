@@ -97,20 +97,20 @@ const CatalogSidebar = () => {
           ) : filteredCategories.length === 0 ? (
             <p className="text-center text-gray-500 py-8">{t('noProductsFound')}</p>
           ) : (
-            <div className="space-y-1">
+            <div className="space-y-2">
               {filteredCategories.map((category) => (
                 <div key={category.id}>
                   <button
                     onClick={() => handleCategoryClick(category.id)}
-                    className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-100 transition-colors active:bg-gray-200"
+                    className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-blue-50 transition-colors active:bg-blue-100 group"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">📦</span>
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
+                        <span className="text-2xl">📦</span>
                       </div>
-                      <span className="font-medium text-gray-900 text-left">{category.name}</span>
+                      <span className="font-semibold text-gray-900 text-left text-base leading-tight">{category.name}</span>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    <ChevronRight className="w-6 h-6 text-gray-400 flex-shrink-0 ml-3 group-hover:text-blue-600 transition-colors" />
                   </button>
                 </div>
               ))}
