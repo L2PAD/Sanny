@@ -558,7 +558,14 @@ const UserProfile = () => {
 
                 <div className="flex gap-3 mt-6">
                   {!isEditing ? (
-                    <Button type="button" onClick={() => setIsEditing(true)}>
+                    <Button 
+                      type="button" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setIsEditing(true);
+                      }}
+                    >
                       Редактировать адрес
                     </Button>
                   ) : (
@@ -567,7 +574,11 @@ const UserProfile = () => {
                       <Button 
                         type="button" 
                         variant="outline" 
-                        onClick={() => setIsEditing(false)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsEditing(false);
+                        }}
                       >
                         Отменить
                       </Button>
