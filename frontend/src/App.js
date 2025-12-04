@@ -83,6 +83,7 @@ function App() {
                           <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
                           <Route path="/seller/dashboard" element={<SellerDashboard />} />
                           <Route path="/admin" element={<AdminPanel />} />
+                          <Route path="/profile" element={<UserProfile />} />
                           <Route path="/contact" element={<ContactInfo />} />
                           <Route path="/delivery-payment" element={<DeliveryPayment />} />
                           <Route path="/exchange-return" element={<ExchangeReturn />} />
