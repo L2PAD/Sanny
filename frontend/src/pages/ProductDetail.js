@@ -205,16 +205,16 @@ const ProductDetail = () => {
               )}
 
               {/* Price */}
-              <div className="flex items-center gap-4 mb-6">
-                <span data-testid="product-price" className="text-5xl font-bold text-[#121212]">
+              <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-6">
+                <span data-testid="product-price" className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#121212]">
                   ${product.price.toFixed(2)}
                 </span>
                 {product.compare_price && (
                   <>
-                    <span className="text-2xl text-gray-400 line-through">
+                    <span className="text-lg md:text-xl lg:text-2xl text-gray-400 line-through">
                       ${product.compare_price.toFixed(2)}
                     </span>
-                    <span data-testid="discount-badge" className="bg-red-500 text-white px-4 py-2 rounded-full font-semibold">
+                    <span data-testid="discount-badge" className="bg-red-500 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-semibold text-sm md:text-base">
                       -{discount}% OFF
                     </span>
                   </>
