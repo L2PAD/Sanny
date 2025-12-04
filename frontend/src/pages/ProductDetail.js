@@ -134,7 +134,7 @@ const ProductDetail = () => {
   return (
     <div data-testid="product-detail-page" className="min-h-screen py-12">
       <div className="container-main">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Images Section */}
           <div className="space-y-4">
             {/* Main Image */}
