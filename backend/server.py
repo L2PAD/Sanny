@@ -2520,7 +2520,7 @@ async def get_leads(
     if status:
         query["status"] = status
     
-    leads = await db.leads.find(query).sort("created_at", -1).to_list(1000)
+    leads = await db.leads.find(query, {"_id": 0}).sort("created_at", -1).to_list(1000)
     return leads
 
 @api_router.post("/crm/leads", response_model=Lead)
