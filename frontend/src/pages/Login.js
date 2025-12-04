@@ -45,14 +45,14 @@ const Login = () => {
     <div data-testid="login-page" className="min-h-[80vh] flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 data-testid="login-title" className="text-4xl font-bold text-[#121212]">Welcome Back</h2>
-          <p className="mt-2 text-gray-600">Sign in to your account to continue</p>
+          <h2 data-testid="login-title" className="text-4xl font-bold text-[#121212]">{t('welcomeBack')}</h2>
+          <p className="mt-2 text-gray-600">{t('signInToAccount')}</p>
         </div>
 
         <form data-testid="login-form" onSubmit={handleSubmit} className="mt-8 space-y-6 bg-white p-8 rounded-2xl border border-gray-200">
           <div className="space-y-4">
             <div>
-              <Label htmlFor="email">Email Address</Label>
+              <Label htmlFor="email">{t('emailAddress')}</Label>
               <Input
                 data-testid="email-input"
                 id="email"
@@ -66,7 +66,7 @@ const Login = () => {
             </div>
 
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('password')}</Label>
               <Input
                 data-testid="password-input"
                 id="password"
@@ -81,7 +81,7 @@ const Login = () => {
           </div>
 
           <Button data-testid="submit-button" type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? t('signingIn') : t('signIn')}
           </Button>
 
           <p className="text-center text-sm text-gray-600">
