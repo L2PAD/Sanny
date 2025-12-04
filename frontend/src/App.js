@@ -27,6 +27,7 @@ import Checkout from './pages/Checkout';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import SellerDashboard from './pages/SellerDashboard';
 import AdminPanel from './pages/AdminPanel';
+import UserProfile from './pages/UserProfile';
 import ContactInfo from './pages/ContactInfo';
 import DeliveryPayment from './pages/DeliveryPayment';
 import ExchangeReturn from './pages/ExchangeReturn';
