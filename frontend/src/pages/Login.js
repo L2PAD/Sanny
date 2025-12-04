@@ -85,9 +85,9 @@ const Login = () => {
           </Button>
 
           <p className="text-center text-sm text-gray-600">
-            Don't have an account?{' '}
+            {t('dontHaveAccount')}{' '}
             <Link data-testid="register-link" to="/register" className="text-[#0071E3] hover:underline font-medium">
-              Sign up
+              {t('signUp')}
             </Link>
           </p>
         </form>
