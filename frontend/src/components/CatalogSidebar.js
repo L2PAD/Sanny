@@ -101,41 +101,17 @@ const CatalogSidebar = () => {
               {filteredCategories.map((category) => (
                 <div key={category.id}>
                   <button
-                    onClick={() => {
-                      if (category.subcategories?.length > 0) {
-                        toggleCategory(category.id);
-                      } else {
-                        handleCategoryClick(category.id);
-                      }
-                    }}
-                    className={`w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 transition-colors ${
-                      expandedCategories.includes(category.id) ? 'bg-gray-50' : ''
-                    }`}
+                    onClick={() => handleCategoryClick(category.id)}
+                    className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-100 transition-colors active:bg-gray-200"
                   >
-                    <span className="font-medium text-gray-900">{category.name}</span>
-                    {category.subcategories?.length > 0 && (
-                      expandedCategories.includes(category.id) ? (
-                        <ChevronDown className="w-4 h-4 text-gray-500" />
-                      ) : (
-                        <ChevronRight className="w-4 h-4 text-gray-500" />
-                      )
-                    )}
-                  </button>
-
-                  {/* Subcategories */}
-                  {expandedCategories.includes(category.id) && category.subcategories?.length > 0 && (
-                    <div className="ml-4 mt-1 space-y-1">
-                      {category.subcategories.map((subcat) => (
-                        <button
-                          key={subcat.id}
-                          onClick={() => handleCategoryClick(subcat.id)}
-                          className="w-full text-left p-2 pl-4 rounded-lg hover:bg-gray-50 text-gray-700 text-sm transition-colors"
-                        >
-                          {subcat.name}
-                        </button>
-                      ))}
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-xl">📦</span>
+                      </div>
+                      <span className="font-medium text-gray-900 text-left">{category.name}</span>
                     </div>
-                  )}
+                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                  </button>
                 </div>
               ))}
             </div>
