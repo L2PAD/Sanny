@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { useComparison } from '../contexts/ComparisonContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { productsAPI, reviewsAPI } from '../utils/api';
 import { Star, Heart, GitCompare, ShoppingCart, Minus, Plus, ChevronRight, Package, Shield, Truck } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -17,6 +18,7 @@ import ReviewsSection from '../components/ReviewsSection';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const { t } = useLanguage();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
