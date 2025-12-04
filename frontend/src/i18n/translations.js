@@ -13,6 +13,8 @@ export const translations = {
     total: 'Итого',
     proceedToCheckout: 'Перейти к оформлению',
     continueShopping: 'Продолжить покупки',
+    yourCartIsEmpty: 'Ваша корзина пуста',
+    addSomeProducts: 'Добавьте товары чтобы начать!',
     // Product actions
     addToCart: 'В корзину',
     outOfStock: 'Нет в наличии',
