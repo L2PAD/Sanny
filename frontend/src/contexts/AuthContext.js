@@ -40,7 +40,8 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
-      return { success: false, error: error.response?.data?.detail || 'Login failed' };
+      const errorMessage = error.response?.data?.detail || 'Помилка входу. Перевірте дані.';
+      return { success: false, error: errorMessage };
     }
   };
 
@@ -57,7 +58,8 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
-      return { success: false, error: error.response?.data?.detail || 'Registration failed' };
+      const errorMessage = error.response?.data?.detail || 'Помилка реєстрації. Спробуйте ще раз.';
+      return { success: false, error: errorMessage };
     }
   };
 
