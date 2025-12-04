@@ -128,11 +128,25 @@ const SlidesManagement = () => {
         return;
       }
       
+      // Валидация
+      if (slideForm.type === 'banner' && !slideForm.image_url) {
+        toast.error('Завантажте зображення або вкажіть URL');
+        return;
+      }
+      
+      if (slideForm.type === 'product' && !slideForm.product_id) {
+        toast.error('Оберіть товар');
+        return;
+      }
+      
       const slideData = { ...slideForm };
       
       // Конвертируем countdown_end_date в ISO формат
       if (slideData.countdown_enabled && slideData.countdown_end_date) {
         slideData.countdown_end_date = new Date(slideData.countdown_end_date).toISOString();
+      } else {
+        // Если таймер выключен, удаляем поле
+        slideData.countdown_end_date = null;
       }
       
       console.log('Saving slide:', slideData);
