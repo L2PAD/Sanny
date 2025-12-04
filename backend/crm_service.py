@@ -225,3 +225,55 @@ class CRMService:
             segments[segment] = segments.get(segment, 0) + 1
         
         return segments
+    
+    async def get_customer_activity(self, days: int = 30) -> Dict[str, Any]:
+        """
+        Get customer activity for the last N days
+        """
+        try:
+            start_date = datetime.now(timezone.utc) - timedelta(days=days)
+            
+            # New registrations
+            new_customers = await self.db.users.count_documents({
+                "created_at": {"$gte": start_date}
+            })
+            
+            # Orders placed
+            orders_placed = await self.db.orders.count_documents({
+                "created_at": {"$gte": start_date}
+            })
+            
+            # Active customers (placed orders)
+            active_customers_pipeline = [
+                {
+                    "$match": {
+                        "created_at": {"$gte": start_date}
+                    }
+                },
+                {
+                    "$group": {
+                        "_id": "$buyer_id"
+                    }
+                },
+                {
+                    "$count": "count"
+                }
+            ]
+            
+            active_result = await self.db.orders.aggregate(active_customers_pipeline).to_list(1)
+            active_customers = active_result[0]["count"] if active_result else 0
+            
+            return {
+                "new_customers": new_customers,
+                "orders_placed": orders_placed,
+                "active_customers": active_customers,
+                "period_days": days
+            }
+        except Exception as e:
+            logger.error(f"Error getting customer activity: {str(e)}")
+            return {
+                "new_customers": 0,
+                "orders_placed": 0,
+                "active_customers": 0,
+                "period_days": days
+            }
