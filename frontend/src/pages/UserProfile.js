@@ -23,10 +23,12 @@ const UserProfile = () => {
     postal_code: '',
     region: '',
     np_department: '',
-    delivery_notes: ''
+    delivery_notes: '',
+    delivery_method: 'nova_poshta'
   });
   const [isEditing, setIsEditing] = useState(false);
   const [loadingOrders, setLoadingOrders] = useState(false);
+  const [selectedDelivery, setSelectedDelivery] = useState('nova_poshta');
 
   useEffect(() => {
     if (loading) return;
