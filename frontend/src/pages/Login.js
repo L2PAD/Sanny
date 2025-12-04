@@ -39,9 +39,9 @@ const Login = () => {
         // Переводим сообщение об ошибке
         let errorMsg = result.error;
         if (errorMsg.includes('Invalid credentials')) {
-          errorMsg = t('loginFailed') + ': ' + (t('language') === 'ua' ? 'Невірний email або пароль' : 'Неверный email или пароль');
+          errorMsg = t('loginFailed') + ': ' + (language === 'ua' ? 'Невірний email або пароль' : 'Неверный email или пароль');
         } else if (errorMsg.includes('User not found')) {
-          errorMsg = t('language') === 'ua' ? 'Користувача не знайдено' : 'Пользователь не найден';
+          errorMsg = language === 'ua' ? 'Користувача не знайдено' : 'Пользователь не найден';
         } else if (!errorMsg.includes('Помилка') && !errorMsg.includes('Ошибка')) {
           errorMsg = t('loginFailed');
         }
@@ -49,7 +49,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Login error:', error);
-      const errorMsg = t('language') === 'ua' ? 'Помилка підключення до серверу' : 'Ошибка подключения к серверу';
+      const errorMsg = language === 'ua' ? 'Помилка підключення до серверу' : 'Ошибка подключения к серверу';
       toast.error(errorMsg);
     } finally {
       setLoading(false);
