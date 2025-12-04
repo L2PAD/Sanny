@@ -35,6 +35,18 @@ export const translations = {
     adminPanel: 'Панель администратора',
     logout: 'Выйти',
     
+    // Login page
+    welcomeBack: 'С возвращением',
+    signInToAccount: 'Войдите в свой аккаунт, чтобы продолжить',
+    emailAddress: 'Email адрес',
+    password: 'Пароль',
+    signingIn: 'Вход...',
+    signIn: 'Войти',
+    dontHaveAccount: 'Нет аккаунта?',
+    signUp: 'Зарегистрироваться',
+    loginSuccess: 'Вход выполнен успешно!',
+    loginFailed: 'Ошибка входа',
+    
     // Home
     heroTitle: 'Откройте для себя',
     heroTitleHighlight: 'Удивительные товары',
