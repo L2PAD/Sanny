@@ -221,20 +221,27 @@ const NewHeader = () => {
                 
                 {/* Language Dropdown */}
                 {showLanguageDropdown && (
-                  <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg py-2 min-w-[140px] z-50">
-                    <button
-                      onClick={() => selectLanguage('ru')}
-                      className="w-full px-4 py-2 text-black hover:bg-gray-100 flex items-center gap-2"
-                    >
-                      🇷🇺 Русский
-                    </button>
-                    <button
-                      onClick={() => selectLanguage('ua')}
-                      className="w-full px-4 py-2 text-black hover:bg-gray-100 flex items-center gap-2"
-                    >
-                      🇺🇦 Українська
-                    </button>
-                  </div>
+                  <>
+                    {/* Backdrop to close on click outside */}
+                    <div 
+                      className="fixed inset-0 z-[60]" 
+                      onClick={() => setShowLanguageDropdown(false)}
+                    />
+                    <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-2xl py-2 min-w-[140px] z-[70] border border-gray-200">
+                      <button
+                        onClick={() => selectLanguage('ru')}
+                        className="w-full px-4 py-2 text-left text-black hover:bg-gray-100 flex items-center gap-2 text-sm"
+                      >
+                        🇷🇺 Русский
+                      </button>
+                      <button
+                        onClick={() => selectLanguage('ua')}
+                        className="w-full px-4 py-2 text-left text-black hover:bg-gray-100 flex items-center gap-2 text-sm"
+                      >
+                        🇺🇦 Українська
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
 
