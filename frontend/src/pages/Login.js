@@ -23,7 +23,7 @@ const Login = () => {
       const result = await login(email, password);
       
       if (result.success) {
-        toast.success('Вхід виконано успішно!');
+        toast.success(t('loginSuccess'));
         
         // Redirect based on user role
         const user = JSON.parse(localStorage.getItem('user'));
@@ -36,20 +36,21 @@ const Login = () => {
           navigate('/profile');
         }
       } else {
-        // Переводим сообщение об ошибке на украинский
+        // Переводим сообщение об ошибке
         let errorMsg = result.error;
         if (errorMsg.includes('Invalid credentials')) {
-          errorMsg = 'Невірний email або пароль';
+          errorMsg = t('loginFailed') + ': ' + (t('language') === 'ua' ? 'Невірний email або пароль' : 'Неверный email или пароль');
         } else if (errorMsg.includes('User not found')) {
-          errorMsg = 'Користувача не знайдено';
-        } else if (!errorMsg.includes('Помилка')) {
-          errorMsg = 'Помилка входу. Перевірте дані.';
+          errorMsg = t('language') === 'ua' ? 'Користувача не знайдено' : 'Пользователь не найден';
+        } else if (!errorMsg.includes('Помилка') && !errorMsg.includes('Ошибка')) {
+          errorMsg = t('loginFailed');
         }
         toast.error(errorMsg);
       }
     } catch (error) {
       console.error('Login error:', error);
-      toast.error('Помилка підключення до серверу');
+      const errorMsg = t('language') === 'ua' ? 'Помилка підключення до серверу' : 'Ошибка подключения к серверу';
+      toast.error(errorMsg);
     } finally {
       setLoading(false);
     }
