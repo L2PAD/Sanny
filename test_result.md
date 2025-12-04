@@ -462,6 +462,7 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Saved Address Feature on Checkout Page"
     - "Profile Editing Functionality with Console Logs"
     - "Advanced Analytics User Behavior Tab"
     - "RozetkaPay Payment Integration"
