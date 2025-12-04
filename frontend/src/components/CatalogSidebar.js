@@ -53,13 +53,13 @@ const CatalogSidebar = () => {
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay - закрывает весь экран */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"
+        className="fixed inset-0 bg-black bg-opacity-70 z-[45] transition-opacity"
         onClick={closeCatalog}
       />
 
-      {/* Sidebar */}
+      {/* Sidebar - на весь экран на мобильных */}
       <div className="fixed left-0 top-0 h-full w-full sm:w-96 md:w-[400px] lg:w-[450px] bg-white shadow-2xl z-50 overflow-y-auto transform transition-transform">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 z-10">
