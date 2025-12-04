@@ -311,7 +311,6 @@ const UserProfile = () => {
                     className="mt-1"
                     placeholder={isEditing ? "Введите полное имя" : ""}
                   />
-                  {console.log('Profile tab - isEditing:', isEditing)}
                 </div>
 
                 <div>
