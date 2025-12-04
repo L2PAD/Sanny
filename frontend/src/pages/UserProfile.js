@@ -38,26 +38,29 @@ const UserProfile = () => {
       return;
     }
     
-    // Initialize user profile
-    const deliveryMethod = user.delivery_method || 'nova_poshta';
-    setUserProfile({
-      full_name: user.full_name || '',
-      email: user.email || '',
-      phone: user.phone || '',
-      address: user.address || '',
-      city: user.city || '',
-      postal_code: user.postal_code || '',
-      region: user.region || '',
-      np_department: user.np_department || '',
-      delivery_notes: user.delivery_notes || '',
-      delivery_method: deliveryMethod
-    });
-    setSelectedDelivery(deliveryMethod);
+    // Initialize user profile ONLY if not currently editing
+    // This prevents overwriting user's changes during edit mode
+    if (!isEditing) {
+      const deliveryMethod = user.delivery_method || 'nova_poshta';
+      setUserProfile({
+        full_name: user.full_name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        address: user.address || '',
+        city: user.city || '',
+        postal_code: user.postal_code || '',
+        region: user.region || '',
+        np_department: user.np_department || '',
+        delivery_notes: user.delivery_notes || '',
+        delivery_method: deliveryMethod
+      });
+      setSelectedDelivery(deliveryMethod);
+    }
 
     if (activeTab === 'orders') {
       fetchOrders();
     }
-  }, [user, loading, navigate, activeTab]);
+  }, [user, loading, navigate, activeTab, isEditing]);
 
   const fetchOrders = async () => {
     try {
