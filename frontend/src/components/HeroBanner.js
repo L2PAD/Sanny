@@ -153,37 +153,50 @@ const HeroBanner = () => {
           className={`absolute inset-0 transition-opacity duration-500 cursor-pointer ${
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ background: slide.background_gradient }}
           onClick={() => handleSlideClick(slide)}
         >
-          <div className="flex items-center justify-center h-full text-white relative">
+          {/* Background - для баннера используем изображение как фон */}
+          {slide.type === 'banner' && slide.image_url ? (
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ 
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${slide.image_url})`,
+              }}
+            />
+          ) : (
+            <div 
+              className="absolute inset-0"
+              style={{ background: slide.background_gradient }}
+            />
+          )}
+
+          <div className="flex items-center justify-center h-full text-white relative z-10">
             {/* Промо текст в углу */}
             {slide.promo_text && (
-              <div className="absolute top-6 right-6 bg-red-600 text-white px-4 py-2 rounded-lg font-bold text-lg shadow-lg">
+              <div className="absolute top-6 right-6 bg-red-600 text-white px-6 py-3 rounded-lg font-bold text-xl shadow-2xl animate-pulse">
                 {slide.promo_text}
               </div>
             )}
 
             {/* Основной контент */}
-            <div className="text-center px-6">
-              {slide.type === 'banner' && slide.image_url && (
-                <img 
-                  src={slide.image_url} 
-                  alt={slide.title}
-                  className="mx-auto mb-6 max-h-48 object-contain"
-                />
+            <div className="text-center px-6 max-w-4xl">
+              {/* Для товара показываем его изображение */}
+              {slide.type === 'product' && slide.product_id && (
+                <div className="mb-6">
+                  {/* Здесь можно добавить изображение товара если нужно */}
+                </div>
               )}
               
-              <h2 className="text-5xl font-bold mb-3 drop-shadow-lg">
+              <h2 className="text-5xl font-bold mb-3 drop-shadow-2xl">
                 {slide.title}
               </h2>
               
               {slide.subtitle && (
-                <p className="text-2xl mb-4 opacity-90">{slide.subtitle}</p>
+                <p className="text-3xl mb-4 opacity-90 drop-shadow-lg">{slide.subtitle}</p>
               )}
               
               {slide.description && (
-                <p className="text-lg opacity-80 mb-6">{slide.description}</p>
+                <p className="text-xl opacity-80 mb-6 drop-shadow-lg">{slide.description}</p>
               )}
 
               {/* Обратный отсчет */}
@@ -196,7 +209,7 @@ const HeroBanner = () => {
               {/* Кнопка действия */}
               {slide.button_text && (
                 <button 
-                  className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+                  className="bg-white text-gray-900 px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl hover:scale-105"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleSlideClick(slide);
