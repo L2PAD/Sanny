@@ -432,29 +432,37 @@ const SlidesManagement = () => {
               </div>
             </div>
 
-            <div className="border-t pt-4">
+            <div className="border-2 border-orange-200 bg-orange-50 rounded-lg p-4">
               <div className="flex items-center gap-4 mb-3">
                 <input
                   type="checkbox"
                   id="countdown_enabled"
                   checked={slideForm.countdown_enabled}
                   onChange={(e) => setSlideForm({ ...slideForm, countdown_enabled: e.target.checked })}
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                 />
-                <Label htmlFor="countdown_enabled" className="cursor-pointer">
-                  Включить обратный отсчет до конца акции
+                <Label htmlFor="countdown_enabled" className="cursor-pointer font-bold text-lg flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-orange-600" />
+                  Включить обратный отсчет до конца акции ⏰
                 </Label>
               </div>
+              <p className="text-sm text-gray-600 mb-3">
+                Таймер будет отображаться на слайде и показывать, сколько времени осталось до конца акции
+              </p>
               
               {slideForm.countdown_enabled && (
-                <div>
-                  <Label>Дата и время окончания акции</Label>
+                <div className="bg-white p-4 rounded border border-orange-300">
+                  <Label className="font-semibold">Дата и время окончания акции *</Label>
                   <Input
                     type="datetime-local"
                     value={slideForm.countdown_end_date}
                     onChange={(e) => setSlideForm({ ...slideForm, countdown_end_date: e.target.value })}
                     required={slideForm.countdown_enabled}
+                    className="mt-2"
                   />
+                  <p className="text-xs text-gray-500 mt-2">
+                    💡 Например: установите дату через неделю для недельной акции
+                  </p>
                 </div>
               )}
             </div>
