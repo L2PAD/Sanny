@@ -310,7 +310,37 @@ const SlidesManagement = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      {/* Sub-tabs для Слайдер и Популярні категорії */}
+      <div className="border-b border-gray-200">
+        <div className="flex gap-4">
+          <button
+            onClick={() => setActiveSubTab('slides')}
+            className={`pb-3 px-4 font-semibold transition-colors ${
+              activeSubTab === 'slides'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            🖼️ Слайдер баннерів
+          </button>
+          <button
+            onClick={() => setActiveSubTab('popular')}
+            className={`pb-3 px-4 font-semibold transition-colors ${
+              activeSubTab === 'popular'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 inline mr-1" />
+            Популярні категорії
+          </button>
+        </div>
+      </div>
+
+      {/* Content based on active sub-tab */}
+      {activeSubTab === 'slides' ? (
+        <>
+          <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold">Управление слайдером главной страницы</h2>
           <p className="text-gray-600 mt-1">Создавайте и редактируйте слайды для баннера</p>
