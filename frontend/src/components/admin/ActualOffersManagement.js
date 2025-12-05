@@ -254,7 +254,7 @@ const ActualOffersManagement = () => {
             resetForm();
             setShowAddForm(!showAddForm);
           }}
-          disabled={offers.length >= 5 && !editingOffer}
+          disabled={(offers?.length || 0) >= 5 && !editingOffer}
         >
           <Plus className="w-4 h-4 mr-2" />
           Додати пропозицію
