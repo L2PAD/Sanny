@@ -261,7 +261,7 @@ const ActualOffersManagement = () => {
         </Button>
       </div>
 
-      {offers.length >= 5 && !editingOffer && (
+      {(offers?.length || 0) >= 5 && !editingOffer && (
         <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
           <p className="text-sm text-yellow-800">
             ⚠️ Досягнуто максимум (5 пропозицій). Видаліть одну для додавання нової.
