@@ -375,6 +375,28 @@ class LeadCreate(BaseModel):
 
 class LeadUpdate(BaseModel):
     status: Optional[str] = None
+
+class PopularCategory(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    icon: str  # emoji icon
+    order: int = 0
+    active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class PopularCategoryCreate(BaseModel):
+    name: str
+    icon: str
+    order: int = 0
+    active: bool = True
+
+class PopularCategoryUpdate(BaseModel):
+    name: Optional[str] = None
+    icon: Optional[str] = None
+    order: Optional[int] = None
+    active: Optional[bool] = None
+
     notes: Optional[str] = None
     assigned_to: Optional[str] = None
 
