@@ -395,6 +395,43 @@ class PopularCategoryUpdate(BaseModel):
     name: Optional[str] = None
     icon: Optional[str] = None
     order: Optional[int] = None
+
+class ActualOffer(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    subtitle: Optional[str] = None
+    image_url: str
+    link_url: str  # URL or /products?category_id=...
+    background_color: Optional[str] = "#ffffff"
+    text_color: Optional[str] = "#000000"
+    position: int = 0  # 0-4 for grid positions
+    order: int = 0
+    active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ActualOfferCreate(BaseModel):
+    title: str
+    subtitle: Optional[str] = None
+    image_url: str
+    link_url: str
+    background_color: Optional[str] = "#ffffff"
+    text_color: Optional[str] = "#000000"
+    position: int = 0
+    order: int = 0
+    active: bool = True
+
+class ActualOfferUpdate(BaseModel):
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    image_url: Optional[str] = None
+    link_url: Optional[str] = None
+    background_color: Optional[str] = None
+    text_color: Optional[str] = None
+    position: Optional[int] = None
+    order: Optional[int] = None
+    active: Optional[bool] = None
+
     active: Optional[bool] = None
 
     notes: Optional[str] = None
