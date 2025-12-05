@@ -62,6 +62,11 @@ const Home = () => {
             {/* Hero Banner */}
             <HeroBanner />
 
+            {/* Popular Categories - под баннером */}
+            <div className="mt-8">
+              <PopularCategories categories={categories} />
+            </div>
+
             {/* Featured Products */}
             <section className="mt-8">
               <div className="flex justify-between items-center mb-6">
