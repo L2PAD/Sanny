@@ -17,7 +17,7 @@ const Home = () => {
   const { t } = useLanguage();
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [newProducts, setNewProducts] = useState([]);
+  const [bestsellers, setBestsellers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -28,14 +28,18 @@ const Home = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [categoriesRes, featuredRes, newRes] = await Promise.all([
+      const [categoriesRes, featuredRes] = await Promise.all([
         categoriesAPI.getAll(),
         productsAPI.getAll({ limit: 12, sort_by: 'popularity' }),
-        productsAPI.getAll({ limit: 12, sort_by: 'newest' }),
       ]);
+      
+      // Получаем бестселлеры
+      const bestsellersRes = await productsAPI.getAll({ limit: 12 });
+      const bestsellersData = bestsellersRes.data.filter(p => p.is_bestseller) || bestsellersRes.data.slice(0, 8);
+      
       setCategories(categoriesRes.data);
       setFeaturedProducts(featuredRes.data);
-      setNewProducts(newRes.data);
+      setBestsellers(bestsellersData);
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
