@@ -317,7 +317,7 @@ const StructuredSpecificationsEditor = ({ specifications = [], onChange }) => {
 
       {/* Groups */}
       <div className="space-y-4">
-        {groups.map((group, groupIndex) => (
+        {(groups || []).map((group, groupIndex) => (
           <div key={groupIndex} className="bg-gray-50 rounded-xl border-2 border-gray-200">
             {/* Group Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
