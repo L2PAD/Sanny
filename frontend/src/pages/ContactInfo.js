@@ -42,8 +42,8 @@ const ContactInfo = () => {
                 <h2 className="text-2xl font-bold">Email</h2>
               </div>
               
-              <a href="mailto:info@bazaar.com" className="block text-xl font-semibold hover:text-blue-600 transition-colors">
-                info@bazaar.com
+              <a href="mailto:support@y-store.in.ua" className="block text-xl font-semibold hover:text-blue-600 transition-colors">
+                support@y-store.in.ua
               </a>
             </div>
           </div>
