@@ -30,24 +30,24 @@ const PopularCategories = ({ categories }) => {
   };
 
   return (
-    <div className="bg-gray-50 py-8 rounded-2xl">
-      <div className="mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">
+    <div className="bg-white py-6 rounded-xl border border-gray-200">
+      <div className="mb-4">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 px-4">
           Популярні категорії
         </h2>
       </div>
 
-      <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6">
+      <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4 px-4">
         {popularCategories.map((category, index) => (
           <button
             key={index}
             onClick={() => handleCategoryClick(category.name)}
-            className="flex flex-col items-center justify-center p-4 md:p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-200 hover:scale-105 group"
+            className="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200 hover:border-blue-300 group"
           >
-            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-              <span className="text-4xl md:text-5xl">{category.icon}</span>
+            <div className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+              <span className="text-3xl md:text-4xl">{category.icon}</span>
             </div>
-            <span className="text-xs md:text-sm font-semibold text-gray-700 text-center leading-tight uppercase">
+            <span className="text-[10px] md:text-xs font-medium text-gray-700 text-center leading-tight uppercase">
               {category.name}
             </span>
           </button>
