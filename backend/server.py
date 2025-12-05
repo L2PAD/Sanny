@@ -119,6 +119,8 @@ class Product(BaseModel):
     installment_months: Optional[int] = None
     installment_available: bool = False
     views_count: int = 0
+    is_bestseller: bool = False  # Хит продаж
+    is_featured: bool = False  # Рекомендуемый
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
