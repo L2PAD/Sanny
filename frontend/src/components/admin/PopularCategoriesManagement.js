@@ -119,7 +119,7 @@ const PopularCategoriesManagement = () => {
     const currentIndex = categories.findIndex(c => c.id === categoryId);
     if (
       (direction === 'up' && currentIndex === 0) ||
-      (direction === 'down' && currentIndex === categories.length - 1)
+      (direction === 'down' && currentIndex === (categories?.length || 0) - 1)
     ) {
       return;
     }
