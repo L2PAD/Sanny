@@ -339,15 +339,61 @@ const ActualOffersManagement = () => {
             </div>
 
             <div>
-              <Label>Посилання (URL) *</Label>
-              <Input
-                value={form.link_url}
-                onChange={(e) => setForm({ ...form, link_url: e.target.value })}
-                placeholder="/products?category_id=..."
-                required
+              <Label>Опис пропозиції</Label>
+              <textarea
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                placeholder="Детальний опис акції..."
+                rows="4"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <p className="text-xs text-gray-500 mt-1">
-                Приклад: /products?category_id=xxx або /product/yyy
+                Відображається на сторінці пропозиції
+              </p>
+            </div>
+
+            <div>
+              <Label>Виберіть товари для акції</Label>
+              <div className="border border-gray-300 rounded-lg p-4 max-h-60 overflow-y-auto">
+                {products.length === 0 ? (
+                  <p className="text-gray-500 text-sm">Товарів немає</p>
+                ) : (
+                  <div className="space-y-2">
+                    {products.map((product) => (
+                      <label key={product.id} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={selectedProducts.includes(product.id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedProducts([...selectedProducts, product.id]);
+                            } else {
+                              setSelectedProducts(selectedProducts.filter(id => id !== product.id));
+                            }
+                          }}
+                          className="w-4 h-4"
+                        />
+                        <span className="text-sm flex-1">{product.title}</span>
+                        <span className="text-sm text-gray-500">${product.price}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                Вибрано: {selectedProducts.length} товарів
+              </p>
+            </div>
+
+            <div>
+              <Label>Посилання (автоматичне)</Label>
+              <Input
+                value={form.link_url}
+                disabled
+                className="bg-gray-100"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Після створення автоматично встановиться /offer/{'{id}'}
               </p>
             </div>
 
