@@ -2690,31 +2690,6 @@ async def delete_popular_category(
     
     return {"message": "Popular category deleted successfully"}
 
-
-        {"id": order_id},
-        {"$set": {"status": status, "updated_at": datetime.now(timezone.utc)}}
-    )
-    
-    if result.modified_count == 0:
-        raise HTTPException(status_code=404, detail="Order not found")
-    
-    # Create note about status change
-    order = await db.orders.find_one({"id": order_id})
-    if order:
-        note_dict = {
-            "id": str(uuid.uuid4()),
-            "customer_id": order["buyer_id"],
-            "author_id": current_user.id,
-            "author_name": current_user.full_name,
-            "note": f"Статус заказа #{order.get('order_number', order_id[:8])} изменен на: {status}",
-            "type": "order_update",
-            "created_at": datetime.now(timezone.utc)
-        }
-        await db.customer_notes.insert_one(note_dict)
-    
-    return {"success": True, "order_id": order_id, "new_status": status}
-
-
 # ============= INITIALIZE APP =============
 
 app.include_router(api_router)
