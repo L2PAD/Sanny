@@ -2598,6 +2598,77 @@ async def update_order_status(
         raise HTTPException(status_code=400, detail="Invalid status")
     
     result = await db.orders.update_one(
+
+# ============= POPULAR CATEGORIES =============
+
+@api_router.get("/popular-categories")
+async def get_popular_categories():
+    """
+    Get all active popular categories (public endpoint)
+    """
+    categories = await db.popular_categories.find({"active": True}, {"_id": 0}).sort("order", 1).to_list(100)
+    return categories
+
+@api_router.get("/admin/popular-categories")
+async def get_all_popular_categories(current_user: User = Depends(get_current_admin)):
+    """
+    Get all popular categories (admin only)
+    """
+    categories = await db.popular_categories.find({}, {"_id": 0}).sort("order", 1).to_list(100)
+    return categories
+
+@api_router.post("/admin/popular-categories", response_model=PopularCategory)
+async def create_popular_category(
+    category: PopularCategoryCreate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Create a popular category (admin only)
+    """
+    category_dict = category.model_dump()
+    category_dict["id"] = str(uuid.uuid4())
+    category_dict["created_at"] = datetime.now(timezone.utc)
+    
+    await db.popular_categories.insert_one(category_dict)
+    return PopularCategory(**category_dict)
+
+@api_router.put("/admin/popular-categories/{category_id}", response_model=PopularCategory)
+async def update_popular_category(
+    category_id: str,
+    category_update: PopularCategoryUpdate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Update a popular category (admin only)
+    """
+    update_data = category_update.model_dump(exclude_unset=True)
+    
+    result = await db.popular_categories.update_one(
+        {"id": category_id},
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Category not found")
+    
+    updated_category = await db.popular_categories.find_one({"id": category_id}, {"_id": 0})
+    return PopularCategory(**updated_category)
+
+@api_router.delete("/admin/popular-categories/{category_id}")
+async def delete_popular_category(
+    category_id: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Delete a popular category (admin only)
+    """
+    result = await db.popular_categories.delete_one({"id": category_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Category not found")
+    
+    return {"message": "Popular category deleted successfully"}
+
+
         {"id": order_id},
         {"$set": {"status": status, "updated_at": datetime.now(timezone.utc)}}
     )
