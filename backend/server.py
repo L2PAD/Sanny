@@ -2689,6 +2689,27 @@ async def get_all_popular_categories(current_user: User = Depends(get_current_ad
     """
     Get all popular categories (admin only)
     """
+
+
+@api_router.put("/admin/products/{product_id}/bestseller")
+async def toggle_product_bestseller(
+    product_id: str,
+    is_bestseller: bool,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Toggle product bestseller status (admin only)
+    """
+    result = await db.products.update_one(
+        {"id": product_id},
+        {"$set": {"is_bestseller": is_bestseller, "updated_at": datetime.now(timezone.utc)}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+    
+    return {"success": True, "product_id": product_id, "is_bestseller": is_bestseller}
+
     categories = await db.popular_categories.find({}, {"_id": 0}).sort("order", 1).to_list(100)
     return categories
 
