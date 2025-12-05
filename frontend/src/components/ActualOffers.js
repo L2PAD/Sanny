@@ -23,11 +23,8 @@ const ActualOffers = () => {
   };
 
   const handleOfferClick = (offer) => {
-    if (offer.link_url.startsWith('http')) {
-      window.open(offer.link_url, '_blank');
-    } else {
-      navigate(offer.link_url);
-    }
+    // Всегда ведем на страницу предложения
+    navigate(`/offer/${offer.id}`);
   };
 
   if (loading) {
