@@ -802,6 +802,10 @@ const SlidesManagement = () => {
           })
         )}
       </div>
+      </>
+      ) : (
+        <PopularCategoriesManagement />
+      )}
     </div>
   );
 };
