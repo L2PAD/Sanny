@@ -354,7 +354,7 @@ const StructuredSpecificationsEditor = ({ specifications = [], onChange }) => {
             {/* Group Fields */}
             {expandedGroups[groupIndex] && (
               <div className="p-4 space-y-3">
-                {group.fields.map((field, fieldIndex) => (
+                {(group.fields || []).map((field, fieldIndex) => (
                   <div key={fieldIndex} className="flex items-start gap-3">
                     <div className="flex-1 grid grid-cols-2 gap-3">
                       <div>
