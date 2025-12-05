@@ -311,12 +311,12 @@ const SlidesManagement = () => {
 
   return (
     <div className="space-y-6">
-      {/* Sub-tabs для Слайдер и Популярні категорії */}
+      {/* Sub-tabs для Слайдер, Популярні категорії та Актуальні пропозиції */}
       <div className="border-b border-gray-200">
-        <div className="flex gap-4">
+        <div className="flex gap-4 overflow-x-auto">
           <button
             onClick={() => setActiveSubTab('slides')}
-            className={`pb-3 px-4 font-semibold transition-colors ${
+            className={`pb-3 px-4 font-semibold transition-colors whitespace-nowrap ${
               activeSubTab === 'slides'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
@@ -326,7 +326,7 @@ const SlidesManagement = () => {
           </button>
           <button
             onClick={() => setActiveSubTab('popular')}
-            className={`pb-3 px-4 font-semibold transition-colors ${
+            className={`pb-3 px-4 font-semibold transition-colors whitespace-nowrap ${
               activeSubTab === 'popular'
                 ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
@@ -334,6 +334,16 @@ const SlidesManagement = () => {
           >
             <Sparkles className="w-4 h-4 inline mr-1" />
             Популярні категорії
+          </button>
+          <button
+            onClick={() => setActiveSubTab('offers')}
+            className={`pb-3 px-4 font-semibold transition-colors whitespace-nowrap ${
+              activeSubTab === 'offers'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            🎁 Актуальні пропозиції
           </button>
         </div>
       </div>
