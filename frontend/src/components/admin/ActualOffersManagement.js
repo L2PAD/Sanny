@@ -225,8 +225,8 @@ const ActualOffersManagement = () => {
       link_url: '/offer/new',
       background_color: '#3b82f6',
       text_color: '#ffffff',
-      position: offers.length,
-      order: offers.length,
+      position: offers?.length || 0,
+      order: offers?.length || 0,
       active: true,
       product_ids: []
     });
