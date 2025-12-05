@@ -156,6 +156,8 @@ class ProductUpdate(BaseModel):
     videos: Optional[List[str]] = None
     specifications: Optional[List[Dict[str, Any]]] = None
     status: Optional[str] = None
+    is_bestseller: Optional[bool] = None
+    is_featured: Optional[bool] = None
 
 class Review(BaseModel):
     model_config = ConfigDict(extra="ignore")
