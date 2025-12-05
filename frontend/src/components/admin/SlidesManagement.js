@@ -248,7 +248,7 @@ const SlidesManagement = () => {
     const currentIndex = slides.findIndex(s => s.id === slideId);
     if (
       (direction === 'up' && currentIndex === 0) ||
-      (direction === 'down' && currentIndex === slides.length - 1)
+      (direction === 'down' && currentIndex === (slides?.length || 0) - 1)
     ) {
       return;
     }
