@@ -93,6 +93,7 @@ function App() {
                           <Route path="/about" element={<AboutUs />} />
                           <Route path="/terms" element={<Terms />} />
                           <Route path="/promotions" element={<Promotions />} />
+                          <Route path="/promotion/:promotionId" element={<PromotionDetail />} />
                           <Route path="*" element={<Navigate to="/" />} />
                         </Routes>
                         <Footer />
