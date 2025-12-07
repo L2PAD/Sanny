@@ -204,8 +204,8 @@ const NewHeader = () => {
                 {t('agreement')}
               </Link>
               
-              <Link to="/blog" className="hover:text-gray-300 transition-colors whitespace-nowrap">
-                {t('blog')}
+              <Link to="/promotions" className="hover:text-gray-300 transition-colors whitespace-nowrap">
+                \u0410\u043a\u0446\u0456\u0457
               </Link>
             </div>
 
