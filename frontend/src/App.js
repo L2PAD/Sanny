@@ -34,6 +34,7 @@ import ExchangeReturn from './pages/ExchangeReturn';
 import AboutUs from './pages/AboutUs';
 import Terms from './pages/Terms';
 import Promotions from './pages/Promotions';
+import PromotionDetail from './pages/PromotionDetail';
 import OfferDetail from './pages/OfferDetail';
 import analyticsTracker from './services/analyticsTracker';
 import './App.css';
