@@ -2758,6 +2758,89 @@ async def toggle_product_bestseller(
     return {"success": True, "product_id": product_id, "is_bestseller": is_bestseller}
 
     categories = await db.popular_categories.find({}, {"_id": 0}).sort("order", 1).to_list(100)
+
+
+# ============= PROMOTIONS (АКЦИИ) =============
+
+@api_router.get("/promotions")
+async def get_promotions():
+    """
+    Get all active promotions (public endpoint)
+    """
+    promotions = await db.promotions.find({"active": True}, {"_id": 0}).sort("order", 1).to_list(100)
+    return promotions
+
+@api_router.get("/promotions/{promotion_id}")
+async def get_promotion(promotion_id: str):
+    """
+    Get single promotion by ID (public endpoint)
+    """
+    promotion = await db.promotions.find_one({"id": promotion_id, "active": True}, {"_id": 0})
+    if not promotion:
+        raise HTTPException(status_code=404, detail="Promotion not found")
+    return promotion
+
+@api_router.get("/admin/promotions")
+async def get_all_promotions(current_user: User = Depends(get_current_admin)):
+    """
+    Get all promotions (admin only)
+    """
+    promotions = await db.promotions.find({}, {"_id": 0}).sort("order", 1).to_list(100)
+    return promotions
+
+@api_router.post("/admin/promotions", response_model=Promotion)
+async def create_promotion(
+    promotion: PromotionCreate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Create a promotion (admin only)
+    """
+    promotion_dict = promotion.model_dump()
+    promotion_dict["id"] = str(uuid.uuid4())
+    promotion_dict["created_at"] = datetime.now(timezone.utc)
+    promotion_dict["updated_at"] = datetime.now(timezone.utc)
+    
+    await db.promotions.insert_one(promotion_dict)
+    return Promotion(**promotion_dict)
+
+@api_router.put("/admin/promotions/{promotion_id}", response_model=Promotion)
+async def update_promotion(
+    promotion_id: str,
+    promotion_update: PromotionUpdate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Update a promotion (admin only)
+    """
+    update_data = promotion_update.model_dump(exclude_unset=True)
+    update_data["updated_at"] = datetime.now(timezone.utc)
+    
+    result = await db.promotions.update_one(
+        {"id": promotion_id},
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Promotion not found")
+    
+    updated_promotion = await db.promotions.find_one({"id": promotion_id}, {"_id": 0})
+    return Promotion(**updated_promotion)
+
+@api_router.delete("/admin/promotions/{promotion_id}")
+async def delete_promotion(
+    promotion_id: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Delete a promotion (admin only)
+    """
+    result = await db.promotions.delete_one({"id": promotion_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Promotion not found")
+    
+    return {"message": "Promotion deleted successfully"}
+
     return categories
 
 @api_router.post("/admin/popular-categories", response_model=PopularCategory)
