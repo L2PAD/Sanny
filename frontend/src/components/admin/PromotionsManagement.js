@@ -234,6 +234,7 @@ const PromotionsManagement = () => {
     setForm({
       title: '',
       description: '',
+      detailed_description: '',
       image_url: '',
       discount_text: '',
       link_url: '/products',
