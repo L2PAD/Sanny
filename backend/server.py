@@ -430,6 +430,53 @@ class ActualOfferCreate(BaseModel):
     background_color: Optional[str] = "#ffffff"
     text_color: Optional[str] = "#000000"
     position: int = 0
+
+class Promotion(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    description: str
+    image_url: str
+    discount_text: Optional[str] = None  # "-50%" или "2+1"
+    link_url: Optional[str] = None  # Ссылка на товары акции
+    countdown_enabled: bool = False
+    countdown_end_date: Optional[datetime] = None
+    background_color: Optional[str] = "#ffffff"
+    text_color: Optional[str] = "#000000"
+    badge_color: Optional[str] = "#ef4444"  # Цвет бейджа скидки
+    order: int = 0
+    active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class PromotionCreate(BaseModel):
+    title: str
+    description: str
+    image_url: str
+    discount_text: Optional[str] = None
+    link_url: Optional[str] = None
+    countdown_enabled: bool = False
+    countdown_end_date: Optional[datetime] = None
+    background_color: Optional[str] = "#ffffff"
+    text_color: Optional[str] = "#000000"
+    badge_color: Optional[str] = "#ef4444"
+    order: int = 0
+    active: bool = True
+
+class PromotionUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    image_url: Optional[str] = None
+    discount_text: Optional[str] = None
+    link_url: Optional[str] = None
+    countdown_enabled: Optional[bool] = None
+    countdown_end_date: Optional[datetime] = None
+    background_color: Optional[str] = None
+    text_color: Optional[str] = None
+    badge_color: Optional[str] = None
+    order: Optional[int] = None
+    active: Optional[bool] = None
+
     order: int = 0
     active: bool = True
 
