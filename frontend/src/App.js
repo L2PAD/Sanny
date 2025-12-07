@@ -33,7 +33,7 @@ import DeliveryPayment from './pages/DeliveryPayment';
 import ExchangeReturn from './pages/ExchangeReturn';
 import AboutUs from './pages/AboutUs';
 import Terms from './pages/Terms';
-import Blog from './pages/Blog';
+import Promotions from './pages/Promotions';
 import OfferDetail from './pages/OfferDetail';
 import analyticsTracker from './services/analyticsTracker';
 import './App.css';
