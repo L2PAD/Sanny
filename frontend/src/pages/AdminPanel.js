@@ -238,6 +238,9 @@ const AdminPanel = () => {
         {/* CRM Tab */}
         {activeTab === 'crm' && <CRMDashboard />}
 
+        {/* Promotions Tab */}
+        {activeTab === 'promotions' && <PromotionsManagement />}
+
         {/* Users Tab */}
         {activeTab === 'users' && (
           <div className="bg-white rounded-2xl p-6 border border-gray-200">
