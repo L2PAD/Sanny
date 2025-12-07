@@ -91,7 +91,7 @@ function App() {
                           <Route path="/exchange-return" element={<ExchangeReturn />} />
                           <Route path="/about" element={<AboutUs />} />
                           <Route path="/terms" element={<Terms />} />
-                          <Route path="/blog" element={<Blog />} />
+                          <Route path="/promotions" element={<Promotions />} />
                           <Route path="*" element={<Navigate to="/" />} />
                         </Routes>
                         <Footer />
