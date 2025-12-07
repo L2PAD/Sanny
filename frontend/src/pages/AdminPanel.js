@@ -17,6 +17,7 @@ import OrdersAnalytics from '../components/admin/OrdersAnalytics';
 import AdvancedAnalytics from '../components/admin/AdvancedAnalytics';
 import SlidesManagement from '../components/admin/SlidesManagement';
 import CRMDashboard from '../components/admin/CRMDashboard';
+import PromotionsManagement from '../components/admin/PromotionsManagement';
 
 const AdminPanel = () => {
   const { isAdmin, loading } = useAuth();
