@@ -40,6 +40,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
+import FloatingActionButton from './components/FloatingActionButton';
 import analyticsTracker from './services/analyticsTracker';
 import './App.css';
 
