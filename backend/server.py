@@ -714,12 +714,9 @@ async def register(user_data: UserCreate):
 async def login(credentials: UserLogin):
     user_doc = await db.users.find_one({"email": credentials.email}, {"_id": 0})
     if not user_doc:
-        print(f"User not found: {credentials.email}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
-    print(f"User found: {credentials.email}, has password_hash: {'password_hash' in user_doc}")
     if not verify_password(credentials.password, user_doc.get("password_hash", "")):
-        print(f"Password verification failed for {credentials.email}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     user_doc.pop("password_hash", None)
