@@ -70,6 +70,12 @@ const ProductCard = ({ product }) => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  const handleQuickView = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowQuickView(true);
+  };
+
   return (
     <Link
       data-testid={`product-card-${product.id}`}
