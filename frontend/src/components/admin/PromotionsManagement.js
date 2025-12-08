@@ -59,6 +59,9 @@ const PromotionsManagement = () => {
   };
 
   const handleImageUpload = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const file = e.target.files[0];
     if (!file) return;
     
