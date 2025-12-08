@@ -511,6 +511,48 @@ class ActualOfferUpdate(BaseModel):
     assigned_to: Optional[str] = None
 
 
+
+# Универсальная модель для кастомных разделов (Хиты продаж, Новинки, Популярные, etc.)
+class CustomSection(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str  # "Хіти продажу", "Новинки", "Популярні" и т.д.
+    slug: str  # "bestsellers", "new", "popular", etc. (для URL)
+    description: Optional[str] = None  # Описание раздела
+    description_html: Optional[str] = None  # HTML описание для детальной страницы
+    banner_image_url: Optional[str] = None  # Баннер для страницы раздела
+    icon: Optional[str] = None  # Иконка для главной страницы (emoji или класс)
+    product_ids: List[str] = []  # ID товаров в этом разделе
+    display_on_home: bool = True  # Показывать на главной странице
+    order: int = 0  # Порядок сортировки на главной
+    active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class CustomSectionCreate(BaseModel):
+    title: str
+    slug: str
+    description: Optional[str] = None
+    description_html: Optional[str] = None
+    banner_image_url: Optional[str] = None
+    icon: Optional[str] = None
+    product_ids: List[str] = []
+    display_on_home: bool = True
+    order: int = 0
+    active: bool = True
+
+class CustomSectionUpdate(BaseModel):
+    title: Optional[str] = None
+    slug: Optional[str] = None
+    description: Optional[str] = None
+    description_html: Optional[str] = None
+    banner_image_url: Optional[str] = None
+    icon: Optional[str] = None
+    product_ids: Optional[List[str]] = None
+    display_on_home: Optional[bool] = None
+    order: Optional[int] = None
+    active: Optional[bool] = None
+
 # ============= CRM MODELS =============
 
 class CustomerNote(BaseModel):
