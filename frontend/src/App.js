@@ -36,8 +36,6 @@ import Terms from './pages/Terms';
 import Promotions from './pages/Promotions';
 import PromotionDetail from './pages/PromotionDetail';
 import OfferDetail from './pages/OfferDetail';
-import About from './pages/About';
-import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingActionButton from './components/FloatingActionButton';
