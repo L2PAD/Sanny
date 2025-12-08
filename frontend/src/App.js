@@ -98,6 +98,7 @@ function App() {
                           <Route path="/terms" element={<Terms />} />
                           <Route path="/promotions" element={<Promotions />} />
                           <Route path="/promotion/:promotionId" element={<PromotionDetail />} />
+                          <Route path="/section/:slug" element={<SectionDetail />} />
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
