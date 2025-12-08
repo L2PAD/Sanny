@@ -18,6 +18,14 @@ const ProductImageGallery = ({ images = [], videos = [], productTitle, discount 
 
   const currentMedia = media[selectedIndex];
 
+  const handleMouseMove = (e) => {
+    if (!isZoomed) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
+
   return (
     <div className="flex gap-3 sticky top-4">
       {media.length > 1 && (
