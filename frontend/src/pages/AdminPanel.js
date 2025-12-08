@@ -230,6 +230,30 @@ const AdminPanel = () => {
             <span className="hidden sm:inline">Акції</span>
             <span className="sm:hidden">🎁</span>
           </button>
+          <button
+            onClick={() => setActiveTab('popular-categories')}
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+              activeTab === 'popular-categories'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Package className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Популярні категорії</span>
+            <span className="sm:hidden">📦</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('custom-sections')}
+            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+              activeTab === 'custom-sections'
+                ? 'border-b-2 border-blue-600 text-blue-600'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <TrendingUp className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Кастомні розділи</span>
+            <span className="sm:hidden">🔥</span>
+          </button>
           </div>
         </div>
 
