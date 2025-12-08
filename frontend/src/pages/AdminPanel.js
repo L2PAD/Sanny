@@ -278,6 +278,12 @@ const AdminPanel = () => {
         {/* Promotions Tab */}
         {activeTab === 'promotions' && <PromotionsManagement />}
 
+        {/* Popular Categories Tab */}
+        {activeTab === 'popular-categories' && <PopularCategoriesManagement />}
+
+        {/* Custom Sections Tab */}
+        {activeTab === 'custom-sections' && <CustomSectionsManagement />}
+
         {/* Users Tab */}
         {activeTab === 'users' && (
           <div className="bg-white rounded-2xl p-6 border border-gray-200">
