@@ -106,8 +106,9 @@ function App() {
                         <Footer />
                         <ScrollToTop />
                         <FloatingActionButton />
-                        <AIChatbot />
-                        <SupportWidget />
+                        {/* Old components removed - replaced by FloatingActionButton */}
+                        {/* <AIChatbot /> */}
+                        {/* <SupportWidget /> */}
                       </div>
                     </AnalyticsWrapper>
                   </CartProvider>
