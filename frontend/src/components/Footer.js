@@ -269,7 +269,8 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar - Hidden as links are now in the main footer section */}
+      {/* 
       <div className="border-t border-white/10">
         <div className="container-main py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
@@ -282,6 +283,14 @@ const Footer = () => {
               <Link to="/terms" className="hover:text-white">{t('agreement')}</Link>
             </div>
           </div>
+        </div>
+      </div>
+      */}
+      
+      {/* Simplified Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="container-main py-6">
+          <p className="text-center text-sm text-gray-400">© 2025 Y-store. Всі права захищені.</p>
         </div>
       </div>
     </footer>
