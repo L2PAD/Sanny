@@ -563,19 +563,28 @@ const PopularCategoriesManagement = () => {
           <h3 className="font-bold mb-4">Попередній перегляд на сайті:</h3>
           <div className="bg-white py-6 rounded-xl border border-gray-200">
             <div className="grid grid-cols-4 md:grid-cols-8 gap-3 px-4">
-              {categories.filter(c => c.active).map((category) => (
-                <div
-                  key={category.id}
-                  className="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg"
-                >
-                  <div className="w-12 h-12 flex items-center justify-center mb-2">
-                    <span className="text-3xl">{category.icon}</span>
+              {categories.filter(c => c.active).map((category) => {
+                const IconComponent = iconComponents[category.icon];
+                return (
+                  <div
+                    key={category.id}
+                    className="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 flex items-center justify-center mb-2 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
+                      {category.image_url ? (
+                        <img src={category.image_url} alt={category.name} className="w-full h-full object-cover rounded-lg" />
+                      ) : IconComponent ? (
+                        <IconComponent className="w-8 h-8 text-blue-600" />
+                      ) : (
+                        <span className="text-2xl">{category.icon}</span>
+                      )}
+                    </div>
+                    <span className="text-[10px] font-medium text-gray-700 text-center leading-tight uppercase">
+                      {category.name}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-medium text-gray-700 text-center leading-tight uppercase">
-                    {category.name}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </Card>
