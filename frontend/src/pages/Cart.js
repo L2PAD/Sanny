@@ -115,7 +115,7 @@ const Cart = () => {
                 <div key={i} className="skeleton h-32 rounded-2xl"></div>
               ))
             ) : (
-              cartItems.map((item) => {
+              cartItems.map((item, index) => {
                 const product = products[item.product_id];
                 if (!product) return null;
 
@@ -123,20 +123,21 @@ const Cart = () => {
                   <div
                     key={item.product_id}
                     data-testid={`cart-item-${item.product_id}`}
-                    className="bg-white border border-gray-200 rounded-2xl p-6 flex gap-6"
+                    className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 flex gap-6 hover:shadow-xl hover:border-blue-300 transition-all duration-300 animate-fadeIn"
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
                     {/* Product Image */}
-                    <Link to={`/products/${product.id}`} className="flex-shrink-0">
-                      <div className="w-24 h-24 bg-[#F7F7F7] rounded-xl overflow-hidden">
+                    <Link to={`/products/${product.id}`} className="flex-shrink-0 group">
+                      <div className="w-28 h-28 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                         {product.images && product.images[0] ? (
                           <img
                             src={product.images[0]}
                             alt={product.title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
-                            <span className="text-3xl">📦</span>
+                            <span className="text-4xl">📦</span>
                           </div>
                         )}
                       </div>
@@ -146,14 +147,18 @@ const Cart = () => {
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
                         <Link to={`/products/${product.id}`}>
-                          <h3 className="font-semibold text-lg hover:text-[#0071E3]">
+                          <h3 className="font-bold text-xl hover:text-blue-600 transition-colors">
                             {product.title}
                           </h3>
                         </Link>
-                        <p className="text-sm text-gray-600 mt-1">{t('quantity')}: {item.quantity}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                            {t('quantity')}: <strong>{item.quantity}</strong>
+                          </span>
+                        </div>
                       </div>
                       <div className="flex items-center justify-between mt-4">
-                        <span data-testid={`item-price-${item.product_id}`} className="text-2xl font-bold">
+                        <span data-testid={`item-price-${item.product_id}`} className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                           ${(product.price * item.quantity).toFixed(2)}
                         </span>
                         <Button
@@ -161,9 +166,9 @@ const Cart = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => removeFromCart(item.product_id)}
-                          className="text-red-600 hover:text-red-700"
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl p-3 transition-all duration-300 hover:scale-110"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-5 h-5" />
                         </Button>
                       </div>
                     </div>
@@ -174,8 +179,8 @@ const Cart = () => {
           </div>
 
           {/* Order Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 space-y-6 sticky top-24">
+          <div className="lg:col-span-1 animate-slideInRight">
+            <div className="bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 rounded-3xl p-8 space-y-6 sticky top-24 shadow-2xl">
               <h2 className="text-2xl font-bold">{t('orderSummary')}</h2>
               
               <div className="space-y-3 py-4 border-t border-b">
