@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ScrollReveal from './ScrollReveal';
 
 const PopularCategories = ({ categories }) => {
   const navigate = useNavigate();
@@ -17,47 +18,29 @@ const PopularCategories = ({ categories }) => {
       
       if (response.data.length > 0) {
         setPopularCategories(response.data);
-      } else {
-        // Fallback к дефолтным категориям если нет в базе
-        setPopularCategories([
-          { name: 'СМАРТФОНИ', icon: '📱', order: 0 },
-          { name: 'ТЕЛЕВІЗОРИ', icon: '📺', order: 1 },
-          { name: 'МУЛЬТИВАРКИ', icon: '🍲', order: 2 },
-          { name: 'КАВОВАРКИ', icon: '☕', order: 3 },
-          { name: 'ПРАЛЬНІ МАШИНИ', icon: '🧺', order: 4 },
-          { name: 'ПИЛОСОСИ', icon: '🧹', order: 5 },
-          { name: 'НОУТБУКИ', icon: '💻', order: 6 },
-          { name: 'ХОЛОДИЛЬНИКИ', icon: '❄️', order: 7 },
-        ]);
       }
     } catch (error) {
       console.error('Failed to fetch popular categories:', error);
-      // Fallback
-      setPopularCategories([
-        { name: 'СМАРТФОНИ', icon: '📱', order: 0 },
-        { name: 'ТЕЛЕВІЗОРИ', icon: '📺', order: 1 },
-        { name: 'МУЛЬТИВАРКИ', icon: '🍲', order: 2 },
-        { name: 'КАВОВАРКИ', icon: '☕', order: 3 },
-        { name: 'ПРАЛЬНІ МАШИНИ', icon: '🧺', order: 4 },
-        { name: 'ПИЛОСОСИ', icon: '🧹', order: 5 },
-        { name: 'НОУТБУКИ', icon: '💻', order: 6 },
-        { name: 'ХОЛОДИЛЬНИКИ', icon: '❄️', order: 7 },
-      ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCategoryClick = (categoryName) => {
-    // Находим ID категории по имени
-    const category = categories.find(cat => 
-      cat.name.toLowerCase().includes(categoryName.toLowerCase().slice(0, 5))
-    );
-    
-    if (category) {
-      navigate(`/products?category_id=${category.id}`);
+  const handleCategoryClick = (category) => {
+    // Если указан category_id, используем его для фильтрации
+    if (category.category_id) {
+      navigate(`/products?category_id=${category.category_id}`);
     } else {
-      navigate('/products');
+      // Иначе ищем категорию по имени
+      const matchedCategory = categories.find(cat => 
+        cat.name.toLowerCase().includes(category.name.toLowerCase().slice(0, 5))
+      );
+      
+      if (matchedCategory) {
+        navigate(`/products?category_id=${matchedCategory.id}`);
+      } else {
+        navigate('/products');
+      }
     }
   };
 
