@@ -29,7 +29,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#121212] text-white mt-20">
+    <footer className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white mt-20 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+      </div>
+
       {/* Google Map Section */}
       <div className="w-full h-[400px] md:h-[500px] relative">
         <iframe
@@ -45,12 +51,14 @@ const Footer = () => {
         ></iframe>
         
         {/* Map Overlay with Address */}
-        <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-2xl max-w-sm">
-          <div className="flex items-start gap-3">
-            <MapPin className="w-6 h-6 text-[#0071E3] flex-shrink-0 mt-1" />
+        <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-xl p-6 rounded-3xl shadow-2xl max-w-sm animate-fadeIn border-2 border-white/20">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <MapPin className="w-6 h-6 text-white" />
+            </div>
             <div>
-              <h3 className="font-bold text-lg text-[#121212] mb-1">Y-store</h3>
-              <p className="text-gray-700 text-sm mb-2">
+              <h3 className="font-extrabold text-xl text-gray-900 mb-2">Y-store</h3>
+              <p className="text-gray-700 text-sm mb-3 leading-relaxed">
                 проспект Миколи Бажана, 24/1<br />
                 Київ, Україна, 02149
               </p>
@@ -58,9 +66,9 @@ const Footer = () => {
                 href="https://www.google.com/maps/dir//проспект+Миколи+Бажана,+24/1,+Київ,+02149"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#0071E3] hover:text-[#0051c3] text-sm font-semibold inline-flex items-center gap-1"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-xl text-sm font-bold inline-flex items-center gap-2 hover:scale-105 transition-transform shadow-lg"
               >
-                {t('getDirections')}
+                {t('getDirections') || 'Маршрут'}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -71,13 +79,13 @@ const Footer = () => {
       </div>
 
       {/* Contact Info */}
-      <div className="container-main py-16">
+      <div className="container-main py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Y-store</h3>
-            <p className="text-gray-400">
-              {t('ctaDescription')}
+          <div className="animate-fadeIn">
+            <h3 className="text-2xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Y-store</h3>
+            <p className="text-gray-300 leading-relaxed">
+              {t('ctaDescription') ||
             </p>
           </div>
 
