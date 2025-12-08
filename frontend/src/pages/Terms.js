@@ -1,19 +1,29 @@
 import React from 'react';
-import { FileText } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { FileText, CheckCircle } from 'lucide-react';
+import ScrollReveal from '../components/ScrollReveal';
 
 const Terms = () => {
-  const { language } = useLanguage();
-
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <h1 className="text-4xl font-bold mb-8 text-center flex items-center justify-center gap-3">
-          <FileText className="w-10 h-10" />
-          {language === 'ru' ? 'Пользовательское соглашение' : 'Угода користувача'}
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-12">
+      <div className="container mx-auto px-4 max-w-5xl">
+        {/* Header */}
+        <ScrollReveal animation="fadeInUp">
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl">
+                <FileText className="w-10 h-10 text-white" />
+              </div>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+              Угода користувача
+            </h1>
+            <p className="text-xl text-gray-600">
+              Публічний договір (оферта) на замовлення, купівлю-продаж і доставку товарів
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="bg-white rounded-2xl shadow-sm p-8 space-y-6">
+        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 md:p-12 space-y-10">
           <section>
             <h2 className="text-2xl font-bold mb-4">
               1. {language === 'ru' ? 'Общие положения' : 'Загальні положення'}
