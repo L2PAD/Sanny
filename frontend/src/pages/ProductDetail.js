@@ -99,15 +99,15 @@ const ProductDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen py-12">
+      <div className="min-h-screen py-12 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
         <div className="container-main">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="skeleton h-[600px] rounded-2xl"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 animate-pulse">
+            <div className="shimmer h-[600px] rounded-3xl"></div>
             <div className="space-y-6">
-              <div className="skeleton h-12 w-3/4"></div>
-              <div className="skeleton h-8 w-1/2"></div>
-              <div className="skeleton h-24 w-full"></div>
-              <div className="skeleton h-12 w-full"></div>
+              <div className="shimmer h-16 w-3/4 rounded-2xl"></div>
+              <div className="shimmer h-12 w-1/2 rounded-2xl"></div>
+              <div className="shimmer h-32 w-full rounded-2xl"></div>
+              <div className="shimmer h-16 w-full rounded-2xl"></div>
             </div>
           </div>
         </div>
@@ -117,9 +117,9 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="min-h-screen py-12">
-        <div className="container-main text-center">
-          <h2 className="text-2xl font-bold text-gray-400">Product not found</h2>
+      <div className="min-h-screen py-12 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+        <div className="container-main text-center animate-fadeIn">
+          <h2 className="text-3xl font-bold text-gray-400">Product not found</h2>
         </div>
       </div>
     );
@@ -132,23 +132,28 @@ const ProductDetail = () => {
   const images = product.images && product.images.length > 0 ? product.images : [null];
 
   return (
-    <div data-testid="product-detail-page" className="min-h-screen py-12">
+    <div data-testid="product-detail-page" className="min-h-screen py-12 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
       <div className="container-main">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Images Section */}
-          <div className="space-y-4">
+          <div className="space-y-6 animate-slideInLeft">
             {/* Main Image */}
-            <div className="aspect-ratio-1-1 bg-[#F7F7F7] rounded-2xl overflow-hidden">
+            <div className="relative aspect-ratio-1-1 bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl overflow-hidden shadow-2xl group">
               {images[selectedImage] ? (
                 <img
                   data-testid="main-product-image"
                   src={images[selectedImage]}
                   alt={product.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
                   <span className="text-8xl">📦</span>
+                </div>
+              )}
+              {discount > 0 && (
+                <div className="absolute top-6 right-6 bg-gradient-to-r from-red-600 to-pink-600 text-white px-6 py-3 rounded-2xl font-extrabold text-xl shadow-2xl animate-pulse transform rotate-3">
+                  -{discount}%
                 </div>
               )}
             </div>
@@ -161,8 +166,8 @@ const ProductDetail = () => {
                     key={idx}
                     data-testid={`thumbnail-${idx}`}
                     onClick={() => setSelectedImage(idx)}
-                    className={`aspect-ratio-1-1 bg-[#F7F7F7] rounded-xl overflow-hidden border-2 ${
-                      selectedImage === idx ? 'border-[#0071E3]' : 'border-transparent'
+                    className={`aspect-ratio-1-1 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden border-3 transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                      selectedImage === idx ? 'border-blue-600 ring-4 ring-blue-200' : 'border-transparent'
                     }`}
                   >
                     {img ? (
@@ -179,20 +184,20 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info Section */}
-          <div className="space-y-6">
+          <div className="space-y-8 animate-slideInRight">
             <div>
-              <h1 data-testid="product-title" className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#121212] mb-4">
+              <h1 data-testid="product-title" className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6 leading-tight">
                 {product.title}
               </h1>
               
               {/* Rating */}
               {product.rating > 0 && (
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-3 mb-6">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-5 h-5 ${
+                        className={`w-6 h-6 transition-all ${
                           i < Math.floor(product.rating)
                             ? 'fill-yellow-400 text-yellow-400'
                             : 'text-gray-300'
@@ -200,46 +205,53 @@ const ProductDetail = () => {
                       />
                     ))}
                   </div>
-                  <span className="text-gray-600">({product.reviews_count} reviews)</span>
+                  <span className="text-gray-600 text-lg font-medium">({product.reviews_count} відгуків)</span>
                 </div>
               )}
 
               {/* Price */}
-              <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-6">
-                <span data-testid="product-price" className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#121212]">
-                  ${product.price.toFixed(2)}
-                </span>
+              <div className="bg-gradient-to-br from-white to-blue-50 rounded-3xl p-6 shadow-xl mb-6">
+                <div className="flex flex-wrap items-center gap-4">
+                  <span data-testid="product-price" className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    ${product.price.toFixed(2)}
+                  </span>
+                  {product.compare_price && (
+                    <>
+                      <span className="text-xl md:text-2xl text-gray-400 line-through">
+                        ${product.compare_price.toFixed(2)}
+                      </span>
+                      <span data-testid="discount-badge" className="bg-gradient-to-r from-red-600 to-pink-600 text-white px-5 py-2 rounded-full font-bold text-lg shadow-lg">
+                        🔥 -{discount}% OFF
+                      </span>
+                    </>
+                  )}
+                </div>
                 {product.compare_price && (
-                  <>
-                    <span className="text-lg md:text-xl lg:text-2xl text-gray-400 line-through">
-                      ${product.compare_price.toFixed(2)}
-                    </span>
-                    <span data-testid="discount-badge" className="bg-red-500 text-white px-3 py-1 md:px-4 md:py-2 rounded-full font-semibold text-sm md:text-base">
-                      -{discount}% OFF
-                    </span>
-                  </>
+                  <div className="mt-3 text-green-600 font-bold text-lg bg-green-50 px-4 py-2 rounded-full inline-block">
+                    💰 Ви економите ${(product.compare_price - product.price).toFixed(2)}
+                  </div>
                 )}
               </div>
 
               {/* Short Description */}
               {product.short_description && (
-                <p className="text-lg text-gray-600 mb-6">{product.short_description}</p>
+                <p className="text-xl text-gray-600 mb-6 leading-relaxed">{product.short_description}</p>
               )}
             </div>
 
             {/* Stock Status */}
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-3 text-base p-4 rounded-2xl bg-white shadow-md">
               {product.stock_level > 0 ? (
                 <>
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-green-600 font-medium">
-                    In Stock ({product.stock_level} available)
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-green-600 font-bold text-lg">
+                    ✅ В наявності ({product.stock_level} шт.)
                   </span>
                 </>
               ) : (
                 <>
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <span className="text-red-600 font-medium">Out of Stock</span>
+                  <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                  <span className="text-red-600 font-bold text-lg">❌ Немає в наявності</span>
                 </>
               )}
             </div>
