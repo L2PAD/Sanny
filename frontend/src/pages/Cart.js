@@ -59,14 +59,25 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div data-testid="empty-cart" className="min-h-[70vh] flex items-center justify-center">
-        <div className="text-center space-y-6">
-          <ShoppingBag className="w-24 h-24 mx-auto text-gray-300" />
-          <h2 className="text-3xl font-bold text-gray-400">{t('yourCartIsEmpty')}</h2>
-          <p className="text-gray-600">{t('addSomeProducts')}</p>
+      <div data-testid="empty-cart" className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="text-center space-y-8 animate-fadeIn">
+          <div className="relative">
+            <ShoppingBag className="w-32 h-32 mx-auto text-gray-300 animate-pulse" />
+            <div className="absolute -top-2 -right-2 w-16 h-16 bg-blue-100 rounded-full blur-2xl opacity-50 animate-ping"></div>
+          </div>
+          <div>
+            <h2 className="text-4xl font-extrabold bg-gradient-to-r from-gray-600 to-gray-400 bg-clip-text text-transparent mb-3">
+              {t('yourCartIsEmpty')}
+            </h2>
+            <p className="text-gray-600 text-lg">{t('addSomeProducts')}</p>
+          </div>
           <Link to="/products">
-            <Button data-testid="continue-shopping-button" size="lg">
-              <ArrowLeft className="w-4 h-4 mr-2" />
+            <Button 
+              data-testid="continue-shopping-button" 
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 rounded-2xl text-lg font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
               {t('continueShopping')}
             </Button>
           </Link>
@@ -76,17 +87,22 @@ const Cart = () => {
   }
 
   return (
-    <div data-testid="cart-page" className="min-h-screen py-12">
+    <div data-testid="cart-page" className="min-h-screen py-12 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
       <div className="container-main">
-        <div className="flex items-center justify-between mb-8">
-          <h1 data-testid="cart-title" className="text-4xl font-bold">{t('shoppingCart')}</h1>
+        <div className="flex items-center justify-between mb-10 animate-slideInLeft">
+          <div>
+            <h1 data-testid="cart-title" className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {t('shoppingCart')}
+            </h1>
+            <p className="text-gray-600 mt-2">Перегляньте товари перед оформленням</p>
+          </div>
           <Button
             data-testid="clear-cart-button"
             variant="ghost"
             onClick={clearCart}
-            className="text-red-600 hover:text-red-700"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
           >
-            <Trash2 className="w-4 h-4 mr-2" />
+            <Trash2 className="w-5 h-5 mr-2" />
             {t('clearCart')}
           </Button>
         </div>
