@@ -86,32 +86,35 @@ const PopularCategories = ({ categories }) => {
         </div>
 
         <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4 px-6">
-          {popularCategories.map((category, index) => (
-            <button
-              key={category.id || index}
-              onClick={() => handleCategoryClick(category)}
-              className="group flex flex-col items-center justify-center p-4 bg-white rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 hover:border-blue-300"
-            >
-              <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-3 overflow-hidden rounded-xl group-hover:scale-110 transition-transform duration-300">
-                {category.image_url ? (
-                  <img 
-                    src={category.image_url} 
-                    alt={category.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : category.icon ? (
-                  <span className="text-4xl md:text-5xl">{category.icon}</span>
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center rounded-xl">
-                    <span className="text-2xl">📦</span>
-                  </div>
-                )}
-              </div>
-              <span className="text-[10px] md:text-xs font-semibold text-gray-700 text-center leading-tight uppercase group-hover:text-blue-600 transition-colors">
-                {category.name}
-              </span>
-            </button>
-          ))}
+          {popularCategories.map((category, index) => {
+            const IconComponent = iconComponents[category.icon];
+            return (
+              <button
+                key={category.id || index}
+                onClick={() => handleCategoryClick(category)}
+                className="group flex flex-col items-center justify-center p-4 bg-white rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 hover:border-blue-300"
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-3 overflow-hidden rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 group-hover:scale-110 transition-transform duration-300">
+                  {category.image_url ? (
+                    <img 
+                      src={category.image_url} 
+                      alt={category.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : IconComponent ? (
+                    <IconComponent className="w-10 h-10 md:w-12 md:h-12 text-blue-600 group-hover:text-blue-700 transition-colors" />
+                  ) : category.icon ? (
+                    <span className="text-4xl md:text-5xl">{category.icon}</span>
+                  ) : (
+                    <ShoppingBag className="w-10 h-10 md:w-12 md:h-12 text-gray-400" />
+                  )}
+                </div>
+                <span className="text-[10px] md:text-xs font-semibold text-gray-700 text-center leading-tight uppercase group-hover:text-blue-600 transition-colors">
+                  {category.name}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </ScrollReveal>
