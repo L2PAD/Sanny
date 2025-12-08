@@ -59,9 +59,6 @@ const PromotionsManagement = () => {
   };
 
   const handleImageUpload = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
     const file = e.target.files[0];
     if (!file) return;
     
@@ -99,7 +96,7 @@ const PromotionsManagement = () => {
       toast.success('Зображення завантажено!');
     } catch (error) {
       console.error('Failed to upload image:', error);
-      toast.error('Помилка завантаження зображення');
+      toast.error('Помилка завантаження зображення: ' + (error.response?.data?.detail || error.message));
     } finally {
       setUploadingImage(false);
     }
