@@ -4,7 +4,13 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Card } from '../ui/card';
 import { toast } from 'sonner';
-import { Plus, Trash2, Edit, Eye, EyeOff, ArrowUp, ArrowDown, Sparkles } from 'lucide-react';
+import { 
+  Plus, Trash2, Edit, Eye, EyeOff, ArrowUp, ArrowDown, Sparkles,
+  Smartphone, Laptop, Monitor, Tv, Watch, Camera, Headphones, Gamepad,
+  Home, Zap, ShoppingBag, Coffee, Microwave, Fan, Wind, Snowflake,
+  Shirt, Heart, Book, Music, Car, Bike, Dumbbell, Baby,
+  Pill, Leaf, Palette, Wrench, Hammer, Lightbulb, Wifi, Speaker
+} from 'lucide-react';
 import axios from 'axios';
 
 const PopularCategoriesManagement = () => {
