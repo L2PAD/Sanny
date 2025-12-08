@@ -359,33 +359,38 @@ const Checkout = () => {
   const totalWithDelivery = cartTotal + deliveryPrice;
 
   return (
-    <div className="min-h-screen bg-[#F7F7F7] py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-12">
       <div className="container-main">
-        <h1 className="text-3xl font-bold mb-8">Оформлення замовлення</h1>
+        <div className="mb-10 animate-slideInLeft">
+          <h1 className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
+            Оформлення замовлення
+          </h1>
+          <p className="text-gray-600 text-lg">Крок 1 з 2 - Введіть дані доставки</p>
+        </div>
 
         <div className="flex gap-8">
           {/* Left Column - Forms */}
-          <div className="flex-1 space-y-6">
+          <div className="flex-1 space-y-8">
             {/* Auth Block (if not authenticated) */}
             {!isAuthenticated && (
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <User className="w-6 h-6 text-white" />
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 border-2 border-blue-300 shadow-xl animate-fadeIn">
+                <div className="flex items-start gap-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <User className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-xl font-bold mb-2 text-gray-900">
-                      {t('quickCheckout') || 'Швидке оформлення'}
+                    <h2 className="text-2xl font-extrabold mb-3 text-gray-900">
+                      {t('quickCheckout') || '⚡ Швидке оформлення'}
                     </h2>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-gray-700 mb-6 text-lg leading-relaxed">
                       {t('loginBenefits') || 'Увійдіть в акаунт щоб автоматично заповнити дані доставки та швидше оформити замовлення'}
                     </p>
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                       <Button 
                         onClick={() => navigate('/login', { state: { from: '/checkout' } })} 
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                       >
-                        <User className="w-4 h-4" />
+                        <User className="w-5 h-5" />
                         {t('login') || 'Увійти'}
                       </Button>
                       <Button 
@@ -394,8 +399,9 @@ const Checkout = () => {
                           // Just collapse this notice, user can continue as guest
                           document.getElementById('guest-notice')?.remove();
                         }}
+                        className="border-2 border-gray-300 hover:border-blue-600 px-6 py-3 rounded-xl font-semibold"
                       >
-                        {t('continueAsGuest') || 'Продовжити як гість'}
+                        {t('continueAsGuest') || 'Продовжити як гість'} →
                       </Button>
                     </div>
                   </div>
