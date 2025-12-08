@@ -77,6 +77,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
+    <>
     <Link
       data-testid={`product-card-${product.id}`}
       to={`/products/${product.id}`}
