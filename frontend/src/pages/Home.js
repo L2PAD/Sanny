@@ -52,9 +52,9 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7F7]">
-      <div className="container-main py-6">
-        <div className="flex gap-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
+      <div className="container-main py-8">
+        <div className="flex gap-8">
           {/* Left Sidebar - Categories - только на десктопе */}
           <div className="hidden lg:block">
             <CategorySidebar 
@@ -67,29 +67,45 @@ const Home = () => {
           {/* Right Content */}
           <div className="flex-1">
             {/* Hero Banner */}
-            <HeroBanner />
+            <div className="transform hover:scale-[1.01] transition-transform duration-300">
+              <HeroBanner />
+            </div>
 
             {/* Featured Products */}
-            <section className="mt-8">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold text-[#121212]">{t('featuredProducts')}</h2>
+            <section className="mt-12">
+              <div className="flex justify-between items-center mb-8">
+                <div>
+                  <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    {t('featuredProducts')}
+                  </h2>
+                  <p className="text-gray-600 mt-2">Найкращі пропозиції для вас</p>
+                </div>
                 <Link 
                   to="/products?sort_by=popularity"
-                  className="text-blue-600 hover:text-blue-700 flex items-center gap-1 font-medium"
+                  className="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   {t('viewAll')}
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
               {loading ? (
-                <div className="flex items-center justify-center py-20">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0071E3]"></div>
+                <div className="flex items-center justify-center py-24">
+                  <div className="relative">
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600"></div>
+                    <div className="absolute top-0 left-0 animate-ping rounded-full h-16 w-16 border-4 border-purple-400 opacity-20"></div>
+                  </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-                  {featuredProducts.slice(0, 12).map((product) => (
-                    <ProductCardCompact key={product.id} product={product} />
+                <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-7">
+                  {featuredProducts.slice(0, 12).map((product, index) => (
+                    <div 
+                      key={product.id} 
+                      className="animate-fadeIn"
+                      style={{ animationDelay: `${index * 50}ms` }}
+                    >
+                      <ProductCardCompact product={product} />
+                    </div>
                   ))}
                 </div>
               )}
