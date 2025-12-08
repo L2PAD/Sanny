@@ -110,74 +110,74 @@ const AdminPanel = () => {
           <div className="flex gap-3 min-w-max pb-2">
             <button
               onClick={() => setActiveTab('analytics')}
-              className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+              className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
                 activeTab === 'analytics'
-                  ? 'border-b-2 border-blue-600 text-blue-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
               }`}
             >
-              <BarChart3 className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
-              <span className="hidden sm:inline">Аналитика</span>
+              <BarChart3 className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="hidden sm:inline">Аналітика</span>
               <span className="sm:hidden">📊</span>
             </button>
             <button
               onClick={() => setActiveTab('users')}
-              className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+              className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
                 activeTab === 'users'
-                  ? 'border-b-2 border-blue-600 text-blue-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
               }`}
             >
-              <Users className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
-              <span className="hidden sm:inline">Пользователи</span>
+              <Users className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="hidden sm:inline">Користувачі</span>
               <span className="sm:hidden">👥</span>
             </button>
             <button
               onClick={() => setActiveTab('categories')}
-              className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+              className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
                 activeTab === 'categories'
-                  ? 'border-b-2 border-blue-600 text-blue-600'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
               }`}
             >
-              <Package className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
-              <span className="hidden sm:inline">Категории</span>
+              <Package className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="hidden sm:inline">Категорії</span>
               <span className="sm:hidden">📦</span>
             </button>
           <button
             onClick={() => setActiveTab('products')}
-            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+            className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
               activeTab === 'products'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
             }`}
           >
-            <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
-            <span className="hidden sm:inline">Товары</span>
+            <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="hidden sm:inline">Товари</span>
             <span className="sm:hidden">🛍️</span>
           </button>
           <button
             onClick={() => setActiveTab('payouts')}
-            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+            className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
               activeTab === 'payouts'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
             }`}
           >
-            <Wallet className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
-            <span className="hidden sm:inline">Выплаты</span>
+            <Wallet className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="hidden sm:inline">Виплати</span>
             <span className="sm:hidden">💰</span>
           </button>
           <button
             onClick={() => setActiveTab('orders')}
-            className={`pb-3 md:pb-4 px-3 md:px-4 font-semibold transition-colors whitespace-nowrap text-sm md:text-base ${
+            className={`px-5 py-3 font-bold rounded-2xl transition-all duration-300 whitespace-nowrap text-sm md:text-base flex items-center gap-2 ${
               activeTab === 'orders'
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-50 hover:scale-105 shadow-md'
             }`}
           >
-            <ClipboardList className="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" />
-            <span className="hidden sm:inline">Заказы</span>
+            <ClipboardList className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="hidden sm:inline">Замовлення</span>
             <span className="sm:hidden">📋</span>
           </button>
           <button
