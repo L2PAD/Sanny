@@ -158,6 +158,13 @@ const ProductCard = ({ product }) => {
               className={`w-5 h-5 ${isFavorite(product.id) ? 'fill-current' : ''}`}
             />
           </button>
+          <button
+            onClick={handleQuickView}
+            className="p-2 rounded-full backdrop-blur-sm transition-all shadow-lg bg-white/80 text-gray-600 hover:bg-white opacity-0 group-hover:opacity-100"
+            title="Швидкий перегляд"
+          >
+            <Eye className="w-5 h-5" />
+          </button>
         </div>
         
         {product.stock_level === 0 && (
