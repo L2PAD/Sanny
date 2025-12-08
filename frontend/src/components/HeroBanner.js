@@ -209,13 +209,13 @@ const HeroBanner = () => {
               {/* Кнопка действия */}
               {slide.button_text && (
                 <button 
-                  className="bg-white text-gray-900 px-6 md:px-10 py-2 md:py-4 rounded-full font-bold text-base md:text-lg lg:text-xl hover:bg-gray-100 transition-all shadow-2xl hover:scale-105"
+                  className="bg-gradient-to-r from-white to-gray-50 text-gray-900 px-8 md:px-12 py-3 md:py-5 rounded-full font-extrabold text-base md:text-xl lg:text-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 shadow-2xl hover:scale-110 transform hover:rotate-1 active:scale-95"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleSlideClick(slide);
                   }}
                 >
-                  {slide.button_text}
+                  {slide.button_text} →
                 </button>
               )}
             </div>
@@ -228,30 +228,30 @@ const HeroBanner = () => {
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors z-10"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 z-10 hover:scale-110 active:scale-95 border-2 border-white/30"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-7 h-7 text-white" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors z-10"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 z-10 hover:scale-110 active:scale-95 border-2 border-white/30"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-7 h-7 text-white" />
           </button>
         </>
       )}
 
       {/* Dots */}
       {slides.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all ${
+              className={`h-3 rounded-full transition-all duration-300 hover:scale-110 ${
                 index === currentSlide
-                  ? 'bg-white w-8'
-                  : 'bg-white/50 w-2'
+                  ? 'bg-white w-10 shadow-lg'
+                  : 'bg-white/50 w-3 hover:bg-white/70'
               }`}
             />
           ))}
