@@ -136,7 +136,8 @@ const PopularCategoriesManagement = () => {
     setEditingCategory(category);
     setForm({
       name: category.name,
-      icon: category.icon,
+      icon: category.icon || '📱',
+      image_url: category.image_url || '',
       order: category.order,
       active: category.active
     });
