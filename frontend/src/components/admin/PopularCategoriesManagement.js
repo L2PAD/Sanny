@@ -67,7 +67,7 @@ const PopularCategoriesManagement = () => {
       
       setShowAddForm(false);
       setEditingCategory(null);
-      setForm({ name: '', icon: '📱', order: categories?.length || 0, active: true });
+      setForm({ name: '', icon: '📱', image_url: '', order: categories?.length || 0, active: true });
       fetchCategories();
     } catch (error) {
       console.error('Failed to save category:', error);
