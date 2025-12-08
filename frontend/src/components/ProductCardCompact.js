@@ -106,20 +106,20 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
         {/* Favorite Button */}
         <button
           onClick={handleToggleFavorite}
-          className={`absolute top-2 right-2 z-10 p-2 rounded-full backdrop-blur-sm transition-all shadow-lg ${
+          className={`absolute top-3 right-3 z-10 p-2.5 rounded-full backdrop-blur-sm transition-all duration-300 shadow-lg hover:scale-110 ${
             isFavorite(product.id)
-              ? 'bg-red-500 text-white'
-              : 'bg-white/80 text-gray-600 hover:bg-white'
+              ? 'bg-gradient-to-r from-red-500 to-pink-600 text-white scale-110'
+              : 'bg-white/90 text-gray-600 hover:bg-white'
           }`}
         >
-          <Heart className={`w-4 h-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+          <Heart className={`w-4 h-4 transition-all ${isFavorite(product.id) ? 'fill-current animate-pulse' : ''}`} />
         </button>
 
         {/* Product Image */}
         <img
           src={images[currentImageIndex]}
           alt={product.title || product.name}
-          className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
         />
 
         {/* Image Navigation Arrows */}
