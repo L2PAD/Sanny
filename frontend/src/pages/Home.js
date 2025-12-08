@@ -126,8 +126,15 @@ const Home = () => {
               <ActualOffers />
             </div>
 
-            {/* Bestsellers - Хіти продажу */}
-            <section className="mt-12">
+            {/* Custom Sections - Хіти продажу, Новинки, Популярні та інші */}
+            {customSections.map((section) => (
+              <div key={section.id} className="mt-8">
+                <CustomSection sectionData={section} />
+              </div>
+            ))}
+
+            {/* Bestsellers - Хіти продажу (старая версия - можно убрать если используем CustomSection) */}
+            <section className="mt-12" style={{ display: 'none' }}>
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-3xl font-bold text-[#121212]">🔥 Хіти продажу</h2>
                 <Link 
