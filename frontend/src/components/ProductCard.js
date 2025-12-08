@@ -254,7 +254,8 @@ const ProductCard = ({ product }) => {
       isOpen={showQuickView}
       onClose={() => setShowQuickView(false)}
     />
-  </>;
+  </>
+  );
 };
 
 export default ProductCard;
