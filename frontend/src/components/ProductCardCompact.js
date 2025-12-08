@@ -74,29 +74,29 @@ const ProductCardCompact = ({ product, viewMode = 'grid' }) => {
   return (
     <div
       onClick={() => navigate(`/product/${product.id}`)}
-      className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full"
+      className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-2xl hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col h-full"
     >
       {/* Image Container */}
       <div 
-        className="relative bg-gray-50 aspect-square overflow-hidden"
+        className="relative bg-gradient-to-br from-gray-50 to-gray-100 aspect-square overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Badges Container - Top Left */}
-        <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
+        <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
           {discount > 0 && (
-            <div className="bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold shadow-lg">
+            <div className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg animate-pulse">
               -{discount}%
             </div>
           )}
           {hasVideos && (
-            <div className="bg-purple-500 text-white px-2 py-1 rounded-md text-xs font-medium shadow-lg flex items-center gap-1">
+            <div className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-lg flex items-center gap-1 backdrop-blur-sm">
               <Video className="w-3 h-3" />
               Відео
             </div>
           )}
           {hasSpecs && (
-            <div className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs font-medium shadow-lg flex items-center gap-1">
+            <div className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-lg flex items-center gap-1 backdrop-blur-sm">
               <FileText className="w-3 h-3" />
               Specs
             </div>
