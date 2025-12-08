@@ -103,67 +103,109 @@ const Promotions = () => {
 
         {/* Promotions Grid */}
         {promotions.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 text-center">
-            <p className="text-gray-500 text-lg">Акцій поки немає</p>
-            <Link to="/" className="text-blue-600 hover:underline mt-4 inline-block">
-              Повернутися на головну
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {promotions.map((promo) => (
-              <div
-                key={promo.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group"
-              >
-                {/* Image */}
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={promo.image_url}
-                    alt={promo.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  
-                  {/* Discount Badge */}
-                  {promo.discount_text && (
-                    <div 
-                      className="absolute top-4 right-4 px-4 py-2 rounded-full font-bold text-white shadow-lg"
-                      style={{ backgroundColor: promo.badge_color }}
-                    >
-                      {promo.discount_text}
-                    </div>
-                  )}
-                  
-                  {/* Countdown */}
-                  {promo.countdown_enabled && promo.countdown_end_date && (
-                    <div className="absolute bottom-4 left-4">
-                      <Countdown endDate={promo.countdown_end_date} />
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 line-clamp-2">
-                    {promo.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">
-                    {promo.description}
-                  </p>
-                  
-                  {promo.link_url && (
-                    <Link
-                      to={`/promotion/${promo.id}`}
-                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group-hover:gap-3 transition-all"
-                    >
-                      Детальніше
-                      <ArrowRight className="w-5 h-5" />
-                    </Link>
-                  )}
-                </div>
+          <ScrollReveal>
+            <div className="bg-white rounded-3xl shadow-xl p-12 text-center border border-gray-100">
+              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full mb-6">
+                <Tag className="w-12 h-12 text-purple-600" />
               </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Акцій поки немає</h3>
+              <p className="text-gray-600 mb-6">Незабаром з'являться нові спеціальні пропозиції!</p>
+              <Link 
+                to="/" 
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                Повернутися на головну
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </ScrollReveal>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {promotions.map((promo, index) => (
+              <ScrollReveal key={promo.id} delay={index * 100}>
+                <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+                  {/* Image */}
+                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100">
+                    <img
+                      src={promo.image_url}
+                      alt={promo.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    
+                    {/* Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Sparkle Icon */}
+                    <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse" />
+                    </div>
+                    
+                    {/* Discount Badge */}
+                    {promo.discount_text && (
+                      <div 
+                        className="absolute top-4 right-4 px-4 py-2 rounded-2xl font-bold text-white shadow-xl backdrop-blur-sm transform group-hover:scale-110 transition-transform duration-300"
+                        style={{ backgroundColor: promo.badge_color || '#ef4444' }}
+                      >
+                        {promo.discount_text}
+                      </div>
+                    )}
+                    
+                    {/* Countdown */}
+                    {promo.countdown_enabled && promo.countdown_end_date && (
+                      <div className="absolute bottom-4 left-4">
+                        <Countdown endDate={promo.countdown_end_date} />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-3 line-clamp-2 text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
+                      {promo.title}
+                    </h3>
+                    <p className="text-gray-600 mb-5 line-clamp-3 text-sm leading-relaxed">
+                      {promo.description}
+                    </p>
+                    
+                    {promo.link_url && (
+                      <Link
+                        to={`/promotion/${promo.id}`}
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2.5 rounded-xl hover:shadow-lg transition-all duration-300 hover:gap-3 font-semibold text-sm"
+                      >
+                        Детальніше
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
+        )}
+
+        {/* Info Section */}
+        {promotions.length > 0 && (
+          <ScrollReveal delay={300}>
+            <div className="mt-16 bg-gradient-to-r from-purple-50 to-pink-50 rounded-3xl p-8 border border-purple-100">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <Gift className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-1">Не пропустіть вигідні пропозиції!</h3>
+                    <p className="text-gray-600 text-sm">Підпишіться на розсилку та отримуйте ексклюзивні знижки</p>
+                  </div>
+                </div>
+                <Link
+                  to="/register"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold whitespace-nowrap"
+                >
+                  Підписатися
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
         )}
       </div>
     </div>
