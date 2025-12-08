@@ -102,14 +102,35 @@ const Login = () => {
             </div>
           </div>
 
-          <Button data-testid="submit-button" type="submit" className="w-full" disabled={loading}>
-            {loading ? t('signingIn') : t('signIn')}
+          <Button 
+            data-testid="submit-button" 
+            type="submit" 
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95" 
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                {t('signingIn')}
+              </span>
+            ) : (
+              t('signIn')
+            )}
           </Button>
 
-          <p className="text-center text-sm text-gray-600">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-white text-gray-500">або</span>
+            </div>
+          </div>
+
+          <p className="text-center text-base text-gray-600">
             {t('dontHaveAccount')}{' '}
-            <Link data-testid="register-link" to="/register" className="text-[#0071E3] hover:underline font-medium">
-              {t('signUp')}
+            <Link data-testid="register-link" to="/register" className="text-blue-600 hover:text-purple-600 font-bold hover:underline transition-colors">
+              {t('signUp')} →
             </Link>
           </p>
         </form>
