@@ -148,7 +148,7 @@ const PopularCategoriesManagement = () => {
       
       setShowAddForm(false);
       setEditingCategory(null);
-      setForm({ name: '', icon: '📱', image_url: '', order: categories?.length || 0, active: true });
+      setForm({ name: '', icon: 'Smartphone', image_url: '', order: categories?.length || 0, active: true });
       fetchCategories();
     } catch (error) {
       console.error('Failed to save category:', error);
