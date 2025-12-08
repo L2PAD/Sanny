@@ -76,8 +76,8 @@ const Home = () => {
               <HeroBanner />
             </div>
 
-            {/* Featured Products */}
-            <section className="mt-12">
+            {/* Featured Products - HIDDEN (старая логика, заменена на CustomSections) */}
+            <section className="mt-12" style={{ display: 'none' }}>
               <div className="flex justify-between items-center mb-8">
                 <div>
                   <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
