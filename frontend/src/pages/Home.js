@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { categoriesAPI, productsAPI } from '../utils/api';
 import ProductCardCompact from '../components/ProductCardCompact';
 import CategorySidebar from '../components/CategorySidebar';
 import HeroBanner from '../components/HeroBanner';
 import PopularCategories from '../components/PopularCategories';
 import ActualOffers from '../components/ActualOffers';
+import CustomSection from '../components/CustomSection';
 import PaymentDeliveryInfo from '../components/PaymentDeliveryInfo';
 import TestimonialsSection from '../components/TestimonialsSection';
 import { ChevronRight } from 'lucide-react';
@@ -18,6 +20,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestsellers, setBestsellers] = useState([]);
+  const [customSections, setCustomSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -28,9 +31,10 @@ const Home = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [categoriesRes, featuredRes] = await Promise.all([
+      const [categoriesRes, featuredRes, sectionsRes] = await Promise.all([
         categoriesAPI.getAll(),
         productsAPI.getAll({ limit: 12, sort_by: 'popularity' }),
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/custom-sections`),
       ]);
       
       // Получаем бестселлеры
@@ -40,6 +44,7 @@ const Home = () => {
       setCategories(categoriesRes.data);
       setFeaturedProducts(featuredRes.data);
       setBestsellers(bestsellersData);
+      setCustomSections(sectionsRes.data);
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
