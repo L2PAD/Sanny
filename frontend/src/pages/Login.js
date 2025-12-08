@@ -57,14 +57,21 @@ const Login = () => {
   };
 
   return (
-    <div data-testid="login-page" className="min-h-[80vh] flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full space-y-8">
+    <div data-testid="login-page" className="min-h-[80vh] flex items-center justify-center py-12 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <div className="max-w-md w-full space-y-8 animate-fadeIn">
         <div className="text-center">
-          <h2 data-testid="login-title" className="text-4xl font-bold text-[#121212]">{t('welcomeBack')}</h2>
-          <p className="mt-2 text-gray-600">{t('signInToAccount')}</p>
+          <div className="mb-4 flex justify-center">
+            <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl transform rotate-3 hover:rotate-0 transition-transform">
+              <span className="text-4xl">👋</span>
+            </div>
+          </div>
+          <h2 data-testid="login-title" className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            {t('welcomeBack')}
+          </h2>
+          <p className="mt-3 text-gray-600 text-lg">{t('signInToAccount')}</p>
         </div>
 
-        <form data-testid="login-form" onSubmit={handleSubmit} className="mt-8 space-y-6 bg-white p-8 rounded-2xl border border-gray-200">
+        <form data-testid="login-form" onSubmit={handleSubmit} className="mt-8 space-y-6 bg-white/80 backdrop-blur-lg p-10 rounded-3xl shadow-2xl border border-white/20">
           <div className="space-y-4">
             <div>
               <Label htmlFor="email">{t('emailAddress')}</Label>
