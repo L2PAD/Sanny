@@ -1,6 +1,6 @@
 # Y-store API Reference
 
-**Base URL:** `https://goapp-7.preview.emergentagent.com/api`
+**Base URL:** `https://go-lang-13.preview.emergentagent.com/api`
 
 ## Authentication
 
