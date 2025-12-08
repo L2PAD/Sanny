@@ -147,7 +147,7 @@ const HeroBanner = () => {
   }
 
   return (
-    <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl md:rounded-3xl overflow-hidden shadow-2xl">
+    <div ref={ref} className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl md:rounded-3xl overflow-hidden shadow-2xl">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
@@ -157,18 +157,22 @@ const HeroBanner = () => {
           }`}
           onClick={() => handleSlideClick(slide)}
         >
-          {/* Background - для баннера используем изображение как фон */}
+          {/* Background - для баннера используем изображение как фон с parallax */}
           {slide.type === 'banner' && slide.image_url ? (
             <div 
               className="absolute inset-0 bg-cover bg-center transform transition-transform duration-700 hover:scale-105"
               style={{ 
                 backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url(${slide.image_url})`,
+                transform: index === currentSlide ? `translateY(${offset * 0.5}px)` : 'translateY(0)',
               }}
             />
           ) : (
             <div 
               className="absolute inset-0 transform transition-transform duration-700 hover:scale-105"
-              style={{ background: slide.background_gradient }}
+              style={{ 
+                background: slide.background_gradient,
+                transform: index === currentSlide ? `translateY(${offset * 0.5}px)` : 'translateY(0)',
+              }}
             />
           )}
 
