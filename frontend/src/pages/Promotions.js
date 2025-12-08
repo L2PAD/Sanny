@@ -74,13 +74,32 @@ const Promotions = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container-main">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">🎁 Акції та знижки</h1>
-          <p className="text-lg text-gray-600">Вигідні пропозиції та спеціальні акції від Y-store</p>
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-blue-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+        
+        <div className="container-main relative z-10">
+          <ScrollReveal>
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-3xl mb-6 animate-bounce">
+                <Gift className="w-10 h-10" />
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+                Акції та знижки
+              </h1>
+              <p className="text-lg sm:text-xl text-white/90">
+                Вигідні пропозиції та спеціальні акції від Y-store
+              </p>
+            </div>
+          </ScrollReveal>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container-main py-12">
 
         {/* Promotions Grid */}
         {promotions.length === 0 ? (
