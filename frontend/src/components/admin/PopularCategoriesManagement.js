@@ -16,9 +16,11 @@ const PopularCategoriesManagement = () => {
   const [form, setForm] = useState({
     name: '',
     icon: '📱',
+    image_url: '',
     order: 0,
     active: true
   });
+  const [uploading, setUploading] = useState(false);
 
   const emojiIcons = ['📱', '📺', '💻', '⌚', '📷', '🎧', '🎮', '🏠', '🍲', '☕', '🧺', '🧹', '❄️', '🔌', '💡', '🎨', '📚', '👕', '👟', '⚽', '🎸', '🚗', '🏃', '🍕', '🎁'];
 
