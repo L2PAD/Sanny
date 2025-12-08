@@ -532,13 +532,16 @@ test_plan:
     implemented: true
     working: false
     file: "/app/frontend/src/components/admin/PopularCategoriesManagement.js"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: true
     status_history:
       - working: false
         agent: "testing"
         comment: "❌ CRITICAL BUG IDENTIFIED: Popular Categories image upload functionality is broken due to form rendering issue. COMPREHENSIVE TESTING COMPLETED: ✅ Admin authentication working (admin@ystore.com/admin credentials) ✅ Admin panel access successful ✅ 'Популярні категорії' tab found and clickable ✅ 'Додати категорію' button found and clickable ❌ CRITICAL ISSUE: Add category form does not render after clicking 'Додати категорію' button. Expected form with category name input (placeholder='СМАРТФОНИ') and file input (type='file') for image upload is not appearing. DEBUGGING RESULTS: Found 3 forms and 4 input elements on page, but none match the expected PopularCategoriesManagement form structure. The showAddForm state is not being set to true or the conditional form rendering is not working. ROOT CAUSE: React state management issue in PopularCategoriesManagement component where clicking 'Add Category' button does not trigger form display. IMPACT: Users cannot test image upload functionality as described in review request - cannot enter category name 'ТЕСТОВА', cannot upload test image, cannot verify 'Зображення завантажено!' message or image preview. This blocks the entire test scenario for popular categories image upload feature."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL AUTHENTICATION FAILURE BLOCKING TESTING: Comprehensive testing reveals that Popular Categories image upload functionality CANNOT BE TESTED due to authentication issues in production environment. TESTING ATTEMPTS: 1) ❌ admin@ystore.com/admin credentials - Login form does not submit, stays on login page 2) ❌ admin@bazaar.com/admin123 credentials - Login form does not submit, stays on login page 3) ❌ Backend errors detected in logs: bcrypt module issues and ResponseValidationError. PRODUCTION ENVIRONMENT ISSUES: 1) Login functionality completely broken - no API requests made when clicking login button 2) Backend service has critical errors preventing authentication 3) Admin panel inaccessible due to authentication failure 4) Popular Categories management page cannot be reached. ROOT CAUSE: Production environment has multiple critical issues: a) Frontend login form not submitting API requests b) Backend authentication service failing with bcrypt and validation errors c) Database may be missing required admin users. IMPACT: COMPLETE BLOCKAGE of Popular Categories image upload testing. Cannot verify: ✅ Form appearance with category name input and file upload ✅ Image upload functionality ✅ 'Зображення завантажено!' toast message ✅ Image preview display ✅ Form stability after upload ✅ Category creation in list. RECOMMENDATION: Main agent must fix authentication system before Popular Categories testing can proceed."
 
   - task: "Saved Address Feature on Checkout Page"
     implemented: true
