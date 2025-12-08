@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star, Heart, Video, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShoppingCart, Star, Heart, Video, FileText, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { Button } from './ui/button';
 import { useCart } from '../contexts/CartContext';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -8,6 +8,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import QuickViewModal from './QuickViewModal';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -16,6 +17,7 @@ const ProductCard = ({ product }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showQuickView, setShowQuickView] = useState(false);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
