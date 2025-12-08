@@ -384,21 +384,28 @@ class PopularCategory(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
-    icon: str  # emoji icon
+    icon: Optional[str] = None  # emoji icon (deprecated, use image_url)
+    image_url: Optional[str] = None  # URL изображения категории
+    category_id: Optional[str] = None  # ID категории товаров для фильтрации
     order: int = 0
     active: bool = True
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class PopularCategoryCreate(BaseModel):
     name: str
-    icon: str
+    icon: Optional[str] = None
+    image_url: Optional[str] = None
+    category_id: Optional[str] = None
     order: int = 0
     active: bool = True
 
 class PopularCategoryUpdate(BaseModel):
     name: Optional[str] = None
     icon: Optional[str] = None
+    image_url: Optional[str] = None
+    category_id: Optional[str] = None
     order: Optional[int] = None
+    active: Optional[bool] = None
 
 class ActualOffer(BaseModel):
     model_config = ConfigDict(extra="ignore")
