@@ -23,11 +23,15 @@ const PopularCategoriesManagement = () => {
     name: '',
     icon: 'Smartphone',
     image_url: '',
+    product_ids: [],
     order: 0,
     active: true
   });
   const [uploading, setUploading] = useState(false);
   const [iconSearch, setIconSearch] = useState('');
+  const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   // Mapping icon names to components
   const iconComponents = {
