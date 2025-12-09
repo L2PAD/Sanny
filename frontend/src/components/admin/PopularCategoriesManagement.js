@@ -608,13 +608,19 @@ const PopularCategoriesManagement = () => {
                       );
                     })()}
                   </div>
-                  <h3 className="font-bold text-center mb-3">{category.name}</h3>
+                  <h3 className="font-bold text-center mb-2">{category.name}</h3>
                   
-                  {!category.active && (
-                    <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded mb-2">
-                      Прихована
+                  <div className="flex flex-col items-center gap-1 mb-3">
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                      {(category.product_ids?.length || 0)} товарів
                     </span>
-                  )}
+                    
+                    {!category.active && (
+                      <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">
+                        Прихована
+                      </span>
+                    )}
+                  </div>
                   
                   {/* Управление */}
                   <div className="flex flex-wrap gap-2 mt-auto">
