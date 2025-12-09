@@ -478,10 +478,11 @@ const CategoryManagement = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">{t('categoryManagement')}</h2>
-        <Button onClick={handleAddNew} className="flex items-center gap-2">
+        {/* Button hidden as per user request - categories are now managed differently */}
+        {/* <Button onClick={handleAddNew} className="flex items-center gap-2">
           <Plus className="w-4 h-4" />
           {t('addCategory')}
-        </Button>
+        </Button> */}
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
