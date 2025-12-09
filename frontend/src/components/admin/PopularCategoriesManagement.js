@@ -111,6 +111,7 @@ const PopularCategoriesManagement = () => {
 
   useEffect(() => {
     fetchCategories();
+    fetchProducts();
   }, []);
 
   const fetchCategories = async () => {
@@ -120,11 +121,27 @@ const PopularCategoriesManagement = () => {
         `${process.env.REACT_APP_BACKEND_URL}/api/admin/popular-categories`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setCategories(response.data);
+      console.log('Fetched categories:', response.data);
+      setCategories(response.data || []);
     } catch (error) {
       console.error('Failed to fetch popular categories:', error);
+      setCategories([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/products`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setProducts(response.data || []);
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+      setProducts([]);
     }
   };
 
