@@ -1150,6 +1150,27 @@ async def create_review(
     review_data: ReviewCreate,
     current_user: User = Depends(get_current_user)
 ):
+    # Check if user purchased this product
+    user_orders = await db.orders.find({
+        "buyer_id": current_user.id,
+        "payment_status": {"$in": ["completed", "paid"]}
+    }, {"_id": 0}).to_list(1000)
+    
+    has_purchased = False
+    for order in user_orders:
+        for item in order.get("items", []):
+            if item.get("product_id") == review_data.product_id:
+                has_purchased = True
+                break
+        if has_purchased:
+            break
+    
+    if not has_purchased:
+        raise HTTPException(
+            status_code=403, 
+            detail="You can only review products you have purchased"
+        )
+    
     # Check if user already reviewed this product
     existing = await db.reviews.find_one({
         "product_id": review_data.product_id,
