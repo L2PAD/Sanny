@@ -569,6 +569,15 @@ const EnhancedProductDetail = () => {
         {/* AI Recommendations */}
         <AIRecommendations product={product} />
       </div>
+
+      {/* Share Modal */}
+      {product && (
+        <ShareModal 
+          isOpen={showShareModal}
+          onClose={() => setShowShareModal(false)}
+          product={product}
+        />
+      )}
     </div>
   );
 };
