@@ -150,18 +150,22 @@ const PopularCategoriesManagement = () => {
     
     try {
       const token = localStorage.getItem('token');
+      const dataToSave = {
+        ...form,
+        product_ids: selectedProducts.map(p => p.id)
+      };
       
       if (editingCategory) {
         await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/api/admin/popular-categories/${editingCategory.id}`,
-          form,
+          dataToSave,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         toast.success('Категорію оновлено!');
       } else {
         await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/api/admin/popular-categories`,
-          form,
+          dataToSave,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         toast.success('Категорію створено!');
@@ -169,7 +173,8 @@ const PopularCategoriesManagement = () => {
       
       setShowAddForm(false);
       setEditingCategory(null);
-      setForm({ name: '', icon: 'Smartphone', image_url: '', order: categories?.length || 0, active: true });
+      setForm({ name: '', icon: 'Smartphone', image_url: '', product_ids: [], order: categories?.length || 0, active: true });
+      setSelectedProducts([]);
       fetchCategories();
     } catch (error) {
       console.error('Failed to save category:', error);
