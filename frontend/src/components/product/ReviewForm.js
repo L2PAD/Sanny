@@ -75,14 +75,25 @@ const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired
     }
   };
 
+  if (loading && isAuthenticated) {
+    return (
+      <div className="bg-gray-50 rounded-2xl p-6 mb-6">
+        <div className="flex justify-center py-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-50 rounded-2xl p-6 mb-6">
       <h3 className="text-xl font-bold text-gray-900 mb-4">
         {t('language') === 'ru' ? 'Оставить отзыв' : 'Залишити відгук'}
       </h3>
       
-      {!isAuthenticated && (
-        <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+      {!isAuthenticated ? (
+        <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
           <p className="text-sm text-blue-900">
             {t('language') === 'ru' 
               ? 'Для добавления отзыва необходимо войти в аккаунт'
@@ -90,9 +101,38 @@ const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired
             }
           </p>
         </div>
-      )}
+      ) : canReview && !canReview.has_purchased ? (
+        <div className="mb-4 p-4 bg-orange-50 border border-orange-200 rounded-lg flex items-start gap-3">
+          <ShoppingBag className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-semibold text-orange-900 mb-1">
+              {t('language') === 'ru' 
+                ? 'Отзывы могут оставлять только покупатели'
+                : 'Відгуки можуть залишати тільки покупці'
+              }
+            </p>
+            <p className="text-xs text-orange-700">
+              {t('language') === 'ru' 
+                ? 'Купите этот товар, чтобы оставить отзыв о нем'
+                : 'Купіть цей товар, щоб залишити відгук про нього'
+              }
+            </p>
+          </div>
+        </div>
+      ) : canReview && canReview.already_reviewed ? (
+        <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
+          <Star className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-green-900">
+            {t('language') === 'ru' 
+              ? 'Вы уже оставили отзыв на этот товар'
+              : 'Ви вже залишили відгук на цей товар'
+            }
+          </p>
+        </div>
+      ) : null}
 
-      <form onSubmit={handleSubmit}>
+      {isAuthenticated && canReview && canReview.can_review && (
+        <form onSubmit={handleSubmit}>
         {/* Rating */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
