@@ -236,6 +236,62 @@ const CategoryManagement = () => {
               </select>
             </div>
 
+            {/* Icon Selection */}
+            <div>
+              <Label className="text-lg font-semibold mb-3 block">Виберіть іконку категорії *</Label>
+              <p className="text-xs text-gray-500 mb-4">Оберіть простий геометричний значок для категорії</p>
+              
+              <div className="grid grid-cols-4 md:grid-cols-8 gap-3 p-4 bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border-2 border-gray-200">
+                {Object.entries(categoryIcons).map(([iconKey, iconData]) => {
+                  const IconComponent = iconData.component;
+                  return (
+                    <button
+                      key={iconKey}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, icon: iconKey })}
+                      className={`flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 ${
+                        formData.icon === iconKey
+                          ? 'bg-blue-600 shadow-lg scale-105'
+                          : 'bg-white hover:bg-blue-50 hover:scale-105 shadow-md'
+                      }`}
+                      title={iconData.label}
+                    >
+                      <div className={`w-12 h-12 flex items-center justify-center rounded-lg ${
+                        formData.icon === iconKey 
+                          ? 'bg-blue-100' 
+                          : 'bg-gray-100'
+                      }`}>
+                        <IconComponent 
+                          className="w-8 h-8" 
+                          color={formData.icon === iconKey ? '#1e40af' : '#374151'}
+                        />
+                      </div>
+                      <span className={`text-[9px] font-medium text-center leading-tight mt-2 ${
+                        formData.icon === iconKey ? 'text-white' : 'text-gray-700'
+                      }`}>
+                        {iconData.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200 flex items-center gap-4">
+                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-100 to-blue-100 rounded-xl">
+                  {(() => {
+                    const IconComponent = getCategoryIcon(formData.icon).component;
+                    return <IconComponent className="w-10 h-10" color="#374151" />;
+                  })()}
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Вибрана іконка:</p>
+                  <p className="text-lg font-bold text-gray-800">
+                    {getCategoryIcon(formData.icon).label}
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Product Selection */}
             <div className="border-t pt-6">
               <div className="flex items-center justify-between mb-4">
