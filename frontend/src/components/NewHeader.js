@@ -123,11 +123,9 @@ const NewHeader = () => {
             >
               <div className="relative">
                 <Heart className={`w-5 h-5 md:w-6 md:h-6 ${favoritesCount > 0 ? 'fill-pink-500 text-pink-500' : ''}`} />
-                {favoritesCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {favoritesCount}
-                  </span>
-                )}
+                <span className={`absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${favoritesCount > 0 ? 'bg-pink-500' : 'bg-gray-400'}`}>
+                  {favoritesCount}
+                </span>
               </div>
               <span className="hidden lg:inline text-sm">{t('language') === 'ru' ? 'Избранное' : 'Обране'}</span>
             </Link>
@@ -140,11 +138,9 @@ const NewHeader = () => {
             >
               <div className="relative">
                 <GitCompare className="w-5 h-5 md:w-6 md:h-6" />
-                {comparisonCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {comparisonCount}
-                  </span>
-                )}
+                <span className={`absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${comparisonCount > 0 ? 'bg-blue-500' : 'bg-gray-400'}`}>
+                  {comparisonCount}
+                </span>
               </div>
               <span className="hidden lg:inline text-sm">{t('language') === 'ru' ? 'Сравнение' : 'Порівняння'}</span>
             </Link>
@@ -157,11 +153,9 @@ const NewHeader = () => {
             >
               <div className="relative">
                 <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
-                {cartItemsCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItemsCount}
-                  </span>
-                )}
+                <span className={`absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${cartItemsCount > 0 ? 'bg-green-500' : 'bg-gray-400'}`}>
+                  {cartItemsCount}
+                </span>
               </div>
               <span className="hidden md:inline text-sm">{t('myCart')}</span>
             </Link>
