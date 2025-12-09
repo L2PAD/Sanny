@@ -52,8 +52,12 @@ const NewHeader = () => {
     const loadFirstCategory = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/categories`);
+        console.log('FirstCategory API response:', response.data);
         if (response.data && response.data.length > 0) {
+          console.log('Setting first category:', response.data[0]);
           setFirstCategory(response.data[0]);
+        } else {
+          console.log('No categories found');
         }
       } catch (error) {
         console.error('Failed to load categories:', error);
