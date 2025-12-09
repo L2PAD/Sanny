@@ -320,12 +320,12 @@ const CategoryManagement = () => {
 
             {/* Icon Selection */}
             <div>
-              <Label className="text-lg font-semibold mb-3 block">Виберіть іконку категорії *</Label>
-              <p className="text-xs text-gray-500 mb-3">Оберіть іконку, яка найкраще відображає категорію</p>
+              <Label className="text-lg font-semibold mb-3 block">{t('selectIcon')} *</Label>
+              <p className="text-xs text-gray-500 mb-3">{t('selectIcon')}</p>
               
               <div className="mb-3">
                 <Input
-                  placeholder="🔍 Пошук іконки..."
+                  placeholder={t('iconSearch')}
                   value={iconSearch}
                   onChange={(e) => setIconSearch(e.target.value)}
                   className="w-full"
