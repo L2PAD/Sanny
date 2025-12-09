@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { X, User, ShoppingBag, Heart, GitCompare, LogOut, BarChart3, Briefcase } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
+import SearchDropdown from './SearchDropdown';
 
 const MobileMenu = ({ isOpen, onClose }) => {
   const { user, logout, isAdmin, isSeller } = useAuth();
