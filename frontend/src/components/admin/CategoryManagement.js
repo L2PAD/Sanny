@@ -263,9 +263,21 @@ const CategoryManagement = () => {
     return (
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-2xl p-8 border border-gray-200">
-          <h2 className="text-2xl font-bold mb-6">
-            {editingCategory ? t('editCategory') : t('addCategory')}
-          </h2>
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-3">
+              {editingCategory ? t('editCategory') : t('addCategory')}
+            </h2>
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-500 p-4 rounded-lg">
+              <p className="text-sm font-semibold text-gray-800 mb-2">
+                💡 Как создать многоуровневый каталог (как на Foxtrot):
+              </p>
+              <ol className="text-sm text-gray-700 space-y-1 list-decimal list-inside">
+                <li><strong>Главная категория:</strong> Создайте без родителя (например: "Электроника")</li>
+                <li><strong>Подкатегория:</strong> Создайте с родителем (например: "Смартфоны" под "Электроника")</li>
+                <li><strong>Результат:</strong> При наведении на "Электроника" справа появится submenu с "Смартфоны"</li>
+              </ol>
+            </div>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Category Name */}
