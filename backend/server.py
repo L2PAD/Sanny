@@ -833,6 +833,44 @@ async def create_category(
     await db.categories.insert_one(cat_doc)
     return category
 
+@api_router.put("/categories/{category_id}", response_model=Category)
+async def update_category(
+    category_id: str,
+    category_data: CategoryCreate,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Update a category (admin only)
+    """
+    update_data = category_data.model_dump(exclude_unset=True)
+    
+    result = await db.categories.update_one(
+        {"id": category_id},
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Category not found")
+    
+    # Return updated category
+    updated_category = await db.categories.find_one({"id": category_id}, {"_id": 0})
+    return Category(**updated_category)
+
+@api_router.delete("/categories/{category_id}")
+async def delete_category(
+    category_id: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Delete a category (admin only)
+    """
+    result = await db.categories.delete_one({"id": category_id})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Category not found")
+    
+    return {"message": "Category deleted successfully"}
+
 # ============= PRODUCTS ENDPOINTS =============
 
 @api_router.get("/products", response_model=List[Product])
