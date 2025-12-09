@@ -817,13 +817,33 @@ async def change_email(
 
 # ============= CATEGORIES ENDPOINTS =============
 
-@api_router.get("/categories", response_model=List[Category])
-async def get_categories():
+@api_router.get("/categories")
+async def get_categories(tree: bool = False):
+    """
+    Get all categories. If tree=true, returns nested structure.
+    Otherwise returns flat list.
+    """
     categories = await db.categories.find({}, {"_id": 0}).to_list(1000)
     for cat in categories:
         if isinstance(cat.get("created_at"), str):
             cat["created_at"] = datetime.fromisoformat(cat["created_at"])
-    return categories
+    
+    if not tree:
+        return categories
+    
+    # Build tree structure
+    def build_tree(parent_id=None):
+        result = []
+        for cat in categories:
+            if cat.get("parent_id") == parent_id:
+                cat_copy = dict(cat)
+                children = build_tree(cat["id"])
+                if children:
+                    cat_copy["children"] = children
+                result.append(cat_copy)
+        return result
+    
+    return build_tree(None)
 
 @api_router.post("/categories", response_model=Category)
 async def create_category(
