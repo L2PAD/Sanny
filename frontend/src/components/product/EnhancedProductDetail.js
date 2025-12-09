@@ -106,16 +106,7 @@ const EnhancedProductDetail = () => {
   };
 
   const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: product.title,
-        text: product.short_description,
-        url: window.location.href
-      }).catch(err => console.log('Error sharing:', err));
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast.success('Ссылка скопирована');
-    }
+    setShowShareModal(true);
   };
 
   if (loading) {
