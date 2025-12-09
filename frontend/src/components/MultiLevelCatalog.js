@@ -158,8 +158,8 @@ const MultiLevelCatalog = () => {
                     className="relative"
                   >
                     <button
-                      onClick={() => handleCategoryClick(category.id)}
-                      className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-blue-50 transition-colors active:bg-blue-100 group"
+                      onClick={() => !hasChildren && handleCategoryClick(category.id)}
+                      className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-blue-50 transition-colors active:bg-blue-100 group cursor-pointer"
                     >
                       <div className="flex items-center gap-4 flex-1 min-w-0">
                         <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:from-blue-200 group-hover:to-purple-200 transition-all">
