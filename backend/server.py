@@ -1649,6 +1649,81 @@ async def delete_review_admin(
     return {"message": "Review deleted successfully"}
 
 
+
+@api_router.put("/admin/reviews/{review_id}/feature")
+async def toggle_review_featured(
+    review_id: str,
+    current_user: User = Depends(get_current_admin)
+):
+    """
+    Toggle review featured status (show on homepage)
+    """
+    review = await db.reviews.find_one({"id": review_id})
+    
+    if not review:
+        raise HTTPException(status_code=404, detail="Review not found")
+    
+    new_featured_status = not review.get("featured", False)
+    
+    result = await db.reviews.update_one(
+        {"id": review_id},
+        {"$set": {"featured": new_featured_status}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=400, detail="Failed to update review")
+    
+    return {
+        "message": "Review featured status updated",
+        "featured": new_featured_status
+    }
+
+
+@api_router.get("/reviews/featured", response_model=List[ReviewWithProduct])
+async def get_featured_reviews():
+    """
+    Get featured reviews for homepage (public endpoint)
+    """
+    try:
+        reviews = await db.reviews.find(
+            {"featured": True},
+            {"_id": 0}
+        ).sort("created_at", -1).limit(5).to_list(5)
+        
+        enriched_reviews = []
+        for review in reviews:
+            # Get product info
+            product = await db.products.find_one({"id": review.get("product_id")}, {"_id": 0})
+            product_name = product.get("title", "Unknown Product") if product else "Unknown Product"
+            
+            # Get user info
+            user = await db.users.find_one({"id": review.get("user_id")}, {"_id": 0})
+            user_email = user.get("email", "N/A") if user else "N/A"
+            
+            # Parse created_at
+            created_at = review.get("created_at")
+            if isinstance(created_at, str):
+                created_at = datetime.fromisoformat(created_at)
+            
+            enriched_review = ReviewWithProduct(
+                id=review["id"],
+                product_id=review["product_id"],
+                product_name=product_name,
+                user_id=review["user_id"],
+                user_name=review.get("user_name", "Unknown"),
+                user_email=user_email,
+                rating=review["rating"],
+                comment=review["comment"],
+                created_at=created_at
+            )
+            enriched_reviews.append(enriched_review)
+        
+        return enriched_reviews
+    except Exception as e:
+        logger.error(f"Error fetching featured reviews: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @api_router.get("/products/{product_id}/can-review")
 async def can_user_review_product(
     product_id: str,
