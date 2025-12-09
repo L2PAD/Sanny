@@ -247,9 +247,19 @@ const PopularCategoriesManagement = () => {
       name: category.name,
       icon: category.icon || 'Smartphone',
       image_url: category.image_url || '',
+      product_ids: category.product_ids || [],
       order: category.order,
       active: category.active
     });
+    
+    // Load selected products
+    if (category.product_ids && category.product_ids.length > 0) {
+      const selected = products.filter(p => category.product_ids.includes(p.id));
+      setSelectedProducts(selected);
+    } else {
+      setSelectedProducts([]);
+    }
+    
     setShowAddForm(true);
   };
 
