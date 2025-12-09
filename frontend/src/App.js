@@ -62,16 +62,17 @@ function AnalyticsWrapper({ children }) {
 
 function App() {
   return (
-    <BrowserRouter>
-      <LanguageProvider>
-        <AuthProvider>
-          <NotificationsProvider>
-            <ComparisonProvider>
-              <FavoritesProvider>
-                <CatalogProvider>
-                  <CartProvider>
-                    <AnalyticsWrapper>
-                      <div data-testid="app" className="App">
+    <HelmetProvider>
+      <BrowserRouter>
+        <LanguageProvider>
+          <AuthProvider>
+            <NotificationsProvider>
+              <ComparisonProvider>
+                <FavoritesProvider>
+                  <CatalogProvider>
+                    <CartProvider>
+                      <AnalyticsWrapper>
+                        <div data-testid="app" className="App">
                         <Toaster position="top-right" />
                         <WelcomeModal />
                         <MultiLevelCatalog />
