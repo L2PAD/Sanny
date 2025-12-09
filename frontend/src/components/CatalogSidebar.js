@@ -20,6 +20,18 @@ const CatalogSidebar = () => {
   const [categorySearch, setCategorySearch] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Icon mapping
+  const iconComponents = {
+    'Smartphone': Smartphone, 'Laptop': Laptop, 'Monitor': Monitor, 'Tv': Tv,
+    'Watch': Watch, 'Camera': Camera, 'Headphones': Headphones, 'Gamepad': Gamepad,
+    'Home': Home, 'Zap': Zap, 'ShoppingBag': ShoppingBag, 'Coffee': Coffee,
+    'Microwave': Microwave, 'Fan': Fan, 'Wind': Wind, 'Snowflake': Snowflake,
+    'Shirt': Shirt, 'Heart': Heart, 'Book': Book, 'Music': Music,
+    'Car': Car, 'Bike': Bike, 'Dumbbell': Dumbbell, 'Baby': Baby,
+    'Pill': Pill, 'Leaf': Leaf, 'Palette': Palette, 'Wrench': Wrench,
+    'Hammer': Hammer, 'Lightbulb': Lightbulb, 'Wifi': Wifi, 'Speaker': Speaker
+  };
+
   useEffect(() => {
     if (isCatalogOpen) {
       fetchCategories();
