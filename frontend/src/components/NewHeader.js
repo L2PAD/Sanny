@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShoppingCart, Heart, GitCompare, User, LogOut, Menu, X } from 'lucide-react';
+import { 
+  Search, ShoppingCart, Heart, GitCompare, User, LogOut, Menu, X,
+  Smartphone, Laptop, Monitor, Tv, Watch, Camera, Headphones, Gamepad,
+  Home, Zap, ShoppingBag, Coffee, Microwave, Fan, Wind, Snowflake,
+  Shirt, Book, Music, Car, Bike, Dumbbell, Baby,
+  Pill, Leaf, Palette, Wrench, Hammer, Lightbulb, Wifi, Speaker
+} from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -10,6 +16,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNotifications } from '../contexts/NotificationsContext';
 import MobileMenu from './MobileMenu';
 import SearchDropdown from './SearchDropdown';
+import axios from 'axios';
 
 const NewHeader = () => {
   const navigate = useNavigate();
