@@ -917,13 +917,17 @@ async def search_suggestions(q: str, limit: int = 5):
     if not q or len(q) < 2:
         return []
     
-    # Use text search for suggestions
+    # Use regex search for better compatibility
     query = {
-        "$text": {"$search": q},
+        "$or": [
+            {"title": {"$regex": q, "$options": "i"}},
+            {"description": {"$regex": q, "$options": "i"}},
+            {"short_description": {"$regex": q, "$options": "i"}}
+        ],
         "status": "published"
     }
     
-    # Get products sorted by relevance
+    # Get products sorted by title match first
     products = await db.products.find(
         query,
         {"_id": 0, "title": 1, "id": 1, "price": 1, "images": 1}
