@@ -298,24 +298,50 @@ const CategoryManagement = () => {
               />
             </div>
 
-            {/* Parent Category */}
-            <div>
-              <Label htmlFor="parent">{t('parentCategory')} (optional)</Label>
+            {/* Parent Category - ДЕРЕВО КАТЕГОРИЙ */}
+            <div className="border-2 border-blue-200 rounded-xl p-5 bg-blue-50">
+              <Label htmlFor="parent" className="text-lg font-bold text-blue-900 mb-2 block">
+                🌳 Родительская категория (для создания дерева как на Foxtrot)
+              </Label>
+              <p className="text-sm text-gray-700 mb-4">
+                <strong>Оставьте пустым</strong> для создания <strong>главной категории</strong> (например: "Электроника", "Для дома").
+                <br />
+                <strong>Выберите родителя</strong> для создания <strong>подкатегории</strong> (например: "Смартфоны" под "Электроника").
+              </p>
               <select
                 id="parent"
                 value={formData.parent_id || ''}
                 onChange={(e) => setFormData({ ...formData, parent_id: e.target.value || null })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base font-medium"
               >
-                <option value="">{t('parentCategory')} - {t('none') || 'None'}</option>
-                {categories
-                  .filter(c => !c.parent_id && (!editingCategory || c.id !== editingCategory.id))
-                  .map(category => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
+                <option value="" className="font-bold">
+                  ➡️ Главная категория (без родителя)
+                </option>
+                <optgroup label="📁 Выберите родительскую категорию:">
+                  {categories
+                    .filter(c => !c.parent_id && (!editingCategory || c.id !== editingCategory.id))
+                    .map(category => (
+                      <option key={category.id} value={category.id}>
+                        📂 {category.name}
+                      </option>
+                    ))}
+                </optgroup>
               </select>
+              {formData.parent_id && (
+                <div className="mt-3 p-3 bg-green-100 border border-green-300 rounded-lg">
+                  <p className="text-sm text-green-800">
+                    ✅ Эта категория будет <strong>подкатегорией</strong> категории:{' '}
+                    <strong>{categories.find(c => c.id === formData.parent_id)?.name}</strong>
+                  </p>
+                </div>
+              )}
+              {!formData.parent_id && (
+                <div className="mt-3 p-3 bg-blue-100 border border-blue-300 rounded-lg">
+                  <p className="text-sm text-blue-800">
+                    ℹ️ Эта категория будет <strong>главной</strong> (верхнего уровня)
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Icon Selection */}
