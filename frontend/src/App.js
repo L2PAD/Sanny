@@ -11,7 +11,7 @@ import { CatalogProvider } from './contexts/CatalogContext';
 import NewHeader from './components/NewHeader';
 import Footer from './components/Footer';
 import AIChatbot from './components/AIChatbot';
-import CatalogSidebar from './components/CatalogSidebar';
+import MultiLevelCatalog from './components/MultiLevelCatalog';
 import SupportWidget from './components/SupportWidget';
 import WelcomeModal from './components/WelcomeModal';
 import Home from './pages/Home';
