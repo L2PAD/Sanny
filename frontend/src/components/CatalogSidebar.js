@@ -123,10 +123,10 @@ const CatalogSidebar = () => {
                     className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-blue-50 transition-colors active:bg-blue-100 group"
                   >
                     <div className="flex items-center gap-4 flex-1 min-w-0">
-                      <div className="w-12 h-12 bg-gradient-to-br from-gray-100 to-blue-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:from-blue-100 group-hover:to-blue-200 transition-all">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:from-blue-200 group-hover:to-purple-200 transition-all">
                         {(() => {
-                          const IconComponent = getCategoryIcon(category.icon || 'box').component;
-                          return <IconComponent className="w-7 h-7" color="#374151" />;
+                          const IconComponent = iconComponents[category.icon || 'Smartphone'];
+                          return IconComponent ? <IconComponent className="w-7 h-7 text-blue-600" /> : <ShoppingBag className="w-7 h-7 text-gray-400" />;
                         })()}
                       </div>
                       <span className="font-semibold text-gray-900 text-left text-base leading-tight">{category.name}</span>
