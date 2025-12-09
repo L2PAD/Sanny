@@ -2851,8 +2851,10 @@ async def get_popular_categories():
 @api_router.get("/admin/popular-categories")
 async def get_all_popular_categories(current_user: User = Depends(get_current_admin)):
     """
-    Get all popular categories (admin only)
+    Get all popular categories (admin only) - returns ALL categories including inactive
     """
+    categories = await db.popular_categories.find({}, {"_id": 0}).sort("order", 1).to_list(1000)
+    return categories
 
 
 @api_router.put("/admin/products/{product_id}/bestseller")
