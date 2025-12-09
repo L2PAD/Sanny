@@ -6,6 +6,7 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { toast } from 'sonner';
 import { Plus, Edit, Trash2, Save, X, Search, ShoppingBag } from 'lucide-react';
+import { categoryIcons, getCategoryIcon } from '../icons/CategoryIcons';
 
 /**
  * Category Management Component
