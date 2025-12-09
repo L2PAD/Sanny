@@ -126,6 +126,7 @@ const CatalogSidebar = () => {
                     <div className="flex items-center gap-4 flex-1 min-w-0">
                       <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:from-blue-200 group-hover:to-purple-200 transition-all">
                         {(() => {
+                          console.log('Category:', category.name, 'Icon:', category.icon, 'Found:', !!iconComponents[category.icon]);
                           const IconComponent = iconComponents[category.icon || 'Smartphone'];
                           return IconComponent ? <IconComponent className="w-7 h-7 text-blue-600" /> : <ShoppingBag className="w-7 h-7 text-gray-400" />;
                         })()}
