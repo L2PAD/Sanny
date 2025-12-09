@@ -176,6 +176,18 @@ class ReviewCreate(BaseModel):
     rating: int = Field(ge=1, le=5)
     comment: str
 
+class ReviewWithProduct(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str
+    product_id: str
+    product_name: str
+    user_id: str
+    user_name: str
+    user_email: str
+    rating: int
+    comment: str
+    created_at: datetime
+
 class CartItem(BaseModel):
     product_id: str
     quantity: int
