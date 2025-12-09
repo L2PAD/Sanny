@@ -170,6 +170,7 @@ class Review(BaseModel):
     rating: int
     comment: str
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    featured: bool = False
 
 class ReviewCreate(BaseModel):
     product_id: str
