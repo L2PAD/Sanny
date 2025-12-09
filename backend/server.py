@@ -386,9 +386,10 @@ class PopularCategory(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
-    icon: Optional[str] = None  # emoji icon (deprecated, use image_url)
+    icon: Optional[str] = None  # lucide-react icon name
     image_url: Optional[str] = None  # URL изображения категории
     category_id: Optional[str] = None  # ID категории товаров для фильтрации
+    product_ids: List[str] = []  # List of product IDs to display in this category
     order: int = 0
     active: bool = True
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -398,6 +399,7 @@ class PopularCategoryCreate(BaseModel):
     icon: Optional[str] = None
     image_url: Optional[str] = None
     category_id: Optional[str] = None
+    product_ids: List[str] = []
     order: int = 0
     active: bool = True
 
@@ -406,6 +408,7 @@ class PopularCategoryUpdate(BaseModel):
     icon: Optional[str] = None
     image_url: Optional[str] = None
     category_id: Optional[str] = None
+    product_ids: Optional[List[str]] = None
     order: Optional[int] = None
     active: Optional[bool] = None
 
