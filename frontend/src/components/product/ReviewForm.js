@@ -15,6 +15,30 @@ const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired
   const [canReview, setCanReview] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (isAuthenticated && productId) {
+      checkCanReview();
+    } else {
+      setLoading(false);
+    }
+  }, [isAuthenticated, productId]);
+
+  const checkCanReview = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}/can-review`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setCanReview(response.data);
+    } catch (error) {
+      console.error('Failed to check review eligibility:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -40,9 +64,12 @@ const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired
       setComment('');
       setRating(5);
       onReviewAdded();
+      await checkCanReview(); // Refresh eligibility
     } catch (error) {
       console.error('Failed to submit review:', error);
-      toast.error(t('language') === 'ru' ? 'Ошибка при добавлении отзыва' : 'Помилка при додаванні відгуку');
+      const errorMsg = error.response?.data?.detail || 
+                      (t('language') === 'ru' ? 'Ошибка при добавлении отзыва' : 'Помилка при додаванні відгуку');
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
