@@ -108,7 +108,7 @@ export const sellerAPI = {
 
 // Reviews API
 export const reviewsAPI = {
-  getByProduct: (productId) => api.get(`/reviews/product/${productId}`),
+  getByProduct: (productId) => api.get(`/products/${productId}/reviews`),
   create: (data) => api.post('/reviews', data),
 };
 
