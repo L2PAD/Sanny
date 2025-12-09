@@ -461,11 +461,11 @@ const CategoryManagement = () => {
             <div className="flex gap-4 pt-4 border-t">
               <Button type="submit" className="flex items-center gap-2">
                 <Save className="w-4 h-4" />
-                {editingCategory ? 'Update Category' : 'Create Category'}
+                {editingCategory ? t('updateCategory') : t('createCategory')}
               </Button>
               <Button type="button" variant="outline" onClick={handleCancel}>
                 <X className="w-4 h-4 mr-2" />
-                Cancel
+                {t('cancel')}
               </Button>
             </div>
           </form>
