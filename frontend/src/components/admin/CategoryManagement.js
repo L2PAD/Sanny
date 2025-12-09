@@ -512,10 +512,10 @@ const CategoryManagement = () => {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         {/* Category Icon */}
-                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-gray-100 to-blue-100 rounded-lg flex items-center justify-center">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
                           {(() => {
-                            const IconComponent = getCategoryIcon(category.icon || 'box').component;
-                            return <IconComponent className="w-7 h-7" color="#374151" />;
+                            const IconComponent = iconComponents[category.icon || 'Smartphone'];
+                            return IconComponent ? <IconComponent className="w-7 h-7 text-blue-600" /> : <ShoppingBag className="w-7 h-7 text-gray-400" />;
                           })()}
                         </div>
                         
