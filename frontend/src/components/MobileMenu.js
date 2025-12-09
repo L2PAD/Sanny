@@ -36,9 +36,14 @@ const MobileMenu = ({ isOpen, onClose }) => {
           </button>
 
           {/* Logo */}
-          <Link to="/" onClick={onClose} className="block mb-8">
+          <Link to="/" onClick={onClose} className="block mb-6">
             <h2 className="text-3xl font-bold text-black">Y-store</h2>
           </Link>
+
+          {/* Search Bar */}
+          <div className="mb-6">
+            <SearchDropdown />
+          </div>
 
           {/* User Section */}
           {user ? (
