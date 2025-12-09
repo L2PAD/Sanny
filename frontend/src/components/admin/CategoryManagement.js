@@ -321,55 +321,59 @@ const CategoryManagement = () => {
             {/* Icon Selection */}
             <div>
               <Label className="text-lg font-semibold mb-3 block">Виберіть іконку категорії *</Label>
-              <p className="text-xs text-gray-500 mb-4">Оберіть простий геометричний значок для категорії</p>
+              <p className="text-xs text-gray-500 mb-3">Оберіть іконку, яка найкраще відображає категорію</p>
               
-              <div className="grid grid-cols-4 md:grid-cols-8 gap-3 p-4 bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border-2 border-gray-200">
-                {Object.entries(categoryIcons).map(([iconKey, iconData]) => {
-                  const IconComponent = iconData.component;
+              <div className="mb-3">
+                <Input
+                  placeholder="🔍 Пошук іконки..."
+                  value={iconSearch}
+                  onChange={(e) => setIconSearch(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+
+              <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl max-h-96 overflow-y-auto border-2 border-blue-200">
+                {filteredIcons.map((iconOption) => {
+                  const IconComponent = iconComponents[iconOption.name];
                   return (
                     <button
-                      key={iconKey}
+                      key={iconOption.name}
                       type="button"
-                      onClick={() => setFormData({ ...formData, icon: iconKey })}
-                      className={`flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 ${
-                        formData.icon === iconKey
-                          ? 'bg-blue-600 shadow-lg scale-105'
-                          : 'bg-white hover:bg-blue-50 hover:scale-105 shadow-md'
+                      onClick={() => setFormData({ ...formData, icon: iconOption.name })}
+                      className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-200 ${
+                        formData.icon === iconOption.name
+                          ? 'bg-blue-600 text-white ring-2 ring-blue-400 ring-offset-2 scale-105 shadow-lg'
+                          : 'bg-white text-gray-700 hover:bg-blue-100 hover:scale-105 shadow-md'
                       }`}
-                      title={iconData.label}
+                      title={iconOption.label}
                     >
-                      <div className={`w-12 h-12 flex items-center justify-center rounded-lg ${
-                        formData.icon === iconKey 
-                          ? 'bg-blue-100' 
-                          : 'bg-gray-100'
-                      }`}>
-                        <IconComponent 
-                          className="w-8 h-8" 
-                          color={formData.icon === iconKey ? '#1e40af' : '#374151'}
-                        />
-                      </div>
-                      <span className={`text-[9px] font-medium text-center leading-tight mt-2 ${
-                        formData.icon === iconKey ? 'text-white' : 'text-gray-700'
-                      }`}>
-                        {iconData.label}
+                      <IconComponent className="w-8 h-8 mb-1" />
+                      <span className="text-[9px] font-medium text-center leading-tight">
+                        {iconOption.label}
                       </span>
                     </button>
                   );
                 })}
               </div>
 
-              <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200 flex items-center gap-4">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-100 to-blue-100 rounded-xl">
-                  {(() => {
-                    const IconComponent = getCategoryIcon(formData.icon).component;
-                    return <IconComponent className="w-10 h-10" color="#374151" />;
-                  })()}
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 font-semibold">Вибрана іконка:</p>
-                  <p className="text-lg font-bold text-gray-800">
-                    {getCategoryIcon(formData.icon).label}
-                  </p>
+              {filteredIcons.length === 0 && (
+                <p className="text-center text-gray-500 py-8">Іконки не знайдено</p>
+              )}
+
+              <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl">
+                    {(() => {
+                      const IconComponent = iconComponents[formData.icon];
+                      return IconComponent ? <IconComponent className="w-10 h-10 text-blue-600" /> : null;
+                    })()}
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600 font-semibold">Вибрана іконка:</p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {iconOptions.find(i => i.name === formData.icon)?.label || formData.icon}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
