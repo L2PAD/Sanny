@@ -112,13 +112,14 @@ function App() {
                       </div>
                     </AnalyticsWrapper>
                   </CartProvider>
-                </CatalogProvider>
-              </FavoritesProvider>
-            </ComparisonProvider>
-          </NotificationsProvider>
-        </AuthProvider>
-      </LanguageProvider>
-    </BrowserRouter>
+                  </CatalogProvider>
+                </FavoritesProvider>
+              </ComparisonProvider>
+            </NotificationsProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
