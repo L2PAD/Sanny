@@ -29,10 +29,38 @@ const NewHeader = () => {
   const { hasUnreadNotifications } = useNotifications();
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [firstCategory, setFirstCategory] = useState(null);
 
   const cartItemsCount = cart?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
   const favoritesCount = favorites?.products?.length || 0;
   const comparisonCount = comparison?.products?.length || 0;
+
+  // Icon mapping
+  const iconComponents = {
+    'Smartphone': Smartphone, 'Laptop': Laptop, 'Monitor': Monitor, 'Tv': Tv,
+    'Watch': Watch, 'Camera': Camera, 'Headphones': Headphones, 'Gamepad': Gamepad,
+    'Home': Home, 'Zap': Zap, 'ShoppingBag': ShoppingBag, 'Coffee': Coffee,
+    'Microwave': Microwave, 'Fan': Fan, 'Wind': Wind, 'Snowflake': Snowflake,
+    'Shirt': Shirt, 'Book': Book, 'Music': Music, 'Car': Car,
+    'Bike': Bike, 'Dumbbell': Dumbbell, 'Baby': Baby,
+    'Pill': Pill, 'Leaf': Leaf, 'Palette': Palette, 'Wrench': Wrench,
+    'Hammer': Hammer, 'Lightbulb': Lightbulb, 'Wifi': Wifi, 'Speaker': Speaker
+  };
+
+  // Load first category for catalog button icon
+  useEffect(() => {
+    const loadFirstCategory = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/categories`);
+        if (response.data && response.data.length > 0) {
+          setFirstCategory(response.data[0]);
+        }
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+      }
+    };
+    loadFirstCategory();
+  }, []);
 
   const handleLogout = () => {
     logout();
