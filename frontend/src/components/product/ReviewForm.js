@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Star } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Star, ShoppingBag, AlertCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { reviewsAPI } from '../../utils/api';
 import { toast } from 'sonner';
 import { useLanguage } from '../../contexts/LanguageContext';
+import axios from 'axios';
 
 const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired }) => {
   const { t } = useLanguage();
@@ -11,6 +12,8 @@ const ReviewForm = ({ productId, onReviewAdded, isAuthenticated, onLoginRequired
   const [comment, setComment] = useState('');
   const [hoveredRating, setHoveredRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [canReview, setCanReview] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
