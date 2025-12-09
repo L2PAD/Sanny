@@ -198,7 +198,7 @@ const MultiLevelCatalog = () => {
       {hoveredCategory && hoveredCategory.children && hoveredCategory.children.length > 0 && (
         <div
           ref={submenuRef}
-          className="fixed top-0 left-[400px] lg:left-[450px] h-full w-[350px] bg-white shadow-2xl z-50 overflow-y-auto"
+          className="fixed top-0 left-[400px] md:left-[400px] lg:left-[450px] h-full w-[320px] md:w-[350px] bg-white shadow-2xl z-[51] overflow-y-auto border-l border-gray-200"
           onMouseEnter={() => setHoveredCategory(hoveredCategory)}
           onMouseLeave={() => setHoveredCategory(null)}
         >
