@@ -118,12 +118,18 @@ const NewHeader = () => {
               to="/favorites"
               className="flex items-center gap-1 md:gap-2 text-black hover:text-pink-600 transition-all duration-300 hover:scale-110 active:scale-95 p-2 hover:bg-pink-50 rounded-2xl"
               title={t('language') === 'ru' ? 'Избранное' : 'Обране'}
+              data-testid="favorites-link"
             >
               <div className="relative">
                 <Heart className={`w-5 h-5 md:w-6 md:h-6 ${favoritesCount > 0 ? 'fill-pink-500 text-pink-500' : ''}`} />
-                <span className={`absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${favoritesCount > 0 ? 'bg-pink-500' : 'bg-gray-400'}`}>
-                  {favoritesCount}
-                </span>
+                {favoritesCount > 0 && (
+                  <span 
+                    className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                    data-testid="favorites-count"
+                  >
+                    {favoritesCount}
+                  </span>
+                )}
               </div>
               <span className="hidden lg:inline text-sm">{t('language') === 'ru' ? 'Избранное' : 'Обране'}</span>
             </Link>
@@ -133,12 +139,18 @@ const NewHeader = () => {
               to="/comparison"
               className="flex items-center gap-1 md:gap-2 text-black hover:text-blue-600 transition-all duration-300 hover:scale-110 active:scale-95 p-2 hover:bg-blue-50 rounded-2xl"
               title={t('language') === 'ru' ? 'Сравнение' : 'Порівняння'}
+              data-testid="comparison-link"
             >
               <div className="relative">
                 <GitCompare className="w-5 h-5 md:w-6 md:h-6" />
-                <span className={`absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${comparisonCount > 0 ? 'bg-blue-500' : 'bg-gray-400'}`}>
-                  {comparisonCount}
-                </span>
+                {comparisonCount > 0 && (
+                  <span 
+                    className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                    data-testid="comparison-count"
+                  >
+                    {comparisonCount}
+                  </span>
+                )}
               </div>
               <span className="hidden lg:inline text-sm">{t('language') === 'ru' ? 'Сравнение' : 'Порівняння'}</span>
             </Link>
