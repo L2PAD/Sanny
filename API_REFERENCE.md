@@ -1,6 +1,6 @@
 # Y-store API Reference
 
-**Base URL:** `https://ecom-hub-43.preview.emergentagent.com/api`
+**Base URL:** `https://store-rebuild-3.preview.emergentagent.com/api`
 
 ## Authentication
 

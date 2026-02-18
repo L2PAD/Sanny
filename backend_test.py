@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 
 # Configuration
-BACKEND_URL = "https://ecom-hub-43.preview.emergentagent.com/api"
+BACKEND_URL = "https://store-rebuild-3.preview.emergentagent.com/api"
 ADMIN_EMAIL = "admin@bazaar.com"
 ADMIN_PASSWORD = "admin123"
 SELLER_EMAIL = "seller@example.com"
