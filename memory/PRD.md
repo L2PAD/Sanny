@@ -82,7 +82,13 @@ Build a modern Y-Store marketplace with the following requirements:
 - **Admin:** admin@ystore.com / admin
 
 ## Key Files
-- `/app/backend/server.py` - Main backend (needs refactoring)
+- `/app/backend/main.py` - Main FastAPI app (modular entry point)
+- `/app/backend/server.py` - Re-exports app for supervisor compatibility
+- `/app/backend/config.py` - Configuration settings
+- `/app/backend/database.py` - MongoDB connection
+- `/app/backend/dependencies.py` - Auth dependencies
+- `/app/backend/models/` - Pydantic models (user, product, category, order, review, promotion, crm, ai)
+- `/app/backend/routes/` - API routes (auth, users, categories, products, reviews, orders, admin, seller, ai, crm, seo)
 - `/app/frontend/src/components/NewHeader.js` - Header with counters (fixed)
 - `/app/frontend/src/contexts/FavoritesContext.js` - Favorites state
 - `/app/frontend/src/contexts/ComparisonContext.js` - Comparison state
