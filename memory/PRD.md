@@ -56,10 +56,6 @@ Build a modern Y-Store marketplace with the following requirements:
   - Convert "Comments" section to threaded chat
   - Add `parent_id` to Comment model
   - Update frontend for nested replies
-- [ ] Backend Refactoring - Split server.py (3593 lines) into modules:
-  - models/, routes/, services/ structure
-  - Remove duplicate models
-  - Fix dead code artifacts
 
 ### P2 - Medium Priority
 - [ ] Frontend Refactoring
