@@ -50,12 +50,15 @@ Build a modern Y-Store marketplace with the following requirements:
 
 ### P0 - Critical (Resolved)
 - [x] Header counter badges bug - FIXED
+- [x] Backend modular refactoring - COMPLETED
 
-### P1 - High Priority (Pending)
-- [ ] Implement Threaded Comments (Chat Functionality)
-  - Convert "Comments" section to threaded chat
-  - Add `parent_id` to Comment model
-  - Update frontend for nested replies
+### P1 - High Priority (Completed)
+- [x] Implement Threaded Comments (Chat Functionality)
+  - Comment model with `parent_id` for threading
+  - Full API: create, reply, react, delete, count
+  - Frontend with nested replies (max depth 3)
+  - Reactions (likes/hearts) with toggle
+  - ✅ All 17 backend + all frontend tests passed
 
 ### P2 - Medium Priority
 - [ ] Frontend Refactoring
