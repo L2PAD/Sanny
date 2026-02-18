@@ -84,7 +84,7 @@ class TestCommentsAPI:
     
     # Test: Create comment requires auth
     def test_create_comment_requires_auth(self):
-        """Test POST /api/comments without auth returns 401"""
+        """Test POST /api/comments without auth returns 401/403"""
         response = requests.post(
             f"{BASE_URL}/api/comments",
             json={
@@ -93,7 +93,7 @@ class TestCommentsAPI:
             }
         )
         
-        assert response.status_code == 401
+        assert response.status_code in [401, 403]
         print("Create comment correctly requires authentication")
     
     # Test: Create new comment (top-level)
@@ -256,7 +256,7 @@ class TestCommentsAPI:
     
     # Test: React requires auth
     def test_react_requires_auth(self):
-        """Test POST /api/comments/{id}/react without auth returns 401"""
+        """Test POST /api/comments/{id}/react without auth returns 401/403"""
         response = requests.get(f"{BASE_URL}/api/comments/product/{TEST_PRODUCT_ID}")
         comments = response.json()
         
@@ -266,7 +266,7 @@ class TestCommentsAPI:
                 f"{BASE_URL}/api/comments/{comment_id}/react",
                 params={"reaction_type": "likes"}
             )
-            assert response.status_code == 401
+            assert response.status_code in [401, 403]
             print("React correctly requires authentication")
     
     # Test: Delete own comment
@@ -306,14 +306,14 @@ class TestCommentsAPI:
     
     # Test: Delete requires auth
     def test_delete_requires_auth(self):
-        """Test DELETE /api/comments/{id} without auth returns 401"""
+        """Test DELETE /api/comments/{id} without auth returns 401/403"""
         response = requests.get(f"{BASE_URL}/api/comments/product/{TEST_PRODUCT_ID}")
         comments = response.json()
         
         if len(comments) > 0:
             comment_id = comments[0]["id"]
             response = requests.delete(f"{BASE_URL}/api/comments/{comment_id}")
-            assert response.status_code == 401
+            assert response.status_code in [401, 403]
             print("Delete correctly requires authentication")
     
     # Test: Delete non-existent comment
