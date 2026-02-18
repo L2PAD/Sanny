@@ -160,12 +160,18 @@ const NewHeader = () => {
               to="/cart"
               className="flex items-center gap-1 md:gap-2 text-black hover:text-green-600 transition-all duration-300 hover:scale-110 active:scale-95 p-2 hover:bg-green-50 rounded-2xl"
               title={t('myCart')}
+              data-testid="cart-link"
             >
               <div className="relative">
                 <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
-                <span className={`absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${cartItemsCount > 0 ? 'bg-green-500' : 'bg-gray-400'}`}>
-                  {cartItemsCount}
-                </span>
+                {cartItemsCount > 0 && (
+                  <span 
+                    className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                    data-testid="cart-count"
+                  >
+                    {cartItemsCount}
+                  </span>
+                )}
               </div>
               <span className="hidden md:inline text-sm">{t('myCart')}</span>
             </Link>
