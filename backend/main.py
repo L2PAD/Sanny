@@ -11,7 +11,7 @@ from config import CORS_ORIGINS
 from database import db, close_db_connection
 
 # Import route modules
-from routes import auth, users, categories, products, reviews, orders, admin, seller, ai, crm, seo
+from routes import auth, users, categories, products, reviews, comments, orders, admin, seller, ai, crm, seo
 
 # Import existing services for analytics
 from advanced_analytics_service import get_advanced_analytics_service
@@ -28,6 +28,7 @@ app.include_router(users.router, prefix=API_PREFIX)
 app.include_router(categories.router, prefix=API_PREFIX)
 app.include_router(products.router, prefix=API_PREFIX)
 app.include_router(reviews.router, prefix=API_PREFIX)
+app.include_router(comments.router, prefix=API_PREFIX)
 app.include_router(orders.router, prefix=API_PREFIX)
 app.include_router(admin.router, prefix=API_PREFIX)
 app.include_router(seller.router, prefix=API_PREFIX)

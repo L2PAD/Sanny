@@ -1,7 +1,7 @@
 """
 Routes package - all API route modules
 """
-from routes import auth, users, categories, products, reviews, orders, admin, seller, ai, crm, seo
+from routes import auth, users, categories, products, reviews, comments, orders, admin, seller, ai, crm, seo
 
 __all__ = [
     'auth',
@@ -9,6 +9,7 @@ __all__ = [
     'categories',
     'products',
     'reviews',
+    'comments',
     'orders',
     'admin',
     'seller',

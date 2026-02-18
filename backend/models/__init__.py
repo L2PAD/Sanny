@@ -5,6 +5,7 @@ from models.user import User, UserCreate, UserLogin, Token
 from models.category import Category, CategoryCreate
 from models.product import Product, ProductCreate, ProductUpdate
 from models.review import Review, ReviewCreate, ReviewWithProduct
+from models.comment import Comment, CommentCreate, CommentWithReplies, CommentReactions
 from models.order import (
     Cart, CartItem, AddToCartRequest,
     Order, OrderItem, ShippingAddress, CheckoutRequest,
@@ -39,6 +40,8 @@ __all__ = [
     'Product', 'ProductCreate', 'ProductUpdate',
     # Review
     'Review', 'ReviewCreate', 'ReviewWithProduct',
+    # Comment
+    'Comment', 'CommentCreate', 'CommentWithReplies', 'CommentReactions',
     # Order
     'Cart', 'CartItem', 'AddToCartRequest',
     'Order', 'OrderItem', 'ShippingAddress', 'CheckoutRequest',
