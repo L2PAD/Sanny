@@ -22,8 +22,8 @@ const NewHeader = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { cart } = useCart();
-  const { favorites } = useFavorites();
-  const { comparison } = useComparison();
+  const { favoritesCount } = useFavorites();
+  const { comparisonCount } = useComparison();
   const { openCatalog } = useCatalog();
   const { language, changeLanguage, t } = useLanguage();
   const { hasUnreadNotifications } = useNotifications();
@@ -31,8 +31,6 @@ const NewHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const cartItemsCount = cart?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
-  const favoritesCount = favorites?.products?.length || 0;
-  const comparisonCount = comparison?.products?.length || 0;
 
   const handleLogout = () => {
     logout();
