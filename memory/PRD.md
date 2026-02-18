@@ -78,6 +78,9 @@ Build a modern Y-Store marketplace with the following requirements:
 - `/api/admin/reviews` - GET all reviews for moderation
 - `/api/reviews/featured` - GET featured reviews for homepage
 - `/api/products/{id}/reviews` - GET product reviews
+- `/api/comments/product/{id}` - GET threaded comments for product
+- `/api/comments` - POST create comment/reply
+- `/api/comments/{id}/react` - POST toggle reaction
 - `/api/sitemap.xml` - GET XML sitemap
 - `/api/robots.txt` - GET robots.txt
 
