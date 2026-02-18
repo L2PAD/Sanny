@@ -93,8 +93,9 @@ Build a modern Y-Store marketplace with the following requirements:
 - `/app/backend/config.py` - Configuration settings
 - `/app/backend/database.py` - MongoDB connection
 - `/app/backend/dependencies.py` - Auth dependencies
-- `/app/backend/models/` - Pydantic models (user, product, category, order, review, promotion, crm, ai)
-- `/app/backend/routes/` - API routes (auth, users, categories, products, reviews, orders, admin, seller, ai, crm, seo)
+- `/app/backend/models/` - Pydantic models (user, product, category, order, review, comment, promotion, crm, ai)
+- `/app/backend/routes/` - API routes (auth, users, categories, products, reviews, comments, orders, admin, seller, ai, crm, seo)
+- `/app/frontend/src/components/product/ProductComments.js` - Threaded chat component
 - `/app/frontend/src/components/NewHeader.js` - Header with counters (fixed)
 - `/app/frontend/src/contexts/FavoritesContext.js` - Favorites state
 - `/app/frontend/src/contexts/ComparisonContext.js` - Comparison state
