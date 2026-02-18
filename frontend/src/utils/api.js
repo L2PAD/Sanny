@@ -112,6 +112,17 @@ export const reviewsAPI = {
   create: (data) => api.post('/reviews', data),
 };
 
+// Comments API - Threaded chat system
+export const commentsAPI = {
+  getByProduct: (productId, userId = null) => 
+    api.get(`/comments/product/${productId}`, { params: userId ? { current_user_id: userId } : {} }),
+  getByProductFlat: (productId) => api.get(`/comments/product/${productId}/flat`),
+  create: (data) => api.post('/comments', data),
+  react: (commentId, reactionType) => api.post(`/comments/${commentId}/react`, null, { params: { reaction_type: reactionType } }),
+  delete: (commentId) => api.delete(`/comments/${commentId}`),
+  getCount: (productId) => api.get(`/comments/count/${productId}`),
+};
+
 export const aiAPI = {
   generateDescription: (data) => api.post('/ai/generate-description', data),
 };
